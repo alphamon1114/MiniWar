@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33bd887e6a4155458f5cd9cefd9aba9, type: 3}
   m_Name: SO_Enemy_Boss
   m_EditorClassIdentifier: 
-  displayName: 보스
+  displayName: 대형 전차
   isBoss: 1
+  locomotion: 0
+  cruiseAltitude: 0
+  bobAmplitude: 0
+  bodySize: {x: 3.6, y: 1.7}
   baseHealth: 1500
   armor: 20
   baseReward: 0
   damagePerSecond: 14
-  moveSpeed: 0.5
+  moveSpeed: 0.3

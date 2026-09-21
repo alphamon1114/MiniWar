@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a510a94149c24b85548e16aa8b29b, type: 3}
   m_Name: SO_Weapon_Rifle
   m_EditorClassIdentifier: 
-  displayName: 고위력형
+  displayName: 대전차포
   slot: 4
   damagePerPellet: 250
   pellets: 1
@@ -21,3 +21,7 @@ MonoBehaviour:
   reloadCost: 750
   shotsPerSecond: 0.8
   reloadSeconds: 2.6
+  projectileSpeed: 14
+  spreadDegrees: 0.2
+  projectileRange: 40
+  projectileScale: {x: 0.55, y: 0.18}

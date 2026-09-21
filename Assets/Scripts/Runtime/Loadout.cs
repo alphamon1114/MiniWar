@@ -45,20 +45,29 @@ namespace MiniWar.Runtime
             CurrentChanged?.Invoke(Current);
         }
 
-        /// <summary>모든 무기의 잔탄이 0인가. 파산 판정의 전제 조건.</summary>
+        /// <summary>
+        /// 모든 <b>탄창형</b> 무기의 잔탄이 0인가. 파산 판정의 전제 조건.
+        ///
+        /// 특수킷(수류탄)은 탄창이 없어 영원히 "비어 있지 않으므로" 여기서 빼야 한다.
+        /// 넣어두면 수류탄을 들고 있다는 이유만으로 파산이 절대 성립하지 않는다.
+        /// </summary>
         public bool AllEmpty
         {
             get
             {
                 foreach (var w in _weapons)
                 {
+                    if (w.IsPerThrow) continue;
                     if (!w.IsEmpty) return false;
                 }
                 return true;
             }
         }
 
-        /// <summary>가장 싼 장전 비용. 이 값도 못 내면 파산이다.</summary>
+        /// <summary>
+        /// 가장 싼 탄창형 장전 비용. 이 값도 못 내면 파산이다.
+        /// 특수킷의 투척비는 훨씬 비싸므로 파산 기준에서 제외한다.
+        /// </summary>
         public int CheapestReloadCost
         {
             get
@@ -66,6 +75,7 @@ namespace MiniWar.Runtime
                 int min = int.MaxValue;
                 foreach (var w in _weapons)
                 {
+                    if (w.IsPerThrow) continue;
                     if (w.ReloadCost < min) min = w.ReloadCost;
                 }
                 return min == int.MaxValue ? 0 : min;

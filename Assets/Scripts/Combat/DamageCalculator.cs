@@ -13,13 +13,24 @@ namespace MiniWar.Combat
     /// </summary>
     public static class DamageCalculator
     {
-        public static float PerPellet(WeaponInstance weapon, float armor)
+        /// <summary>
+        /// 방어력을 적용한 펠릿 1개의 피해. 투사체는 무기 인스턴스를 들고 다니지 않으므로
+        /// 이 오버로드로 계산한다 — 계산식은 한 군데뿐이어야 한다.
+        /// </summary>
+        public static float PerPelletAgainst(float damagePerPellet, bool piercing, float armor)
         {
-            float effectiveArmor = weapon.Data.piercing ? 0f : armor;
-            return Mathf.Max(0f, weapon.DamagePerPellet - effectiveArmor);
+            float effectiveArmor = piercing ? 0f : armor;
+            return Mathf.Max(0f, damagePerPellet - effectiveArmor);
         }
 
-        /// <summary>1발이 실제로 넣는 총 피해.</summary>
+        public static float PerPellet(WeaponInstance weapon, float armor)
+            => PerPelletAgainst(weapon.DamagePerPellet, weapon.Data.piercing, armor);
+
+        /// <summary>
+        /// 1발이 넣는 총 피해. <b>전탄 명중을 가정한 상한</b>이다.
+        /// 펠릿이 1개인 무기는 실제와 같지만, 산탄형은 퍼짐 때문에 근거리에서만 이 값에 근접한다.
+        /// 밸런싱 표의 산탄형 수치를 "최대치"로 읽어야 하는 이유.
+        /// </summary>
         public static float PerShot(WeaponInstance weapon, float armor)
             => PerPellet(weapon, armor) * weapon.Data.pellets;
 

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33bd887e6a4155458f5cd9cefd9aba9, type: 3}
   m_Name: SO_Enemy_Armored
   m_EditorClassIdentifier: 
-  displayName: 장갑형
+  displayName: 장갑차
   isBoss: 0
+  locomotion: 0
+  cruiseAltitude: 0
+  bobAmplitude: 0
+  bodySize: {x: 1.9, y: 0.9}
   baseHealth: 300
   armor: 20
-  baseReward: 330
+  baseReward: 250
   damagePerSecond: 10
   moveSpeed: 0.7

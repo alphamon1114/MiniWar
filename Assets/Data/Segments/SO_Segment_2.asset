@@ -20,21 +20,24 @@ MonoBehaviour:
   - distance: 15
     enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
     count: 3
-  - distance: 35
+  - distance: 30
+    enemy: {fileID: 11400000, guid: 1639f3a0d77d1e3e90656b0ff7c7ac5c, type: 2}
+    count: 1
+  - distance: 45
     enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
     count: 2
-  - distance: 55
+  - distance: 60
     enemy: {fileID: 11400000, guid: 99c39cad1b7cdcfd9fa0db001d3a466e, type: 2}
     count: 1
   - distance: 80
     enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
-    count: 2
+    count: 3
   - distance: 100
     enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
-    count: 2
-  - distance: 120
-    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
-    count: 2
+    count: 1
+  - distance: 115
+    enemy: {fileID: 11400000, guid: 1639f3a0d77d1e3e90656b0ff7c7ac5c, type: 2}
+    count: 1
   - distance: 140
     enemy: {fileID: 11400000, guid: 99c39cad1b7cdcfd9fa0db001d3a466e, type: 2}
     count: 1

@@ -25,9 +25,20 @@ namespace MiniWar.Data
         [Tooltip("1 미만이어야 비용이 줄어든다.")]
         [Range(0.1f, 1f)] public float reloadCostPerLevel = 0.70f;
 
-        [Header("제한")]
-        [Tooltip("한 판에서 주어지는 강화 횟수. 구간 끝 2회 + 보스 격파 1회.")]
-        [Min(1)] public int upgradesPerRun = 3;
+        [Header("가격 — 강화는 돈으로 산다")]
+        [Tooltip("첫 강화 가격. 이후 살 때마다 배율만큼 오른다. "
+               + "돈이 탄약·점수와 경쟁하게 만드는 것이 목적이다.")]
+        [Min(0)] public int firstUpgradeCost = 350;
+
+        [Tooltip("구매할 때마다 가격에 곱해지는 배율. 기하급수라 무한 구매를 스스로 막는다.")]
+        [Min(1f)] public float costGrowth = 2f;
+
+        [Tooltip("정비 지점 한 곳에서 살 수 있는 최대 개수. 0이면 돈이 되는 만큼.")]
+        [Min(0)] public int maxPurchasesPerStop = 0;
+
+        /// <summary>이미 purchased번 샀을 때 다음 강화의 가격.</summary>
+        public int CostOf(int purchased)
+            => Mathf.RoundToInt(firstUpgradeCost * Mathf.Pow(costGrowth, Mathf.Max(0, purchased)));
 
         public float MultiplierPerLevel(UpgradeAxis axis) => axis switch
         {

@@ -29,9 +29,12 @@ MonoBehaviour:
   - distance: 45
     enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
     count: 2
-  - distance: 60
+  - distance: 55
+    enemy: {fileID: 11400000, guid: 1639f3a0d77d1e3e90656b0ff7c7ac5c, type: 2}
+    count: 1
+  - distance: 68
     enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
-    count: 2
+    count: 1
   - distance: 80
     enemy: {fileID: 11400000, guid: 99c39cad1b7cdcfd9fa0db001d3a466e, type: 2}
     count: 1

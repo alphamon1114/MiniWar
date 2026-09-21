@@ -21,3 +21,7 @@ MonoBehaviour:
   reloadCost: 9
   shotsPerSecond: 2
   reloadSeconds: 1.2
+  projectileSpeed: 22
+  spreadDegrees: 1
+  projectileRange: 30
+  projectileScale: {x: 0.28, y: 0.06}

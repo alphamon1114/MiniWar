@@ -44,7 +44,20 @@ namespace MiniWar.Runtime
             RefreshDangerState();
         }
 
-        public bool CanAfford(WeaponInstance weapon) => weapon != null && _money >= weapon.ReloadCost;
+        public bool CanAfford(WeaponInstance weapon) => weapon != null && _money >= weapon.UseCost;
+
+        /// <summary>
+        /// 즉시 지출. 특수킷(수류탄)처럼 장전 없이 쓸 때마다 돈이 나가는 무기가 쓴다.
+        /// </summary>
+        public bool TrySpend(int amount)
+        {
+            if (_bankrupt || amount < 0 || _money < amount) return false;
+
+            _money -= amount;
+            MoneyChanged?.Invoke(_money);
+            RefreshDangerState();
+            return true;
+        }
 
         /// <summary>
         /// 장전 시도. 성공하면 비용을 차감하고 탄창을 채운다.
