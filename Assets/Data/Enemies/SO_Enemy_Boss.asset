@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33bd887e6a4155458f5cd9cefd9aba9, type: 3}
+  m_Name: SO_Enemy_Boss
+  m_EditorClassIdentifier: 
+  displayName: 보스
+  isBoss: 1
+  baseHealth: 1500
+  armor: 20
+  baseReward: 0
+  damagePerSecond: 14
+  moveSpeed: 0.5

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568a0181332e19c45aaa02291949b58f, type: 3}
+  m_Name: SO_Segment_3
+  m_EditorClassIdentifier: 
+  index: 3
+  lengthMeters: 200
+  healthMultiplier: 2.5
+  rewardMultiplier: 1.3
+  spawns:
+  - distance: 15
+    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
+    count: 3
+  - distance: 35
+    enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
+    count: 2
+  - distance: 55
+    enemy: {fileID: 11400000, guid: 99c39cad1b7cdcfd9fa0db001d3a466e, type: 2}
+    count: 1
+  - distance: 80
+    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
+    count: 3
+  - distance: 105
+    enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
+    count: 3
+  - distance: 130
+    enemy: {fileID: 11400000, guid: 99c39cad1b7cdcfd9fa0db001d3a466e, type: 2}
+    count: 1
+  - distance: 155
+    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
+    count: 2
+  - distance: 180
+    enemy: {fileID: 11400000, guid: 99c39cad1b7cdcfd9fa0db001d3a466e, type: 2}
+    count: 1
