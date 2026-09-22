@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11704381f0228c74c97221eaf24ac5ad, type: 3}
+  m_Name: SO_Boss_Tank
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Data.BossData
+  displayName: "\uB300\uD615 \uC804\uCC28"
+  totalHealth: 1800
+  reward: 0
+  bodySize: {x: 4.2, y: 2.1}
+  hoverHeight: 0
+  contactDamagePerSecond: 22
+  standoffDistance: 5
+  phases:
+  - label: "\uD3EC\uD0D1"
+    healthShare: 0.4
+    armor: 18
+    moveSpeed: 0
+    attacks: 0000000002000000i
+    attackInterval: 2.2
+    shellDamage: 26
+    tint: {r: 0.18, g: 0.18, b: 0.2, a: 1}
+    enterNotice: "\uB300\uD615 \uC804\uCC28 \u2014 \uD3EC\uD0D1\uC774 \uB3CC\uC544\uAC04\uB2E4. \uC7A5\uAC11\uC774 \uB450\uAECD\uB2E4"
+  - label: "\uC7A5\uAC11 \uC774\uD0C8"
+    healthShare: 0.35
+    armor: 0
+    moveSpeed: 1.6
+    attacks: 0100000002000000i
+    attackInterval: 1.6
+    shellDamage: 20
+    tint: {r: 0.34, g: 0.3, b: 0.3, a: 1}
+    enterNotice: "\uC7A5\uAC11\uD310\uC774 \uB5A8\uC5B4\uC838 \uB098\uAC14\uB2E4 \u2014 \uC9C0\uAE08\uC740 \uBB58 \uC3D8\uB4E0 \uB4E4\uC5B4\uAC04\uB2E4"
+  - label: "\uD3ED\uC8FC"
+    healthShare: 0.25
+    armor: 10
+    moveSpeed: 2.4
+    attacks: 000000000100000002000000i
+    attackInterval: 1.1
+    shellDamage: 30
+    tint: {r: 0.5, g: 0.2, b: 0.2, a: 1}
+    enterNotice: "\uD3ED\uC8FC \u2014 \uBC00\uACE0 \uB4E4\uC5B4\uC628\uB2E4"

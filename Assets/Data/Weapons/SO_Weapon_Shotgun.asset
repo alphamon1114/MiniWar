@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a510a94149c24b85548e16aa8b29b, type: 3}
   m_Name: SO_Weapon_Shotgun
   m_EditorClassIdentifier: 
-  displayName: 산탄형
-  slot: 3
+  displayName: "\uC0B0\uD0C4\uD615"
+  role: 0
+  icon: {fileID: 21300000, guid: a40e9d7e0569a424f905464fb3f5dedd, type: 3}
+  price: 1300
+  blurb: "\uAC00\uAE4C\uC774\uC11C \uC804\uD0C4\uC744 \uB9DE\uD788\uBA74 \uAC00\uC7A5 \uD6A8\uC728\uC774 \uC88B\uB2E4. \uBA40\uBA74 \uC544\uBB34 \uC77C\uB3C4 \uC548 \uC77C\uC5B4\uB09C\uB2E4."
+  ammoMode: 0
   damagePerPellet: 30
   pellets: 4
   piercing: 0
@@ -25,3 +29,8 @@ MonoBehaviour:
   spreadDegrees: 11
   projectileRange: 18
   projectileScale: {x: 0.18, y: 0.06}
+  ballistic: 0
+  flightTime: 0.85
+  blastRadius: 0
+  blastFalloff: 0.4
+  meleeRange: 1.4

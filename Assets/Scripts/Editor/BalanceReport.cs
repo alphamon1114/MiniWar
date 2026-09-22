@@ -19,7 +19,8 @@ namespace MiniWar.EditorTools
     {
         const string ReportFileName = "BalanceReport.txt";
 
-        [MenuItem("MiniWar/밸런스 표 출력 %#b")]
+        // 단축키는 붙이지 않는다. Ctrl+Shift+B는 Unity의 Build Profiles와 충돌한다.
+        [MenuItem("MiniWar/밸런스 표 출력")]
         public static void Generate()
         {
             var weapons = Load<WeaponData>().OrderBy(w => w.slot).ToList();
@@ -40,8 +41,10 @@ namespace MiniWar.EditorTools
             sb.AppendLine();
 
             AppendWeaponStats(sb, weapons, table);
+            AppendUpgradeLadder(sb, table);
             AppendMarginTable(sb, weapons, enemies, segments, table);
-            AppendBossGate(sb, weapons, enemies, table);
+            AppendBossGate(sb, weapons, table);
+            AppendStage(sb);
             AppendSegmentComposition(sb, segments);
 
             string text = sb.ToString();
@@ -57,13 +60,6 @@ namespace MiniWar.EditorTools
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(AssetDatabase.LoadAssetAtPath<T>)
                 .Where(a => a != null);
-
-        static WeaponInstance Build(WeaponData data, UpgradeTable table, UpgradeAxis axis, int levels)
-        {
-            var w = new WeaponInstance(data, table);
-            for (int i = 0; i < levels; i++) w.ApplyUpgrade(axis);
-            return w;
-        }
 
         static void AppendWeaponStats(StringBuilder sb, List<WeaponData> weapons, UpgradeTable table)
         {
@@ -106,28 +102,111 @@ namespace MiniWar.EditorTools
             sb.AppendLine();
         }
 
-        static void AppendBossGate(StringBuilder sb, List<WeaponData> weapons, List<EnemyData> enemies,
-                                   UpgradeTable table)
+        /// <summary>
+        /// 강화 가격 사다리. 기하급수라 몇 번째부터 현실적으로 못 사는지가 바로 보인다.
+        /// </summary>
+        static void AppendUpgradeLadder(StringBuilder sb, UpgradeTable table)
         {
-            var boss = enemies.FirstOrDefault(e => e.isBoss);
-            if (boss == null) return;
-
-            sb.AppendLine($"── 보스 게이트 · 체력 {boss.baseHealth:F0} 방어력 {boss.armor:F0} 초당피해 {boss.damagePerSecond:F0} ──");
-            for (int lv = 0; lv <= table.upgradesPerRun; lv++)
+            sb.AppendLine("── 강화 가격 (판 전체 누적 구매 횟수 기준) ──");
+            sb.Append("  ");
+            int cumulative = 0;
+            for (int i = 0; i < 6; i++)
             {
-                sb.Append($"  위력 강화 {lv}회");
-                foreach (var d in weapons)
-                {
-                    var w = Build(d, table, UpgradeAxis.Damage, lv);
-                    int shots = DamageCalculator.ShotsToKill(w, boss.baseHealth, boss.armor);
-                    if (shots == int.MaxValue) { sb.Append($" | {d.displayName}: 무효"); continue; }
-                    float sec = DamageCalculator.SecondsToKill(w, boss.baseHealth, boss.armor);
-                    float dmg = sec * boss.damagePerSecond;
-                    sb.Append($" | {d.displayName}: {shots}발 {sec:F0}s 피해{dmg:F0}");
-                }
-                sb.AppendLine();
+                int cost = table.CostOf(i);
+                cumulative += cost;
+                sb.Append($"{i + 1}회 ${cost:N0}(누적 ${cumulative:N0})   ");
             }
-            sb.AppendLine("  판정: 고위력형 위력 강화 0회는 사망, 1회부터 생존이 설계 의도.");
+            sb.AppendLine();
+            sb.AppendLine("  판정: 구간에서 벌 수 있는 총액보다 3~4회째가 비싸야 선택이 강제된다.");
+            sb.AppendLine();
+        }
+
+        /// <summary>
+        /// 보스는 페이즈마다 장갑이 다르므로 "총 몇 발"은 의미가 없다.
+        /// 페이즈별로 나눠 봐야 <b>어느 형태에서 어느 무기가 죽는지</b>가 드러난다.
+        /// </summary>
+        static void AppendBossGate(StringBuilder sb, List<WeaponData> weapons, UpgradeTable table)
+        {
+            var bosses = Load<BossData>().OrderBy(b => b.totalHealth).ToList();
+            if (bosses.Count == 0)
+            {
+                sb.AppendLine("── 보스 ── BossData 에셋이 없습니다. MiniWar → 스테이지 에셋 생성");
+                sb.AppendLine();
+                return;
+            }
+
+            foreach (var boss in bosses) AppendOneBoss(sb, weapons, table, boss);
+        }
+
+        static void AppendOneBoss(StringBuilder sb, List<WeaponData> weapons, UpgradeTable table,
+                                  BossData boss)
+        {
+            if (boss.phases == null || boss.phases.Length == 0) return;
+
+            sb.AppendLine($"── 보스 · {boss.displayName} 총 체력 {boss.totalHealth:F0}"
+                        + (boss.hoverHeight > 0f ? " (비행 — 곡사 불가)" : "") + " ──");
+
+            foreach (var d in weapons)
+            {
+                var w = new WeaponInstance(d, table);
+                float totalSec = 0f, totalCost = 0f;
+                bool stuck = false;
+
+                sb.Append($"  {d.displayName,-8}");
+
+                for (int i = 0; i < boss.phases.Length; i++)
+                {
+                    var p = boss.phases[i];
+                    float hp = boss.totalHealth * p.healthShare;
+
+                    int shots = DamageCalculator.ShotsToKill(w, hp, p.armor);
+                    if (shots == int.MaxValue)
+                    {
+                        sb.Append($" | {p.label}: <무효>");
+                        stuck = true;
+                        continue;
+                    }
+
+                    float sec = DamageCalculator.SecondsToKill(w, hp, p.armor);
+                    float cost = shots * w.CostPerShot;
+                    totalSec += sec;
+                    totalCost += cost;
+
+                    sb.Append($" | {p.label}(장갑{p.armor:F0}): {shots}발 {sec:F0}s ${cost:F0}");
+                }
+
+                sb.AppendLine(stuck
+                    ? "   => 이 무기만으로는 보스를 못 잡는다"
+                    : $"   => 합계 {totalSec:F0}s ${totalCost:F0}");
+            }
+
+            sb.AppendLine("  판정: 한 무기가 모든 페이즈에서 최선이면 안 된다. " +
+                          "페이즈마다 다른 무기가 싸거나 빨라야 '무기 단위 강화'가 대가를 갖는다.");
+            sb.AppendLine();
+        }
+
+        static void AppendStage(StringBuilder sb)
+        {
+            var stages = Load<StageData>().OrderBy(s => s.stageNumber).ToList();
+            if (stages.Count == 0) return;
+
+            sb.AppendLine("── 던전 목록 ──");
+            foreach (var stage in stages)
+            {
+                sb.AppendLine($"[{stage.stageNumber}] {stage.displayName} · {stage.TotalLength:F0}m · "
+                            + $"보스 {(stage.boss != null ? stage.boss.displayName : "없음")} "
+                            + $"x{stage.bossHealthMultiplier:F2} · "
+                            + $"클리어 ${stage.clearReward:N0} (최초 +${stage.firstClearBonus:N0})");
+
+                for (int i = 0; i < stage.legs.Length; i++)
+                {
+                    sb.AppendLine($"    {stage.LabelOf(i),-18} {stage.LegStart(i),5:F0}m ~ "
+                                + $"{stage.LegStart(i) + stage.LengthOf(i),5:F0}m  (관문 · 회복 "
+                                + $"{stage.healPerCheckpoint:F0})");
+                }
+                sb.AppendLine($"    {"보스방",-18} {stage.ArenaStart,5:F0}m ~ {stage.TotalLength,5:F0}m");
+            }
+            sb.AppendLine("  판정: 클리어 보상이 전탄 보급비보다 커야 반복해서 돌 수 있다.");
             sb.AppendLine();
         }
 

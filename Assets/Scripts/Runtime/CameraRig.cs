@@ -20,12 +20,34 @@ namespace MiniWar.Runtime
 
         Camera _camera;
         float _maxX = float.NegativeInfinity;
+        bool _locked;
+        float _lockedX;
 
         void Awake() => _camera = GetComponent<Camera>();
+
+        /// <summary>
+        /// 보스방에서는 카메라를 세운다. 무대가 고정돼야 조준선과 착탄 표시를 읽을 수 있고,
+        /// 플레이어가 좌우로 피할 폭이 화면에 정확히 드러난다.
+        /// </summary>
+        public void LockAt(float x) { _locked = true; _lockedX = x; }
+
+        public void Unlock() => _locked = false;
+
+        public float HalfWidth => _camera != null ? _camera.orthographicSize * _camera.aspect : 8.9f;
 
         void LateUpdate()
         {
             if (player == null) return;
+
+            if (_locked)
+            {
+                var stage = transform.position;
+                stage.x = Mathf.Lerp(stage.x, _lockedX, Time.deltaTime * 3f);
+                stage.y = Mathf.Lerp(stage.y, baseY, Time.deltaTime * verticalSmooth);
+                transform.position = stage;
+                _maxX = Mathf.Max(_maxX, stage.x);
+                return;                                  // 보스방의 좌우 벽은 GameRunner가 잡는다
+            }
 
             float desiredX = player.transform.position.x + leadOffset;
             _maxX = Mathf.Max(_maxX, desiredX);          // 뒤로 되돌아가지 않는다

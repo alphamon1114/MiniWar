@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a510a94149c24b85548e16aa8b29b, type: 3}
   m_Name: SO_Weapon_Rifle
   m_EditorClassIdentifier: 
-  displayName: 대전차포
-  slot: 4
+  displayName: "\uB300\uC804\uCC28\uD3EC"
+  role: 0
+  icon: {fileID: 21300000, guid: 6ac70c7db6be643448653e973c69a889, type: 3}
+  price: 2600
+  blurb: "\uBC29\uC5B4\uB825\uC744 \uBB34\uC2DC\uD55C\uB2E4. \uD0C4\uC18D\uC774 \uB290\uB824 \uC6C0\uC9C1\uC774\uB294 \uC801\uC740 \uC608\uCE21\uD574\uC11C \uC3F4\uC57C \uD55C\uB2E4."
+  ammoMode: 0
   damagePerPellet: 250
   pellets: 1
   piercing: 1
@@ -25,3 +29,8 @@ MonoBehaviour:
   spreadDegrees: 0.2
   projectileRange: 40
   projectileScale: {x: 0.55, y: 0.18}
+  ballistic: 0
+  flightTime: 0.85
+  blastRadius: 0
+  blastFalloff: 0.4
+  meleeRange: 1.4

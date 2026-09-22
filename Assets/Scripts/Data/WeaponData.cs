@@ -9,6 +9,27 @@ namespace MiniWar.Data
         Magazine = 0,
         /// <summary>탄창 없음. 쓸 때마다 reloadCost만큼 즉시 나간다.</summary>
         PerThrow = 1,
+        /// <summary>탄약도 돈도 들지 않는다. 대신 적에게 붙어야 한다(근접).</summary>
+        Melee = 2,
+    }
+
+    /// <summary>
+    /// 무기 칸. 칸마다 하나씩만 들고 나간다.
+    ///
+    /// 역할로 칸을 나누면 "무엇을 포기할 것인가"가 칸 안에서만 물어진다 —
+    /// 주무기 셋 중 하나를 고르는 것은 화력의 성격을 정하는 일이고,
+    /// 보조·근접·특수킷은 그 선택이 막히는 상황을 메우는 보험이다.
+    /// </summary>
+    public enum WeaponRole
+    {
+        /// <summary>주무기 — 화력의 중심. 연사·산탄·대전차 중 하나.</summary>
+        Primary = 0,
+        /// <summary>보조무기 — 싸고 약하다. 돈이 마르면 여기로 돌아온다.</summary>
+        Sidearm = 1,
+        /// <summary>근접무기 — 공짜다. 대신 맞을 각오를 해야 한다.</summary>
+        Melee = 2,
+        /// <summary>특수킷 — 쓸 때마다 돈. 능선 너머나 뭉친 적을 처리한다.</summary>
+        Special = 3,
     }
 
     /// <summary>
@@ -21,8 +42,17 @@ namespace MiniWar.Data
         [Header("식별")]
         public string displayName = "권총";
 
-        [Tooltip("숫자키 전환 슬롯. 1~5.")]
-        [Range(1, 5)] public int slot = 1;
+        [Tooltip("이 무기가 들어갈 칸. 숫자키 1~4와 그대로 대응한다.")]
+        public WeaponRole role = WeaponRole.Sidearm;
+
+        [Tooltip("HUD 왼쪽 아래에 뜨는 총기 그림. 씬 생성 시 자동으로 만들어 꽂는다.")]
+        public Sprite icon;
+
+        [Tooltip("마을 무기상에서 사는 값. 0이면 처음부터 가지고 있다(권총).")]
+        [Min(0)] public int price;
+
+        [Tooltip("무기상 목록에 뜨는 한 줄. 무엇에 쓰는 물건인지 말해준다.")]
+        [TextArea(2, 3)] public string blurb = "";
 
         [Tooltip("Magazine: 탄창을 채울 때 돈이 나간다(총기). "
                + "PerThrow: 탄창 없이 쓸 때마다 돈이 나간다(수류탄 등 특수킷).")]
@@ -75,10 +105,29 @@ namespace MiniWar.Data
         [Tooltip("폭발 가장자리에서 남는 피해 비율. 중심은 100%, 가장자리는 이 값.")]
         [Range(0f, 1f)] public float blastFalloff = 0.4f;
 
+        [Header("근접")]
+        [Tooltip("근접 공격이 닿는 거리(유닛). ammoMode가 Melee일 때만 쓴다.")]
+        [Min(0.2f)] public float meleeRange = 1.4f;
+
+        /// <summary>숫자키 슬롯. 칸(역할)에서 곧바로 나온다.</summary>
+        public int slot => (int)role + 1;
+
         /// <summary>강화 0회 기준 발당 탄약비. 밸런싱 표와 대조할 때 쓴다.</summary>
-        public float CostPerShot => magazineSize <= 0 ? 0f : (float)reloadCost / magazineSize;
+        public float CostPerShotValue => magazineSize <= 0 ? 0f : (float)reloadCost / magazineSize;
 
         /// <summary>강화 0회 기준 초당 피해량(방어력 0 상대).</summary>
         public float RawDps => damagePerPellet * pellets * shotsPerSecond;
+
+        public static string LabelOf(WeaponRole role)
+        {
+            switch (role)
+            {
+                case WeaponRole.Primary: return "주무기";
+                case WeaponRole.Sidearm: return "보조무기";
+                case WeaponRole.Melee: return "근접무기";
+                case WeaponRole.Special: return "특수킷";
+                default: return role.ToString();
+            }
+        }
     }
 }

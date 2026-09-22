@@ -35,16 +35,39 @@ namespace MiniWar.Runtime
         readonly Dictionary<int, GameObject> _chunks = new Dictionary<int, GameObject>();
         readonly List<int> _expired = new List<int>();
 
+        // 보스방 — 이 구간에서는 능선이 평평해진다.
+        bool _hasFlatZone;
+        float _flatStart, _flatEnd, _flatHeight;
+        const float FlatRamp = 5f;
+
         void Awake() => Instance = this;
         void OnDestroy() { if (Instance == this) Instance = null; }
+
+        /// <summary>
+        /// 보스방을 평지로 만든다. 청크가 만들어지기 전에 불러야 한다 —
+        /// 보스 패턴이 능선에 가리면 읽을 수가 없고, 조준선과 착탄 표시가 의미를 잃는다.
+        /// </summary>
+        public void SetFlatZone(float startX, float endX, float height)
+        {
+            _hasFlatZone = true;
+            _flatStart = startX;
+            _flatEnd = endX;
+            _flatHeight = height;
+        }
 
         /// <summary>어떤 x에서의 지면 높이. 결정적이다.</summary>
         public float HeightAt(float x)
         {
-            return baseHeight
-                 + Mathf.Sin(x * 0.11f) * 1.25f
-                 + Mathf.Sin(x * 0.29f + 2.1f) * 0.55f
-                 + Mathf.Sin(x * 0.061f + 5.3f) * 0.95f;
+            float ridge = baseHeight
+                        + Mathf.Sin(x * 0.11f) * 1.25f
+                        + Mathf.Sin(x * 0.29f + 2.1f) * 0.55f
+                        + Mathf.Sin(x * 0.061f + 5.3f) * 0.95f;
+
+            if (!_hasFlatZone || x < _flatStart - FlatRamp || x > _flatEnd) return ridge;
+
+            // 진입 경사에서 부드럽게 평지로 넘어간다. 벽처럼 꺾이면 발이 걸린다.
+            float t = x >= _flatStart ? 1f : Mathf.SmoothStep(0f, 1f, (x - (_flatStart - FlatRamp)) / FlatRamp);
+            return Mathf.Lerp(ridge, _flatHeight, t);
         }
 
         void Start() => Refresh();

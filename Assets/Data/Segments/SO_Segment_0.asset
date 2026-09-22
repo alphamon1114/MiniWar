@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568a0181332e19c45aaa02291949b58f, type: 3}
+  m_Name: SO_Segment_0
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Data.SegmentData
+  index: 0
+  lengthMeters: 70
+  healthMultiplier: 0.7
+  rewardMultiplier: 1
+  spawns:
+  - distance: 8
+    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
+    count: 1
+  - distance: 20
+    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
+    count: 2
+  - distance: 34
+    enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
+    count: 1
+  - distance: 46
+    enemy: {fileID: 11400000, guid: 7918ecefb4e3e0ab5505b63e08ac423b, type: 2}
+    count: 1
+  - distance: 58
+    enemy: {fileID: 11400000, guid: 44ce70b804a94302c949dbae7f63118d, type: 2}
+    count: 1

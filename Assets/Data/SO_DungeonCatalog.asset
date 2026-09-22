@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b39e0688234524389a58b3ed9df61f, type: 3}
+  m_Name: SO_DungeonCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Data.DungeonCatalog
+  dungeons:
+  - {fileID: 11400000, guid: 9bc7609f97ed23445b609f88fbfbf4fb, type: 2}
+  - {fileID: 11400000, guid: bc250e278b419934dbdd4c6033046e40, type: 2}
+  - {fileID: 11400000, guid: 74cc532ed8e5c124ba157bfd9a0eacd8, type: 2}
+  - {fileID: 11400000, guid: 0144a69f6aa5c014f8bbdc7e544a2a2c, type: 2}

@@ -58,12 +58,18 @@ namespace MiniWar.Runtime
         /// <summary>탄창 없이 쓸 때마다 돈이 나가는 특수킷인가.</summary>
         public bool IsPerThrow => Data.ammoMode == AmmoMode.PerThrow;
 
-        /// <summary>1회 사용 비용. 탄창형은 장전비, 특수킷은 투척비.</summary>
-        public int UseCost => ReloadCost;
+        /// <summary>탄약도 돈도 들지 않는 근접무기인가.</summary>
+        public bool IsMelee => Data.ammoMode == AmmoMode.Melee;
 
-        // 특수킷은 탄창 개념이 없으므로 항상 "비어 있지 않고" "가득 차 있다".
-        public bool IsEmpty => !IsPerThrow && Ammo <= 0;
-        public bool IsFull => IsPerThrow || Ammo >= MagazineSize;
+        /// <summary>탄창을 쓰지 않는 무기. 파산 판정에서 빠지는 것들.</summary>
+        public bool IsMagazineless => IsPerThrow || IsMelee;
+
+        /// <summary>1회 사용 비용. 탄창형은 장전비, 특수킷은 투척비, 근접은 0.</summary>
+        public int UseCost => IsMelee ? 0 : ReloadCost;
+
+        // 특수킷·근접무기는 탄창 개념이 없으므로 항상 "비어 있지 않고" "가득 차 있다".
+        public bool IsEmpty => !IsMagazineless && Ammo <= 0;
+        public bool IsFull => IsMagazineless || Ammo >= MagazineSize;
 
         // ── 상태 변경 ───────────────────────────────────────────
 
@@ -75,10 +81,33 @@ namespace MiniWar.Runtime
             Changed?.Invoke(this);
         }
 
+        /// <summary>
+        /// 던전을 나가도 강화와 잔탄이 남도록 <see cref="PlayerProfile"/>이 읽고 쓴다.
+        /// 인던 구조에서는 이 두 값이 "마을에서 쌓인 것"의 전부다.
+        /// </summary>
+        public int[] GetLevels() => (int[])_levels.Clone();
+
+        public void SetLevels(int[] levels)
+        {
+            if (levels == null) return;
+
+            for (int i = 0; i < AxisCount && i < levels.Length; i++)
+                _levels[i] = Mathf.Max(0, levels[i]);
+
+            Ammo = Mathf.Min(Ammo, MagazineSize);
+            Changed?.Invoke(this);
+        }
+
+        public void SetAmmo(int ammo)
+        {
+            Ammo = Mathf.Clamp(ammo, 0, MagazineSize);
+            Changed?.Invoke(this);
+        }
+
         /// <summary>1발 소모. 잔탄이 없으면 false를 돌려주고 아무것도 하지 않는다.</summary>
         public bool TryConsumeShot()
         {
-            if (IsPerThrow) return true;        // 탄창이 아니라 돈으로 계산한다
+            if (IsMagazineless) return true;    // 탄창이 아니라 돈(또는 거리)으로 계산한다
             if (Ammo <= 0) return false;
             Ammo--;
             Changed?.Invoke(this);

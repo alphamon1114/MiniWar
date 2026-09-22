@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11704381f0228c74c97221eaf24ac5ad, type: 3}
+  m_Name: SO_Boss_Airship
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Data.BossData
+  displayName: "\uACF5\uACA9 \uBE44\uD589\uC120"
+  totalHealth: 2400
+  reward: 0
+  bodySize: {x: 5.2, y: 1.3}
+  hoverHeight: 4.6
+  contactDamagePerSecond: 0
+  standoffDistance: 6
+  phases:
+  - label: "\uD3ED\uACA9 \uD56D\uB85C"
+    healthShare: 0.35
+    armor: 12
+    moveSpeed: 1.2
+    attacks: 01000000i
+    attackInterval: 1.4
+    shellDamage: 22
+    tint: {r: 0.22, g: 0.22, b: 0.26, a: 1}
+    enterNotice: "\uACF5\uACA9 \uBE44\uD589\uC120 \u2014 \uBC1C\uBC11\uC744 \uB450\uB4DC\uB9B0\uB2E4. \uC11C \uC788\uC9C0 \uB9C8\uB77C"
+  - label: "\uCE21\uBA74 \uD3EC\uBB38"
+    healthShare: 0.35
+    armor: 4
+    moveSpeed: 2
+    attacks: 0200000000000000i
+    attackInterval: 1.3
+    shellDamage: 24
+    tint: {r: 0.34, g: 0.32, b: 0.36, a: 1}
+    enterNotice: "\uCE21\uBA74 \uD3EC\uBB38 \uAC1C\uBC29 \u2014 \uC7A5\uAC11\uC774 \uC587\uC544\uC84C\uB2E4"
+  - label: "\uAC15\uD558"
+    healthShare: 0.3
+    armor: 8
+    moveSpeed: 2.8
+    attacks: 000000000100000002000000i
+    attackInterval: 0.9
+    shellDamage: 30
+    tint: {r: 0.5, g: 0.22, b: 0.24, a: 1}
+    enterNotice: "\uACE0\uB3C4\uB97C \uB0AE\uCD98\uB2E4 \u2014 \uC804\uD0C4 \uBC1C\uC0AC"

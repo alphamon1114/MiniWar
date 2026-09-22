@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a510a94149c24b85548e16aa8b29b, type: 3}
   m_Name: SO_Weapon_Grenade
   m_EditorClassIdentifier: 
-  displayName: 수류탄
-  slot: 5
+  displayName: "\uC218\uB958\uD0C4"
+  role: 3
+  icon: {fileID: 21300000, guid: 2faf1438ac9ecfb4ab029aa53223e515, type: 3}
+  price: 700
+  blurb: "\uB2A5\uC120 \uB108\uBA38\uC640 \uBB49\uCE5C \uC801. \uACE1\uC0AC\uB77C \uC9C0\uD615\uC774 \uB9C9\uC9C0 \uC54A\uB294\uB2E4. \uB358\uC9C8 \uB54C\uB9C8\uB2E4 \uB3C8\uC774 \uB098\uAC04\uB2E4."
   ammoMode: 1
   damagePerPellet: 120
   pellets: 1
@@ -30,3 +33,4 @@ MonoBehaviour:
   flightTime: 0.85
   blastRadius: 2
   blastFalloff: 0.4
+  meleeRange: 1.4

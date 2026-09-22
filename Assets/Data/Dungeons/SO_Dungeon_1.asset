@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5f6cc08e8ce9b4e9f0b711d99119ff, type: 3}
+  m_Name: SO_Dungeon_1
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Data.StageData
+  stageNumber: 2
+  displayName: "\uAD6D\uACBD \uB2A5\uC120"
+  briefing: "\uC804\uCD08\uC120\uC744 \uB6AB\uACE0 \uB2A5\uC120 \uB108\uBA38\uC758 \uC804\uCC28\uB97C \uC7A1\uB294\uB2E4. \uAD8C\uCD1D \uD55C \uC790\uB8E8\uB85C\uB294 \uBC85\uCC28\uB2E4."
+  clearReward: 400
+  firstClearBonus: 600
+  legs:
+  - segment: {fileID: 11400000, guid: 64d1714373cc2ab8282a9c47f721eeb9, type: 2}
+    label: "1\uAD6C\uAC04 \xB7 \uC804\uCD08\uC120"
+  - segment: {fileID: 11400000, guid: ac2f1ef1022ad1a80459a354bd4b65a8, type: 2}
+    label: "2\uAD6C\uAC04 \xB7 \uBCF4\uAE09\uB85C"
+  boss: {fileID: 11400000, guid: a0fc2f7eb2789eb4389f93ad0db3577e, type: 2}
+  bossHealthMultiplier: 1
+  arenaLength: 34
+  arenaFloorHeight: -2.2
+  healPerCheckpoint: 60

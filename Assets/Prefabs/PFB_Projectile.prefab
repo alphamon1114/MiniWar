@@ -105,5 +105,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaf7277c8c09634080b5f0fed6715d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Combat.Projectile
-  radius: 0.06
-  trail: {fileID: 0}
