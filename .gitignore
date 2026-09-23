@@ -6,6 +6,12 @@
 # See: https://github.com/github/gitignore/tree/main/Global
 #
 .utmp/
+/Tools/McpSetup/
+/Server/bin/
+/Server/obj/
+/Server/data/
+/Tests/Online/bin/
+/Tests/Online/obj/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -104,3 +110,7 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Hand-written server/test projects (Unity-generated csproj files above remain ignored).
+!/Server/*.csproj
+!/Tests/Online/*.csproj

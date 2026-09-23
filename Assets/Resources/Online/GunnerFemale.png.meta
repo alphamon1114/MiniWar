@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: 99e33ca8b1f99e64b9b95c782e6e1ba3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -252006788627726109
+    second: GunnerFemale_0
+  - first:
+      213: -3380114306487389460
+    second: GunnerFemale_1
+  - first:
+      213: -4182994567376521138
+    second: GunnerFemale_2
+  - first:
+      213: 1092711023704272396
+    second: GunnerFemale_3
+  - first:
+      213: -5720289903474266800
+    second: GunnerFemale_4
+  - first:
+      213: 7980562300318465905
+    second: GunnerFemale_5
+  - first:
+      213: 7167940210698551781
+    second: GunnerFemale_6
+  - first:
+      213: -2151342690239455417
+    second: GunnerFemale_7
+  - first:
+      213: -3710984520959423417
+    second: GunnerFemale_8
+  - first:
+      213: 1886702807316286810
+    second: GunnerFemale_9
+  - first:
+      213: -6989048201048764316
+    second: GunnerFemale_10
+  - first:
+      213: -5980692709845902866
+    second: GunnerFemale_11
+  - first:
+      213: -933835027366932848
+    second: GunnerFemale_12
+  - first:
+      213: -7010061223026553550
+    second: GunnerFemale_13
+  - first:
+      213: 7516139141108925737
+    second: GunnerFemale_14
+  - first:
+      213: 1237798199485283617
+    second: GunnerFemale_15
+  - first:
+      213: -5723452286503194105
+    second: GunnerFemale_16
+  - first:
+      213: -1952126758692070775
+    second: GunnerFemale_17
+  - first:
+      213: -2054338684154164386
+    second: GunnerFemale_18
+  - first:
+      213: 343359989317677703
+    second: GunnerFemale_19
+  - first:
+      213: -1408130354782985315
+    second: GunnerFemale_20
+  - first:
+      213: 839581248447495828
+    second: GunnerFemale_21
+  - first:
+      213: -4576369481912024709
+    second: GunnerFemale_22
+  - first:
+      213: -7801149773339055778
+    second: GunnerFemale_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GunnerFemale_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 446
+        width: 322
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e08bd23921b08cf0800000000000000
+      internalID: -252006788627726109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_1
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 313
+        width: 386
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce27a9562fb6711d0800000000000000
+      internalID: -3380114306487389460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_2
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 342
+        width: 394
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e48322a7a9403f5c0800000000000000
+      internalID: -4182994567376521138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_3
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 866
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0eeb0af2e61a2f00800000000000000
+      internalID: 1092711023704272396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_4
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 406
+        width: 447
+        height: 463
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05da923e3a27d90b0800000000000000
+      internalID: -5720289903474266800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_5
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 838
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17f3b5a1127a0ce60800000000000000
+      internalID: 7980562300318465905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_6
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 797
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e10dede4a3a97360800000000000000
+      internalID: 7167940210698551781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_7
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 727
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74fd426b835e422e0800000000000000
+      internalID: -2151342690239455417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_8
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 660
+        width: 43
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c8d356d3fef7cc0800000000000000
+      internalID: -3710984520959423417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_9
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 672
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5dc1d2053aee2a10800000000000000
+      internalID: 1886702807316286810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_10
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 648
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 460d762d0b9e10f90800000000000000
+      internalID: -6989048201048764316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_11
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 525
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9dddedaaf400da0800000000000000
+      internalID: -5980692709845902866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 461
+        height: 424
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09e0af28df95a03f0800000000000000
+      internalID: -933835027366932848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_13
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 0
+        width: 297
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23d03c3657247be90800000000000000
+      internalID: -7010061223026553550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_14
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 0
+        width: 371
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92505340ab0be4860800000000000000
+      internalID: 7516139141108925737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_15
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 361
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12d30ff77ea8d2110800000000000000
+      internalID: 1237798199485283617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_16
+      rect:
+        serializedVersion: 2
+        x: 1421
+        y: 0
+        width: 334
+        height: 425
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 702741638763290b0800000000000000
+      internalID: -5723452286503194105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_17
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 217
+        width: 52
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98adf974e07a8e4e0800000000000000
+      internalID: -1952126758692070775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_18
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 31
+        width: 106
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5bc5a2e9d58d73e0800000000000000
+      internalID: -2054338684154164386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_19
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 265
+        width: 61
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 782bc51571cd3c400800000000000000
+      internalID: 343359989317677703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_20
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 179
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9327b527e0557ce0800000000000000
+      internalID: -1408130354782985315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_21
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 104
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49ebac972bac6ab00800000000000000
+      internalID: 839581248447495828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_22
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 36
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7102bde3387d70c0800000000000000
+      internalID: -4576369481912024709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerFemale_23
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 15
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e59a1880d9fbcb390800000000000000
+      internalID: -7801149773339055778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GunnerFemale_0: -252006788627726109
+      GunnerFemale_1: -3380114306487389460
+      GunnerFemale_10: -6989048201048764316
+      GunnerFemale_11: -5980692709845902866
+      GunnerFemale_12: -933835027366932848
+      GunnerFemale_13: -7010061223026553550
+      GunnerFemale_14: 7516139141108925737
+      GunnerFemale_15: 1237798199485283617
+      GunnerFemale_16: -5723452286503194105
+      GunnerFemale_17: -1952126758692070775
+      GunnerFemale_18: -2054338684154164386
+      GunnerFemale_19: 343359989317677703
+      GunnerFemale_2: -4182994567376521138
+      GunnerFemale_20: -1408130354782985315
+      GunnerFemale_21: 839581248447495828
+      GunnerFemale_22: -4576369481912024709
+      GunnerFemale_23: -7801149773339055778
+      GunnerFemale_3: 1092711023704272396
+      GunnerFemale_4: -5720289903474266800
+      GunnerFemale_5: 7980562300318465905
+      GunnerFemale_6: 7167940210698551781
+      GunnerFemale_7: -2151342690239455417
+      GunnerFemale_8: -3710984520959423417
+      GunnerFemale_9: 1886702807316286810
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

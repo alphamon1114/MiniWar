@@ -1,0 +1,1146 @@
+fileFormatVersion: 2
+guid: 43582ae10094e1647b2eec8c86d22346
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3123374196488969725
+    second: GunnerMale_0
+  - first:
+      213: 1416612613246096191
+    second: GunnerMale_1
+  - first:
+      213: -8922978438618532613
+    second: GunnerMale_2
+  - first:
+      213: -6342148877370207564
+    second: GunnerMale_3
+  - first:
+      213: -6531877945222448230
+    second: GunnerMale_4
+  - first:
+      213: 4288330037622911509
+    second: GunnerMale_5
+  - first:
+      213: 2648893499415949205
+    second: GunnerMale_6
+  - first:
+      213: 3203365873613796993
+    second: GunnerMale_7
+  - first:
+      213: 1237532297941847792
+    second: GunnerMale_8
+  - first:
+      213: 5220631759021882987
+    second: GunnerMale_9
+  - first:
+      213: -801285791038305756
+    second: GunnerMale_10
+  - first:
+      213: -9033292290719780197
+    second: GunnerMale_11
+  - first:
+      213: 2398227688174315523
+    second: GunnerMale_12
+  - first:
+      213: -6003197350546505970
+    second: GunnerMale_13
+  - first:
+      213: 4790943479414572844
+    second: GunnerMale_14
+  - first:
+      213: 6669279920752369752
+    second: GunnerMale_15
+  - first:
+      213: -9205022966605426988
+    second: GunnerMale_16
+  - first:
+      213: 7197402741230752825
+    second: GunnerMale_17
+  - first:
+      213: -1386418651532917956
+    second: GunnerMale_18
+  - first:
+      213: 4161636801379802344
+    second: GunnerMale_19
+  - first:
+      213: 1126334555882176740
+    second: GunnerMale_20
+  - first:
+      213: 4833189572334002522
+    second: GunnerMale_21
+  - first:
+      213: 2277700235063800809
+    second: GunnerMale_22
+  - first:
+      213: -3690053572543863949
+    second: GunnerMale_23
+  - first:
+      213: -9081751246218944578
+    second: GunnerMale_24
+  - first:
+      213: -4323255380174871859
+    second: GunnerMale_25
+  - first:
+      213: -3519454535922006518
+    second: GunnerMale_26
+  - first:
+      213: 2487470706472417455
+    second: GunnerMale_27
+  - first:
+      213: 939494111109279186
+    second: GunnerMale_28
+  - first:
+      213: -514056259670356410
+    second: GunnerMale_29
+  - first:
+      213: 4786862955265285974
+    second: GunnerMale_30
+  - first:
+      213: 6815283264981918372
+    second: GunnerMale_31
+  - first:
+      213: 4916616955676672873
+    second: GunnerMale_32
+  - first:
+      213: -6146128983854398251
+    second: GunnerMale_33
+  - first:
+      213: -9209869800496316997
+    second: GunnerMale_34
+  - first:
+      213: 2846636941326312832
+    second: GunnerMale_35
+  - first:
+      213: 2613364284268719632
+    second: GunnerMale_36
+  - first:
+      213: -8317169223461078424
+    second: GunnerMale_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GunnerMale_0
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 448
+        width: 223
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd985a8844785b20800000000000000
+      internalID: 3123374196488969725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_1
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 776
+        width: 56
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f331fdc8aa1d8a310800000000000000
+      internalID: 1416612613246096191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_2
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 446
+        width: 336
+        height: 411
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf43ca3d2663b2480800000000000000
+      internalID: -8922978438618532613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_3
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 22
+        width: 544
+        height: 851
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b2d4bbb2392cf7a0800000000000000
+      internalID: -6342148877370207564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_4
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 448
+        width: 331
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9bbecebd9b1a55a0800000000000000
+      internalID: -6531877945222448230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_5
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 740
+        width: 28
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 512b62cd275338b30800000000000000
+      internalID: 4288330037622911509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_6
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 749
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f67807a92c2c420800000000000000
+      internalID: 2648893499415949205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_7
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 725
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186fb563a44a47c20800000000000000
+      internalID: 3203365873613796993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_8
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 563
+        width: 44
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe85e871199c2110800000000000000
+      internalID: 1237532297941847792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_9
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 592
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6e3f9bbce8637840800000000000000
+      internalID: 5220631759021882987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_10
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 602
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42a089581d241e4f0800000000000000
+      internalID: -801285791038305756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_11
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 555
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b927f53a58c43a280800000000000000
+      internalID: -9033292290719780197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_12
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 535
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 308e2244067384120800000000000000
+      internalID: 2398227688174315523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_13
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 529
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ffb14e0db50bca0800000000000000
+      internalID: -6003197350546505970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_14
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 521
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27ca7506b9dc7240800000000000000
+      internalID: 4790943479414572844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_15
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 498
+        width: 38
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8502718a0ca0e8c50800000000000000
+      internalID: 6669279920752369752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_16
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 507
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4decb26d160314080800000000000000
+      internalID: -9205022966605426988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_17
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 512
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9345b70e8af42e360800000000000000
+      internalID: 7197402741230752825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_18
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 474
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c33876df49372cce0800000000000000
+      internalID: -1386418651532917956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_19
+      rect:
+        serializedVersion: 2
+        x: 1333
+        y: 463
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec9f6e1f9a11c930800000000000000
+      internalID: 4161636801379802344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_20
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 467
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e0ca9d9f4b81af00800000000000000
+      internalID: 1126334555882176740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_21
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 457
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5127170f40f21340800000000000000
+      internalID: 4833189572334002522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_22
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 435
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e33dc7cb440c9f10800000000000000
+      internalID: 2277700235063800809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_23
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 27
+        width: 243
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 373ac5693db4accc0800000000000000
+      internalID: -3690053572543863949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_24
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 370
+        width: 60
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebf98a6db5327f180800000000000000
+      internalID: -9081751246218944578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_25
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 25
+        width: 241
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc261672326b004c0800000000000000
+      internalID: -4323255380174871859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_26
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 27
+        width: 227
+        height: 394
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a064b371fb2682fc0800000000000000
+      internalID: -3519454535922006518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_27
+      rect:
+        serializedVersion: 2
+        x: 1338
+        y: 402
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa87a78ad65458220800000000000000
+      internalID: 2487470706472417455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_28
+      rect:
+        serializedVersion: 2
+        x: 1453
+        y: 27
+        width: 295
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd6d399ae0c90d00800000000000000
+      internalID: 939494111109279186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_29
+      rect:
+        serializedVersion: 2
+        x: 1726
+        y: 384
+        width: 29
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64e48cf2e84bdd8f0800000000000000
+      internalID: -514056259670356410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_30
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 338
+        width: 40
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65f5015fe7a5e6240800000000000000
+      internalID: 4786862955265285974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_31
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 169
+        width: 118
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a269e44500c49e50800000000000000
+      internalID: 6815283264981918372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_32
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 319
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96345c362155b3440800000000000000
+      internalID: 4916616955676672873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_33
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 287
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d440a5b04094baa0800000000000000
+      internalID: -6146128983854398251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_34
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 257
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbdb1d16638ff2080800000000000000
+      internalID: -9209869800496316997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_35
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 209
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 085624c4739418720800000000000000
+      internalID: 2846636941326312832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_36
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 209
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ea78868f8844420800000000000000
+      internalID: 2613364284268719632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GunnerMale_37
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 31
+        width: 64
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a7ac258aa739c80800000000000000
+      internalID: -8317169223461078424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GunnerMale_0: 3123374196488969725
+      GunnerMale_1: 1416612613246096191
+      GunnerMale_10: -801285791038305756
+      GunnerMale_11: -9033292290719780197
+      GunnerMale_12: 2398227688174315523
+      GunnerMale_13: -6003197350546505970
+      GunnerMale_14: 4790943479414572844
+      GunnerMale_15: 6669279920752369752
+      GunnerMale_16: -9205022966605426988
+      GunnerMale_17: 7197402741230752825
+      GunnerMale_18: -1386418651532917956
+      GunnerMale_19: 4161636801379802344
+      GunnerMale_2: -8922978438618532613
+      GunnerMale_20: 1126334555882176740
+      GunnerMale_21: 4833189572334002522
+      GunnerMale_22: 2277700235063800809
+      GunnerMale_23: -3690053572543863949
+      GunnerMale_24: -9081751246218944578
+      GunnerMale_25: -4323255380174871859
+      GunnerMale_26: -3519454535922006518
+      GunnerMale_27: 2487470706472417455
+      GunnerMale_28: 939494111109279186
+      GunnerMale_29: -514056259670356410
+      GunnerMale_3: -6342148877370207564
+      GunnerMale_30: 4786862955265285974
+      GunnerMale_31: 6815283264981918372
+      GunnerMale_32: 4916616955676672873
+      GunnerMale_33: -6146128983854398251
+      GunnerMale_34: -9209869800496316997
+      GunnerMale_35: 2846636941326312832
+      GunnerMale_36: 2613364284268719632
+      GunnerMale_37: -8317169223461078424
+      GunnerMale_4: -6531877945222448230
+      GunnerMale_5: 4288330037622911509
+      GunnerMale_6: 2648893499415949205
+      GunnerMale_7: 3203365873613796993
+      GunnerMale_8: 1237532297941847792
+      GunnerMale_9: 5220631759021882987
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
