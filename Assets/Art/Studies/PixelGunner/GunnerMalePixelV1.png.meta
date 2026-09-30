@@ -1,0 +1,341 @@
+fileFormatVersion: 2
+guid: 6aa871f5d7d8eba4e977aaf5e057174a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 948945178445059213
+    second: GunnerMalePixelV1_0
+  - first:
+      213: 28792232954148811
+    second: GunnerMalePixelV1_1
+  - first:
+      213: -3008399054312709521
+    second: GunnerMalePixelV1_2
+  - first:
+      213: -4345631107716332206
+    second: GunnerMalePixelV1_3
+  - first:
+      213: 3420979149086221192
+    second: GunnerMalePixelV1_4
+  - first:
+      213: 8647280710795673659
+    second: GunnerMalePixelV1_5
+  - first:
+      213: -6388496630152356151
+    second: GunnerMalePixelV1_6
+  - first:
+      213: 3703686051774368682
+    second: GunnerMalePixelV1_7
+  - first:
+      213: -6431005916232407414
+    second: GunnerMalePixelV1_8
+  - first:
+      213: -6996527976755850909
+    second: GunnerMalePixelV1_9
+  - first:
+      213: -6795117362631204907
+    second: GunnerMalePixelV1_10
+  - first:
+      213: -3761650952214118628
+    second: GunnerMalePixelV1_11
+  - first:
+      213: 5263686945650946390
+    second: GunnerMalePixelV1_12
+  - first:
+      213: 6704610819612164195
+    second: GunnerMalePixelV1_13
+  - first:
+      213: 3122711217667881870
+    second: GunnerMalePixelV1_14
+  - first:
+      213: 5792508054614241238
+    second: GunnerMalePixelV1_15
+  - first:
+      213: 4787120173838749060
+    second: GunnerMalePixelV1_16
+  - first:
+      213: -9167573776926330045
+    second: GunnerMalePixelV1_17
+  - first:
+      213: -2662992504662877061
+    second: GunnerMalePixelV1_18
+  - first:
+      213: -7313178738625369048
+    second: GunnerMalePixelV1_19
+  - first:
+      213: 8087619744555572282
+    second: GunnerMalePixelV1_20
+  - first:
+      213: 7426685811115371301
+    second: GunnerMalePixelV1_21
+  - first:
+      213: 5979999369581420286
+    second: GunnerMalePixelV1_22
+  - first:
+      213: -6573814165345975319
+    second: GunnerMalePixelV1_23
+  - first:
+      213: -671396865875046183
+    second: GunnerMalePixelV1_24
+  - first:
+      213: 518685816071362440
+    second: GunnerMalePixelV1_25
+  - first:
+      213: -4189695352494665789
+    second: GunnerMalePixelV1_26
+  - first:
+      213: 8701296224483972688
+    second: GunnerMalePixelV1_27
+  - first:
+      213: -5705984185076377372
+    second: GunnerMalePixelV1_28
+  - first:
+      213: -3759167241665115745
+    second: GunnerMalePixelV1_29
+  - first:
+      213: 186314994250801857
+    second: GunnerMalePixelV1_30
+  - first:
+      213: 7649153871073677370
+    second: GunnerMalePixelV1_31
+  - first:
+      213: -2796264987561398554
+    second: GunnerMalePixelV1_32
+  - first:
+      213: -8791558078062160193
+    second: GunnerMalePixelV1_33
+  - first:
+      213: 4298532354674297853
+    second: GunnerMalePixelV1_34
+  - first:
+      213: -568564165025676829
+    second: GunnerMalePixelV1_35
+  - first:
+      213: -3429926778501496850
+    second: GunnerMalePixelV1_36
+  - first:
+      213: -5750853972616233144
+    second: GunnerMalePixelV1_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 405.81818
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Body
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 565
+        height: 1254
+      alignment: 9
+      pivot: {x: 0.53097343, y: 0.066985644}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b537529102289224ab66d4e8012cf1c8
+      internalID: 1027449061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WholeArms
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 664
+        width: 530
+        height: 330
+      alignment: 9
+      pivot: {x: 0.1981132, y: 0.75151515}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f72e3bacc3dd6b49bfb4f076fc08623
+      internalID: -1757694545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rifle
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 304
+        width: 670
+        height: 170
+      alignment: 9
+      pivot: {x: 0.30895522, y: 0.3882353}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb88a9a68cc29c4c9a858d9294917ba
+      internalID: -945086004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5511b03ccc3241948899623a1a92df66
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Body: 1027449061
+      Rifle: -945086004
+      WholeArms: -1757694545
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

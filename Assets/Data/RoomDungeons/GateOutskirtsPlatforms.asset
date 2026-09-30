@@ -1,0 +1,860 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4826166596897628798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: "\uC131\uBB38 \uB300\uD3EC \uBC30\uCE58"
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uC131\uBB38 \uB300\uD3EC"
+  description: "\uAC00\uB85C 48m\uC758 \uAE34 \uBC29. \uC67C\uCABD \uC9C4\uC785 \u2192 \uC911\uC559 \uAD50\uC804 \u2192 \uC624\uB978\uCABD \uCD9C\uAD6C\uB85C \uC9C4\uD589\uD569\uB2C8\uB2E4.\n\uC9C0\uC0C1\xB73m\xB76m \uBC1C\uD310\uC744 \uC624\uAC00\uC138\uC694. Space \uC810\uD504, \u2193+Space \uD558\uAC15. \uBAB9 8\uB9C8\uB9AC \uCC98\uCE58 \uD6C4 \uD3EC\uD0C8\uC5D0 \uC9D1\uACB0\uD569\uB2C8\uB2E4."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 48
+    height: 16
+  gridSize: 0.5
+  jumpHeight: 3.5
+  background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 4, y: 0}
+  exit: {x: 45, y: 3}
+  floors:
+  - id: ace7497fc2314c04824de37d9e33eaff
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 48
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 2d6155742ca44f948cdec84f4894e144
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 2.5
+      width: 10
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 3794bb9d1ca84221b5e866121a171a86
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 7087dae2d2af46d2b9a053ee3d16aa35
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 5.5
+      width: 14
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  spawns:
+  - id: 9a45ebec51ec4dc2b96f882d4d1114ab
+    enemy: {fileID: 11400000, guid: 73ebc2b9dc850cf49a850e9b016158fa, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 40, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: ccb1e8e500554dabac9ade84be889a10
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 22, y: 0}
+    count: 2
+    spacing: 7
+    faceLeft: 1
+  - id: 1218a5a7effa484da001bb8ebeba6dbb
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 5, y: 3}
+    count: 3
+    spacing: 3
+    faceLeft: 1
+  - id: 22923fa00d8742d9b4af67c9f3e06fac
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 13, y: 6}
+    count: 2
+    spacing: 5
+    faceLeft: 1
+--- !u!114 &-4525250581947187639
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: "\uBCF4\uAE09 \uCC3D\uACE0 \uBC30\uCE58"
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uBCF4\uAE09 \uCC3D\uACE0"
+  description: "\uAC00\uB85C 48m\uC758 \uAE34 \uBC29. \uC67C\uCABD \uC9C4\uC785 \u2192 \uC911\uC559 \uAD50\uC804 \u2192 \uC624\uB978\uCABD \uCD9C\uAD6C\uB85C \uC9C4\uD589\uD569\uB2C8\uB2E4.\n\uC9C0\uC0C1\xB73m\xB76m \uBC1C\uD310\uC744 \uC624\uAC00\uC138\uC694. Space \uC810\uD504, \u2193+Space \uD558\uAC15. \uBAB9 8\uB9C8\uB9AC \uCC98\uCE58 \uD6C4 \uD3EC\uD0C8\uC5D0 \uC9D1\uACB0\uD569\uB2C8\uB2E4."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 48
+    height: 16
+  gridSize: 0.5
+  jumpHeight: 3.5
+  background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 4, y: 0}
+  exit: {x: 45, y: 3}
+  floors:
+  - id: f415e911c01e4886855e73a4a044bd81
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 48
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: c79678d8509c481da791246f44a157ab
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 2.5
+      width: 10
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 905142dcf8224ba39686d89d5fb7ffcb
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 30c59af5e245401ba816222daefc631b
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 5.5
+      width: 14
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 3e0da576249046ae92c5a75491ad3a37
+    rect:
+      serializedVersion: 2
+      x: 35
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 29893b0a0b3e4d669e4f6571387f574c
+    rect:
+      serializedVersion: 2
+      x: 27
+      y: 5.5
+      width: 13
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  spawns:
+  - id: bf5b1796767d4ed5af58a7ed3de0695f
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8, y: 0}
+    count: 2
+    spacing: 17
+    faceLeft: 1
+  - id: fc22a480ed3641f3beb97cfcc59cea00
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 7, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: ba20ca0f60ff4a54a5655b024ec94122
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 23, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 96841f07bc7c4699a3e311256823ffa7
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 38, y: 3}
+    count: 2
+    spacing: 5
+    faceLeft: 1
+  - id: 88f057f81a4c44bb9fd6ba48f1917181
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 7a1223d043e944d49a7da9574ee9bafa
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 34, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+--- !u!114 &-2264075078674588974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: "\uC131\uBB38 \uC9C4\uC785\uB85C \uBC30\uCE58"
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uC131\uBB38 \uC9C4\uC785\uB85C"
+  description: "\uAC00\uB85C 48m\uC758 \uAE34 \uBC29. \uC67C\uCABD \uC9C4\uC785 \u2192 \uC911\uC559 \uAD50\uC804 \u2192 \uC624\uB978\uCABD \uCD9C\uAD6C\uB85C \uC9C4\uD589\uD569\uB2C8\uB2E4.\n\uC9C0\uC0C1\xB73m\xB76m \uBC1C\uD310\uC744 \uC624\uAC00\uC138\uC694. Space \uC810\uD504, \u2193+Space \uD558\uAC15. \uBAB9 8\uB9C8\uB9AC \uCC98\uCE58 \uD6C4 \uD3EC\uD0C8\uC5D0 \uC9D1\uACB0\uD569\uB2C8\uB2E4."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 48
+    height: 16
+  gridSize: 0.5
+  jumpHeight: 3.5
+  background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 4, y: 0}
+  exit: {x: 45, y: 3}
+  floors:
+  - id: 4f7b60c160694fa7a95f09db7b2db139
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 48
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 86ca274647744c7eab6136cb435d5feb
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 2.5
+      width: 10
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 4ef4e77404294de9b1d89cd321634769
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 41628e4c71394aeb8c1adf8cdb211889
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 5.5
+      width: 14
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 8592f477c648499c844540cf8cd65de4
+    rect:
+      serializedVersion: 2
+      x: 35
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 39192cb054954b9b82db24ae96e5654a
+    rect:
+      serializedVersion: 2
+      x: 27
+      y: 5.5
+      width: 13
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  spawns:
+  - id: 2f56e30bb77b4c3486fdb25d635c1ecb
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8, y: 0}
+    count: 2
+    spacing: 17
+    faceLeft: 1
+  - id: 2dc2c46e354e4a689e30ccb1b8bf29a9
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 7, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 0c68602343814f78b438d86e75e15791
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 23, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 5b89b166ddc64848a81df71429e63d19
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 38, y: 3}
+    count: 2
+    spacing: 5
+    faceLeft: 1
+  - id: f01ac7a8fdc64cd6b88322e343185eb2
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 4381d1a64d484c0ab8a3ead5d670ae4e
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 34, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+--- !u!114 &-708029231650035919
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: "\uC131\uBCBD \uC6B0\uD68C\uB85C \uBC30\uCE58"
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uC131\uBCBD \uC6B0\uD68C\uB85C"
+  description: "\uAC00\uB85C 48m\uC758 \uAE34 \uBC29. \uC67C\uCABD \uC9C4\uC785 \u2192 \uC911\uC559 \uAD50\uC804 \u2192 \uC624\uB978\uCABD \uCD9C\uAD6C\uB85C \uC9C4\uD589\uD569\uB2C8\uB2E4.\n\uC9C0\uC0C1\xB73m\xB76m \uBC1C\uD310\uC744 \uC624\uAC00\uC138\uC694. Space \uC810\uD504, \u2193+Space \uD558\uAC15. \uBAB9 8\uB9C8\uB9AC \uCC98\uCE58 \uD6C4 \uD3EC\uD0C8\uC5D0 \uC9D1\uACB0\uD569\uB2C8\uB2E4."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 48
+    height: 16
+  gridSize: 0.5
+  jumpHeight: 3.5
+  background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 4, y: 0}
+  exit: {x: 45, y: 3}
+  floors:
+  - id: 99b6f0ee4f3b4950823b517559cc4710
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 48
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: ce1290d7472d4370a9c04bcbbff927ec
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 2.5
+      width: 10
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: b921f44b568443bcb03c431c01aa2cc4
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 9799dc9ce0f443938b2cbe9cca8aecff
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 5.5
+      width: 14
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 190aa4295df248dfb693f4f04b3a2db7
+    rect:
+      serializedVersion: 2
+      x: 35
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 684f09a4b75944dbaa4bd04f73cb204b
+    rect:
+      serializedVersion: 2
+      x: 27
+      y: 5.5
+      width: 13
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  spawns:
+  - id: e52ee249a18547b0bba8a8d26d4ea8b9
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8, y: 0}
+    count: 2
+    spacing: 17
+    faceLeft: 1
+  - id: ef3e653101f34e21940ce9e55e23b27b
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 7, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: a4a779fbca7740a2918a9719bf1d9f31
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 23, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: f4c3563bb7d247c4800306afe971a35a
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 38, y: 3}
+    count: 2
+    spacing: 5
+    faceLeft: 1
+  - id: 6a5f56466cd34f98b9fdf4598786788a
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: b879993d99b54254a200733b48b92f1a
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 34, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977fbfaab81dd7f4a90ef86e89518c19, type: 3}
+  m_Name: GateOutskirtsPlatforms
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.RoomDungeon
+  displayName: "\uC131\uBB38 \uC678\uACFD \xB7 \uBCF5\uCE35 \uD0C8\uD658"
+  startRoomId: bcf4c3c65e674c1da614c3a731bc40a8
+  allowBacktracking: 1
+  rooms:
+  - id: bcf4c3c65e674c1da614c3a731bc40a8
+    displayName: "\uCE68\uD22C \uC9C0\uC810"
+    cell: {x: 0, y: 0}
+    isBoss: 0
+    layout: {fileID: 6597141876379370296}
+    portals:
+    - id: 0d9eaad0a89345039d0698a7b62a2359
+      direction: 1
+      targetRoomId: 044ce99e78454cddab0b8e90932d3f97
+      targetPortalId: 9e8d8439a12b4be5b231f9f1642ece1e
+      position: {x: 45, y: 3}
+      arrival: {x: 42.5, y: 3}
+  - id: 044ce99e78454cddab0b8e90932d3f97
+    displayName: "\uBB34\uB108\uC9C4 \uAD11\uC7A5"
+    cell: {x: 1, y: 0}
+    isBoss: 0
+    layout: {fileID: 7764527703288969926}
+    portals:
+    - id: 9e8d8439a12b4be5b231f9f1642ece1e
+      direction: 0
+      targetRoomId: bcf4c3c65e674c1da614c3a731bc40a8
+      targetPortalId: 0d9eaad0a89345039d0698a7b62a2359
+      position: {x: 1.5, y: 0}
+      arrival: {x: 4, y: 0}
+    - id: bbe417ff0fc24d6d8a5c0d63be3279b7
+      direction: 3
+      targetRoomId: ac3e8abf76fb487a880d1a9b85946685
+      targetPortalId: 500a3e98eb784e369b9b5e01f3d8c2af
+      position: {x: 24, y: 0}
+      arrival: {x: 26, y: 0}
+  - id: 78d41b4de6c743b4bf06137c0292027a
+    displayName: "\uC131\uBB38 \uC9C4\uC785\uB85C"
+    cell: {x: 2, y: 0}
+    isBoss: 0
+    layout: {fileID: -2264075078674588974}
+    portals:
+    - id: 8783e440d7624948b7722e13ab3fbf9f
+      direction: 2
+      targetRoomId: 49ba458622c14db4a9e64090b057ad15
+      targetPortalId: b1f9a8b75afe47a9b81f22ce1b6b0a2c
+      position: {x: 31, y: 6}
+      arrival: {x: 33, y: 6}
+    - id: 020e3686fdd346b6bd2e8bbfc16bccc1
+      direction: 3
+      targetRoomId: be670e97a8ca4e2886d80d1e6e0bacd0
+      targetPortalId: 889e58c37fec49eabb07196dc1c93d0c
+      position: {x: 24, y: 0}
+      arrival: {x: 26, y: 0}
+  - id: 49ba458622c14db4a9e64090b057ad15
+    displayName: "\uC131\uBB38 \uB300\uD3EC"
+    cell: {x: 2, y: 1}
+    isBoss: 1
+    layout: {fileID: -4826166596897628798}
+    portals:
+    - id: b1f9a8b75afe47a9b81f22ce1b6b0a2c
+      direction: 3
+      targetRoomId: 78d41b4de6c743b4bf06137c0292027a
+      targetPortalId: 8783e440d7624948b7722e13ab3fbf9f
+      position: {x: 24, y: 0}
+      arrival: {x: 26, y: 0}
+  - id: ac3e8abf76fb487a880d1a9b85946685
+    displayName: "\uBCF4\uAE09 \uCC3D\uACE0"
+    cell: {x: 1, y: -1}
+    isBoss: 0
+    layout: {fileID: -4525250581947187639}
+    portals:
+    - id: 500a3e98eb784e369b9b5e01f3d8c2af
+      direction: 2
+      targetRoomId: 044ce99e78454cddab0b8e90932d3f97
+      targetPortalId: bbe417ff0fc24d6d8a5c0d63be3279b7
+      position: {x: 31, y: 6}
+      arrival: {x: 33, y: 6}
+    - id: 7421cf3a84ab44a691bc6ff825eba095
+      direction: 1
+      targetRoomId: be670e97a8ca4e2886d80d1e6e0bacd0
+      targetPortalId: ed248694b7f94ce2a8120c72c376f088
+      position: {x: 45, y: 3}
+      arrival: {x: 42.5, y: 3}
+  - id: be670e97a8ca4e2886d80d1e6e0bacd0
+    displayName: "\uC131\uBCBD \uC6B0\uD68C\uB85C"
+    cell: {x: 2, y: -1}
+    isBoss: 0
+    layout: {fileID: -708029231650035919}
+    portals:
+    - id: ed248694b7f94ce2a8120c72c376f088
+      direction: 0
+      targetRoomId: ac3e8abf76fb487a880d1a9b85946685
+      targetPortalId: 7421cf3a84ab44a691bc6ff825eba095
+      position: {x: 1.5, y: 0}
+      arrival: {x: 4, y: 0}
+    - id: 889e58c37fec49eabb07196dc1c93d0c
+      direction: 2
+      targetRoomId: 78d41b4de6c743b4bf06137c0292027a
+      targetPortalId: 020e3686fdd346b6bd2e8bbfc16bccc1
+      position: {x: 31, y: 6}
+      arrival: {x: 33, y: 6}
+--- !u!114 &6597141876379370296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: "\uCE68\uD22C \uC9C0\uC810 \uBC30\uCE58"
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uCE68\uD22C \uC9C0\uC810"
+  description: "\uAC00\uB85C 48m\uC758 \uAE34 \uBC29. \uC67C\uCABD \uC9C4\uC785 \u2192 \uC911\uC559 \uAD50\uC804 \u2192 \uC624\uB978\uCABD \uCD9C\uAD6C\uB85C \uC9C4\uD589\uD569\uB2C8\uB2E4.\n\uC9C0\uC0C1\xB73m\xB76m \uBC1C\uD310\uC744 \uC624\uAC00\uC138\uC694. Space \uC810\uD504, \u2193+Space \uD558\uAC15. \uBAB9 8\uB9C8\uB9AC \uCC98\uCE58 \uD6C4 \uD3EC\uD0C8\uC5D0 \uC9D1\uACB0\uD569\uB2C8\uB2E4."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 48
+    height: 16
+  gridSize: 0.5
+  jumpHeight: 3.5
+  background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 4, y: 0}
+  exit: {x: 45, y: 3}
+  floors:
+  - id: 7bfeda037d1e4286b4e0246046e34568
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 48
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 506cd8559eab4ebca2cbe81f3498728e
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 2.5
+      width: 10
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: b07748a8ff1644cd81f3c1c7df464a6c
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 76af0ed0dc394a4fbeb6eeeeb9bf3dca
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 5.5
+      width: 14
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: bb36a7da1db044de959f27a3c41ab511
+    rect:
+      serializedVersion: 2
+      x: 35
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: f0ee90c53fed44c99df0aa278c4e8d11
+    rect:
+      serializedVersion: 2
+      x: 27
+      y: 5.5
+      width: 13
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  spawns:
+  - id: 3374791d09ac4112ae187507f308bf4b
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8, y: 0}
+    count: 2
+    spacing: 17
+    faceLeft: 1
+  - id: a07b0ecc3c3641a29399948eff49aa0e
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 7, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 6083a9093a4d4e189fee72902620eeda
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 23, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: f24db043bb9c43b6a3391b42a6dfde01
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 38, y: 3}
+    count: 2
+    spacing: 5
+    faceLeft: 1
+  - id: 0634b2a12d62436888ed74338d096773
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 3a60d50845e24a00987e7e49cba75b2f
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 34, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+--- !u!114 &7764527703288969926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: "\uBB34\uB108\uC9C4 \uAD11\uC7A5 \uBC30\uCE58"
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uBB34\uB108\uC9C4 \uAD11\uC7A5"
+  description: "\uAC00\uB85C 48m\uC758 \uAE34 \uBC29. \uC67C\uCABD \uC9C4\uC785 \u2192 \uC911\uC559 \uAD50\uC804 \u2192 \uC624\uB978\uCABD \uCD9C\uAD6C\uB85C \uC9C4\uD589\uD569\uB2C8\uB2E4.\n\uC9C0\uC0C1\xB73m\xB76m \uBC1C\uD310\uC744 \uC624\uAC00\uC138\uC694. Space \uC810\uD504, \u2193+Space \uD558\uAC15. \uBAB9 8\uB9C8\uB9AC \uCC98\uCE58 \uD6C4 \uD3EC\uD0C8\uC5D0 \uC9D1\uACB0\uD569\uB2C8\uB2E4."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 48
+    height: 16
+  gridSize: 0.5
+  jumpHeight: 3.5
+  background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 4, y: 0}
+  exit: {x: 45, y: 3}
+  floors:
+  - id: b38b54b2763a451db53d7ee48941ef81
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 48
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 068b6a21ce90436686c1a45669ae822d
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 2.5
+      width: 10
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: d67f869955b24a2983b63d6c72609585
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 7f1d089f4d2842dfa0acd4b70a4cc13b
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 5.5
+      width: 14
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 2ff00d06627d4ff0a772817e853d5282
+    rect:
+      serializedVersion: 2
+      x: 35
+      y: 2.5
+      width: 11
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  - id: 6cd09f8898704dcd96474048642f705a
+    rect:
+      serializedVersion: 2
+      x: 27
+      y: 5.5
+      width: 13
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.29, g: 0.4, b: 0.42, a: 1}
+    oneWay: 1
+  spawns:
+  - id: 728aa3aac70b4c19833a3f0270e6230b
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8, y: 0}
+    count: 2
+    spacing: 17
+    faceLeft: 1
+  - id: dd21c82643754ee5b8ea663003aa9491
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 7, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: c36c2fc6a1514e559e84affea797afc3
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 23, y: 3}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 2bb0aa3212cc4c909e3a06452f1d99e8
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 38, y: 3}
+    count: 2
+    spacing: 5
+    faceLeft: 1
+  - id: 28567a0646f542f58e8c7d9abae2b0b0
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 16717ff3d059441688de0ba530fbcdc9
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 34, y: 6}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1

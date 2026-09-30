@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace MiniWar.Online
@@ -8,15 +9,23 @@ namespace MiniWar.Online
         readonly Sprite[][] bodies = new Sprite[2][];
         readonly Sprite[] weapons;
         readonly Sprite[] handguns;
+        readonly GameObject[] rigs = new GameObject[2];
+        readonly Sprite[] portraits = new Sprite[2];
         public static readonly string[] FamilyNames = { "피스톨", "기관단총", "샷건", "소총", "저격총", "근접무기", "리볼버" };
-        public static readonly float[] WeaponWidths = { .65f, .95f, 1.3f, 1.35f, 1.65f, 1.25f, .75f };
+        public static readonly float[] WeaponWidths = { .52f, .95f, 1.3f, 1.35f, 1.65f, 1.25f, .62f };
 
         public OnlineVisuals()
         {
             bodies[0] = Slice(Resources.Load<Texture2D>("Online/GunnerMale"), 4, 2, true);
             bodies[1] = Slice(Resources.Load<Texture2D>("Online/GunnerFemale"), 4, 2, true);
-            weapons = Slice(Resources.Load<Texture2D>("Online/Weapons"), 6, 3, false);
-            handguns = Slice(Resources.Load<Texture2D>("Online/Handguns"), 2, 3, false, true);
+            weapons = Resources.LoadAll<Sprite>("Online/PixelV1/Weapons").OrderBy(x => x.name).ToArray();
+            handguns = Resources.LoadAll<Sprite>("Online/PixelV1/Handguns").OrderBy(x => x.name).ToArray();
+            if (weapons.Length != 18 || handguns.Length != 6)
+                Debug.LogError("Pixel equipment sprites missing. Run MiniWar > Characters > Build part sprites and rigs.");
+            rigs[0] = Resources.Load<GameObject>("Online/Rigs/GunnerMale");
+            rigs[1] = Resources.Load<GameObject>("Online/Rigs/GunnerFemale");
+            portraits[0] = Resources.Load<Sprite>("Online/RedrawV1/MalePortrait");
+            portraits[1] = Resources.Load<Sprite>("Online/RedrawV1/FemalePortrait");
         }
 
         // Trim transparent cell gutters without rewriting the source art. Every cell remains independently addressable.
@@ -48,7 +57,12 @@ namespace MiniWar.Online
             return result;
         }
 
-        public Sprite Body(int body, bool pistolReady, int frame = 0) => bodies[Mathf.Clamp(body, 0, 1)][(pistolReady ? 4 : 0) + frame % 4];
+        public Sprite Body(int body, bool pistolReady, int frame = 0)
+        {
+            int index = Mathf.Clamp(body, 0, 1);
+            return portraits[index] != null ? portraits[index] : bodies[index][(pistolReady ? 4 : 0) + frame % 4];
+        }
+        public GameObject RigPrefab(int body) => rigs[Mathf.Clamp(body, 0, 1)];
         public Sprite Weapon(int family, int tier)
         {
             int row = Mathf.Clamp(tier, 1, 3) - 1;
@@ -67,38 +81,4 @@ namespace MiniWar.Online
         }
     }
 
-    public sealed class OnlineActorView : MonoBehaviour
-    {
-        SpriteRenderer body, weapon;
-        Transform socket;
-        OnlineVisuals visuals;
-        LanActor state;
-
-        public void Initialize(OnlineVisuals library)
-        {
-            visuals = library;
-            var bodyObject = new GameObject("Character body"); bodyObject.transform.SetParent(transform, false);
-            body = bodyObject.AddComponent<SpriteRenderer>(); body.sortingOrder = 3;
-            socket = new GameObject("Weapon grip").transform; socket.SetParent(transform, false);
-            weapon = socket.gameObject.AddComponent<SpriteRenderer>(); weapon.sortingOrder = 5;
-        }
-
-        public void Apply(LanActor actor) { state = actor; Render(); }
-        void Update() { if (state != null) Render(); }
-
-        void Render()
-        {
-            bool pistolReady = LanRules.IsHandgun(state.weaponFamily) && !state.aiming;
-            body.sprite = visuals.Body(state.body, pistolReady, (int)(Time.unscaledTime * 4) % 4);
-            if (body.sprite != null) body.transform.localScale = Vector3.one * (2.5f / body.sprite.bounds.size.y);
-            body.flipX = state.facing < 0;
-            weapon.sprite = visuals.Weapon(state.weaponFamily, state.weaponTier);
-            float size = weapon.sprite == null ? 1 : OnlineVisuals.WeaponWidths[Mathf.Clamp(state.weaponFamily, 0, 6)] / weapon.sprite.bounds.size.x;
-            float gripX = pistolReady ? state.body == 0 ? .39f : .29f : state.body == 0 ? -.07f : .05f;
-            socket.localPosition = new Vector3(gripX * state.facing, pistolReady ? 2.02f : 1.43f, 0);
-            float angle = state.aiming ? state.aimAngle : pistolReady ? 90 : state.facing > 0 ? 0 : 180;
-            socket.localRotation = Quaternion.Euler(0, 0, angle);
-            socket.localScale = new Vector3(size, size * state.facing, 1);
-        }
-    }
 }

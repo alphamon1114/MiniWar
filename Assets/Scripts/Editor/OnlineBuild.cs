@@ -13,6 +13,14 @@ namespace MiniWar.EditorTools
     {
         public const string ScenePath = "Assets/Scenes/OnlineLobby.unity";
 
+        [MenuItem("MiniWar/Online/Open lobby scene")]
+        public static void OpenScene()
+        {
+            if (!File.Exists(ScenePath)) throw new FileNotFoundException("Online lobby scene is missing.", ScenePath);
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            EditorSceneManager.OpenScene(ScenePath);
+        }
+
         [MenuItem("MiniWar/Online/Create or refresh lobby scene")]
         public static void CreateScene()
         {
@@ -34,8 +42,7 @@ namespace MiniWar.EditorTools
                 AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Portraits/PORTRAIT_Gate.png")
             };
             EditorSceneManager.SaveScene(scene, ScenePath);
-            EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true),
-                new EditorBuildSettingsScene("Assets/Scenes/Town.unity", false), new EditorBuildSettingsScene("Assets/Scenes/Dungeon.unity", false) };
+            EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
             AssetDatabase.SaveAssets();
             Debug.Log("Online lobby ready: " + ScenePath);
         }

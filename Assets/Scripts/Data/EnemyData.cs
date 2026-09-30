@@ -23,6 +23,9 @@ namespace MiniWar.Data
         public string displayName = "돌격병";
         public bool isBoss;
 
+        [Tooltip("기본 서 있는 모습. 던전 배치별 이미지가 있으면 그 이미지를 우선합니다.")]
+        public Sprite idleSprite;
+
         [Header("이동 방식")]
         [Tooltip("비행형은 고도를 유지하며 빠르게 접근한다. 탄속이 있으므로 예측 사격이 필요하다.")]
         public LocomotionKind locomotion = LocomotionKind.Ground;

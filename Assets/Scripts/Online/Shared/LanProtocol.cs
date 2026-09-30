@@ -9,13 +9,18 @@ namespace MiniWar.Online
 
     public static class LanRules
     {
-        public const int Version = 2;
+        public const int Version = 5;
+        public const int PartyCapacity = 4;
         public const int Port = 7777;
         public const int ChannelCapacity = 30;
         public const int MaxChannels = 2;
         public const float TownWidth = 42f;
         public const float TownSpawnX = 18f;
         public const float WalkSpeed = 5f;
+        public const float DashSpeed = 15f;
+        public const float DashDuration = .16f;
+        public const float DashChainWindow = 1f;
+        public const float DashCooldown = 3f;
         public const float JumpSpeed = 8f;
         public const float Gravity = 24f;
         public static bool IsWeaponFamily(int family) => family >= 0 && family <= (int)WeaponFamily.Revolver;
@@ -39,9 +44,13 @@ namespace MiniWar.Online
         public int channel;
         public float move;
         public bool jump;
-        public float aimAngle;
+        public bool dash; // Shift press edge, never a held sprint or client-provided speed.
+        public float aimAngle; // Continuous world-space firing intent; only the visible pose is quantized.
         public bool aiming;
+        public bool fire; // Held trigger; server chooses cadence and validates the equipped weapon.
         public long sequence;
+        public string partyId;
+        public string applicationId;
     }
 
     [Serializable] public sealed class LanItem
@@ -74,8 +83,49 @@ namespace MiniWar.Online
         public int weaponFamily;
         public int weaponTier = 1;
         public int weaponEnhance;
-        public float aimAngle;
+        public float aimAngle; // Exact firing intent; rendering alone is quantized.
         public bool aiming;
+        public float dashRemaining, dashCooldown, dashChainWindow;
+        public int dashDirection = 1;
+        public long dashSequence;
+    }
+
+    [Serializable] public sealed class LanShot
+    {
+        public long id;
+        public string shooter;
+        public int family;
+        public int tier = 1;
+        public int facing;
+        public float x, y, angle;
+    }
+
+    [Serializable] public sealed class LanPartyListing
+    {
+        public string id, title, leader;
+        public int count;
+        public int capacity = LanRules.PartyCapacity;
+    }
+
+    [Serializable] public sealed class LanPartyMember
+    {
+        public string nickname;
+        public int body;
+    }
+
+    [Serializable] public sealed class LanPartyApplication
+    {
+        public string id, nickname;
+        public int body;
+    }
+
+    [Serializable] public sealed class LanParty
+    {
+        public string id, title, leader;
+        public int capacity = LanRules.PartyCapacity;
+        public LanPartyMember[] members = Array.Empty<LanPartyMember>();
+        // Sent only to the leader of this party.
+        public LanPartyApplication[] applications = Array.Empty<LanPartyApplication>();
     }
 
     [Serializable] public sealed class LanEvent
@@ -89,5 +139,9 @@ namespace MiniWar.Online
         public int[] channelCounts = Array.Empty<int>();
         public LanProfile profile;
         public LanActor[] actors = Array.Empty<LanActor>();
+        public LanShot shot;
+        public LanPartyListing[] parties = Array.Empty<LanPartyListing>();
+        public LanParty party;
+        public string pendingPartyId, pendingPartyTitle;
     }
 }

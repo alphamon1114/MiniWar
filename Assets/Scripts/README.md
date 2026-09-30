@@ -1,5 +1,11 @@
 # 무기전쟁 — 코어 스크립트
 
+> 던전 배치 제작기는 `Dungeons/` 데이터·로컬 이동 테스트와 `Editor/DungeonBuilder*.cs` 편집 도구를 사용한다. **MiniWar → 던전 제작기**로 열며 사용법은 `Docs/DUNGEON_BUILDER.md`를 참고한다.
+
+> 현재 게임은 `Online/` 코드와 `Assets/Scenes/OnlineLobby.unity`를 사용한다. 최신 기획·실행 방법은 프로젝트 루트의 `Docs/ONLINE_DESIGN.md`, `Docs/ONLINE_QUICKSTART.md`를 참고한다.
+>
+> 아래는 초기 싱글플레이 설계 기록이다. 2026-09-28에 옛 Town/Dungeon/테스트 씬과 SceneBuilder는 제거했다. `Data/`, `Runtime/`, `Combat/` 및 프리팹은 온라인 전투·성장 이식에 참고할 수 있어 보존했다. 기존 GameSession의 Town/Dungeon 전환은 현재 온라인 흐름에서 사용하지 않는다.
+
 Unity 6 / C# 9 기준. 외부 패키지 의존 없음. `Assets/Scripts/` 아래 그대로 넣으면 된다.
 
 ## 파일 구성

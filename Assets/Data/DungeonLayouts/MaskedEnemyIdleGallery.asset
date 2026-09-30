@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5151b6fb6ee5ae4e8aeae3da2057a58, type: 3}
+  m_Name: MaskedEnemyIdleGallery
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonLayout
+  displayName: "\uAC00\uBA74 \uBCD1\uC0AC \xB7 \uAE30\uBCF8 \uC790\uC138"
+  description: "\uC6C0\uC9C1\uC784 \uC5C6\uB294 \uAE30\uBCF8 \uC11C \uC788\uB294 \uBAA8\uC2B5 4\uC885. \uC67C\uCABD\uBD80\uD130 \uC21C\uCC30\uB300\uC6D0, \uB2E8\uAC80 \uACBD\uBE44\uBCD1, \uC11D\uAD81 \uACBD\uBE44\uBCD1, \uD751\uB9C8\uBC95\uC0AC."
+  bounds:
+    serializedVersion: 2
+    x: 0
+    y: -2
+    width: 24
+    height: 12
+  gridSize: 0.5
+  jumpHeight: 1.3333334
+  background: {fileID: 0}
+  backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
+  entrance: {x: 2, y: 0}
+  exit: {x: 22, y: 0}
+  floors:
+  - id: bfe4c965f4204fd5bdf019ceac79cbf3
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: -2
+      width: 24
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  spawns:
+  - id: e15b8f5221ec43fcb1a9ce5f950ed466
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 6, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 0
+  - id: 5968923df1bc4e2abcdab060a51e2040
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 10, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 0
+  - id: dc06f248dd174124a42c657c5b8b541e
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 14, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 0
+  - id: 4a7d28fd41fb4af1bb502d33791ecc3a
+    enemy: {fileID: 11400000, guid: 743176c913d71f3478df596a6ed75a75, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 18, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 0

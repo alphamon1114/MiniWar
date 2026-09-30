@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bf7e4af6b294549965bc634e98abdd, type: 3}
+  m_Name: GunnerMaleBodyV1
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Online.CharacterBodyFrames
+  frames:
+  - {fileID: -1946860487, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -1723504778, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -1453578986, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -929717363, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: 945547420, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -126798878, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: 236156738, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: 2079052541, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -1608110591, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -151659734, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -1214630218, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: 1500290846, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -792843271, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -1400929504, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -2062680232, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  - {fileID: -648950653, guid: 63f80d26b5d5cac43ac35c5ede29222e, type: 3}
+  frontShoulders:
+  - {x: -0.17000005, y: 2.0781438}
+  - {x: -0.17000005, y: 2.0781438}
+  - {x: -0.17000005, y: 2.0781438}
+  - {x: -0.17000005, y: 2.0781438}
+  - {x: -0.17000005, y: 2.0483387}
+  - {x: -0.17000005, y: 2.0483387}
+  - {x: -0.17000005, y: 2.0483387}
+  - {x: -0.17000005, y: 2.023638}
+  - {x: -0.17000005, y: 1.9989374}
+  - {x: -0.17000005, y: 1.9989374}
+  - {x: -0.17000005, y: 2.007171}
+  - {x: -0.17000005, y: 2.0318716}
+  - {x: -0.17000005, y: 1.233054}
+  - {x: -0.17000005, y: 1.9185778}
+  - {x: -0.17000005, y: 1.9483833}
+  - {x: -0.17000005, y: 1.7993562}
+  backShoulders:
+  - {x: 0.119999945, y: 2.103144}
+  - {x: 0.119999945, y: 2.103144}
+  - {x: 0.119999945, y: 2.103144}
+  - {x: 0.119999945, y: 2.103144}
+  - {x: 0.119999945, y: 2.0733387}
+  - {x: 0.119999945, y: 2.0733387}
+  - {x: 0.119999945, y: 2.0733387}
+  - {x: 0.119999945, y: 2.048638}
+  - {x: 0.119999945, y: 2.0239375}
+  - {x: 0.119999945, y: 2.0239375}
+  - {x: 0.119999945, y: 2.032171}
+  - {x: 0.119999945, y: 2.0568717}
+  - {x: 0.119999945, y: 1.258054}
+  - {x: 0.119999945, y: 1.9435778}
+  - {x: 0.119999945, y: 1.9733833}
+  - {x: 0.119999945, y: 1.8243562}

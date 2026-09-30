@@ -12,16 +12,27 @@ public sealed class LobbyPlayer
     public int Facing = 1;
     public float AimAngle;
     public bool Aiming;
+    public bool Fire;
+    public double NextShot;
     public long LastSequence = -1;
+    public float DashRemaining;
+    public int DashDirection = 1, DashUses, QueuedDashDirection;
+    public bool DashQueued;
+    public double DashReadyAt, DashChainUntil = -1;
+    public long DashSequence;
     public double LastInput, LastChat = -10, LastEquip = -10;
 }
 
 // All methods are called under the server world's lock. Simulation consumes input at a fixed rate.
-public sealed class LobbyWorld
+public sealed partial class LobbyWorld
 {
     readonly Dictionary<string, LobbyPlayer> players = new();
+    readonly List<LanEvent> shots = new();
+    long shotId;
+    public IReadOnlyList<LanEvent> Shots => shots;
     public long TickNumber { get; private set; }
     public double Time { get; private set; }
+    public bool DashMotionThisTick { get; private set; }
     public IReadOnlyCollection<LobbyPlayer> Players => players.Values;
     public LobbyPlayer? Find(string id) => players.GetValueOrDefault(id);
 
@@ -34,10 +45,16 @@ public sealed class LobbyWorld
         var player = new LobbyPlayer { Id = id, Profile = profile, Channel = channel, LastInput = Time,
             X = LanRules.TownSpawnX + players.Values.Count(p => p.Channel == channel) % 5 * .65f };
         players.Add(id, player);
+        PartyRevision++;
         return (player, "");
     }
 
-    public void Leave(string id) => players.Remove(id);
+    public void Leave(string id)
+    {
+        RemoveApplication(id);
+        LeaveParty(id);
+        if (players.Remove(id)) PartyRevision++;
+    }
 
     public bool Input(string id, LanCommand cmd)
     {
@@ -47,7 +64,9 @@ public sealed class LobbyWorld
         p.Jump |= cmd.jump;
         p.AimAngle = Math.Clamp(cmd.aimAngle, -180, 180);
         p.Aiming = cmd.aiming;
+        p.Fire = cmd.fire && cmd.aiming;
         p.LastInput = Time;
+        if (cmd.dash) RequestDash(p);
         return true;
     }
 
@@ -57,8 +76,14 @@ public sealed class LobbyWorld
         if (p == null) return "로그인이 필요합니다.";
         if (channel < 1 || channel > LanRules.MaxChannels) return "없는 채널입니다.";
         if (p.Channel == channel) return "";
+        if (memberships.ContainsKey(id)) return "파티에서 탈퇴한 뒤 채널을 이동하세요.";
         if (players.Values.Count(x => x.Channel == channel) >= LanRules.ChannelCapacity) return "해당 채널이 가득 찼습니다.";
+        if (RemoveApplication(id)) NotifyParty(id, "채널을 이동하여 참가 신청을 취소했습니다.");
         p.Channel = channel; p.Move = 0; p.Jump = false; p.X = LanRules.TownSpawnX; p.Y = 0; p.VelocityY = 0;
+        p.Fire = false; p.Aiming = false;
+        p.DashRemaining = 0; p.DashQueued = false; p.DashUses = 0; p.DashChainUntil = -1;
+        // Keep DashReadyAt: changing channel cannot refresh the cooldown.
+        PartyRevision++;
         return "";
     }
 
@@ -76,17 +101,29 @@ public sealed class LobbyWorld
     {
         if (dt <= 0 || dt > 0.1f) throw new ArgumentOutOfRangeException(nameof(dt));
         Time += dt; TickNumber++;
+        DashMotionThisTick = false;
+        shots.Clear();
         foreach (var p in players.Values)
         {
-            if (Time - p.LastInput > 0.5) { p.Move = 0; p.Aiming = false; }
-            p.X = Math.Clamp(p.X + p.Move * LanRules.WalkSpeed * dt, 0.5f, LanRules.TownWidth - 0.5f);
+            if (Time - p.LastInput > 0.5) { p.Move = 0; p.Jump = false; p.Aiming = false; p.Fire = false; p.DashQueued = false; }
+            TickHorizontal(p, dt);
             if (Math.Abs(p.Move) > 0.01) p.Facing = p.Move > 0 ? 1 : -1;
-            if (p.Aiming) p.Facing = Math.Abs(p.AimAngle) > 90 ? -1 : 1;
+            if (p.Aiming) p.Facing = LanAim.Facing(p.AimAngle, p.Facing);
             if (p.Jump && p.Y <= 0) p.VelocityY = LanRules.JumpSpeed;
             p.Jump = false;
             p.VelocityY -= LanRules.Gravity * dt;
             p.Y = Math.Max(0, p.Y + p.VelocityY * dt);
             if (p.Y <= 0) p.VelocityY = 0;
+            if (p.Fire && Time + .00001 >= p.NextShot)
+            {
+                var weapon = p.Profile.items.FirstOrDefault(i => i.id == p.Profile.activeItemId);
+                if (weapon == null || !float.IsFinite(LanShooting.Interval(weapon.family))) continue;
+                // No catch-up bursts, even if a client floods inputs or switches weapons between ticks.
+                p.NextShot = Time + LanShooting.Interval(weapon.family);
+                shots.Add(new LanEvent { op = "shot", channel = p.Channel, tick = TickNumber,
+                    shot = new LanShot { id = ++shotId, shooter = p.Profile.nickname, family = weapon.family, tier = weapon.tier,
+                        facing = p.Facing, x = p.X, y = p.Y + LanShooting.AimHeight, angle = p.AimAngle } });
+            }
         }
     }
 
@@ -100,7 +137,10 @@ public sealed class LobbyWorld
             return new LanActor { nickname = p.Profile.nickname, x = p.X, y = p.Y, facing = p.Facing,
                 body = p.Profile.body, weaponFamily = weapon?.family ?? (int)WeaponFamily.Melee,
                 weaponTier = weapon?.tier ?? 1, weaponEnhance = weapon?.enhance ?? 0,
-                aimAngle = p.AimAngle, aiming = p.Aiming };
+                aimAngle = p.AimAngle, aiming = p.Aiming,
+                dashRemaining = p.DashRemaining, dashDirection = p.DashDirection, dashSequence = p.DashSequence,
+                dashCooldown = (float)Math.Max(0, p.DashReadyAt - Time),
+                dashChainWindow = p.DashUses == 1 ? (float)Math.Max(0, p.DashChainUntil - Time) : 0 };
         }).ToArray()
     };
 }

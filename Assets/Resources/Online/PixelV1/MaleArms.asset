@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b8606c7741a33468ad9edf5adeda34, type: 3}
+  m_Name: MaleArms
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Online.CharacterArmFrames
+  frames:
+  - {fileID: 68917803, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: -1533368147, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1125266852, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: -432155917, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 412424614, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1814400595, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1542818827, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 336193673, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1262756811, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1038773718, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1770457362, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  - {fileID: 1751817549, guid: 386577fc9a383d04785bae92d3b84192, type: 3}
+  grips:
+  - {x: 0.6136364, y: 0.03181818}
+  - {x: 0.7, y: 0.07727273}
+  - {x: 0.68636364, y: -0.13181818}
+  - {x: 0.6636364, y: -0.5954546}
+  - {x: 0.3318182, y: -0.9727273}
+  - {x: 0.5181818, y: -0.44545454}
+  - {x: 0.47727272, y: 0.29090908}
+  - {x: 0.8727273, y: 0.29545453}
+  - {x: 1.0545454, y: 0.04090909}
+  - {x: 0.75454545, y: -0.6727273}
+  - {x: 0.3590909, y: -0.8}
+  - {x: 0.47727272, y: 0.26363635}

@@ -40,7 +40,7 @@ namespace MiniWar.EditorTools
                 "확인");
         }
 
-        /// <summary>SceneBuilder가 씬을 만들기 전에 부른다.</summary>
+        /// <summary>기존 무기 데이터 생성용. 온라인 성장 시스템 이식 시 참고한다.</summary>
         public static List<WeaponData> EnsureAssets()
         {
             EnsureFolder(WeaponDir);

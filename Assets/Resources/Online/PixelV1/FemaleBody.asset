@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bf7e4af6b294549965bc634e98abdd, type: 3}
+  m_Name: FemaleBody
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Online.CharacterBodyFrames
+  frames:
+  - {fileID: 2146770756, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: -602564296, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: 2146770756, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: -602564296, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: 1353503605, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: 197162370, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: -1806412478, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: 1981623753, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: 1275266250, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: 257820742, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: 2078485332, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: -489479455, guid: 0942c680c3ef623419695b3e37af9f49, type: 3}
+  - {fileID: -277362221, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: -778338241, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: -717855786, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  - {fileID: 342614987, guid: d4afe327b91a916428e94a6d863ff4ae, type: 3}
+  frontShoulders:
+  - {x: -0.17999998, y: 1.9701823}
+  - {x: -0.17999998, y: 1.9701823}
+  - {x: -0.17999998, y: 1.9701823}
+  - {x: -0.17999998, y: 1.9701823}
+  - {x: -0.18000002, y: 2.026852}
+  - {x: -0.18000002, y: 2.026852}
+  - {x: -0.18000002, y: 2.0217593}
+  - {x: -0.18000002, y: 2.0217593}
+  - {x: -0.18000002, y: 1.9861112}
+  - {x: -0.18000002, y: 2.0064814}
+  - {x: -0.18000002, y: 2.001389}
+  - {x: -0.18000002, y: 2.001389}
+  - {x: -0.17999998, y: 1.5050339}
+  - {x: -0.17999998, y: 2.1}
+  - {x: -0.17999998, y: 2.1}
+  - {x: -0.17999998, y: 2.1}
+  backShoulders:
+  - {x: 0.110000014, y: 1.9951823}
+  - {x: 0.110000014, y: 1.9951823}
+  - {x: 0.110000014, y: 1.9951823}
+  - {x: 0.110000014, y: 1.9951823}
+  - {x: 0.10999997, y: 2.051852}
+  - {x: 0.10999997, y: 2.051852}
+  - {x: 0.10999997, y: 2.0467594}
+  - {x: 0.10999997, y: 2.0467594}
+  - {x: 0.10999997, y: 2.0111113}
+  - {x: 0.10999997, y: 2.0314815}
+  - {x: 0.10999997, y: 2.0263891}
+  - {x: 0.10999997, y: 2.0263891}
+  - {x: 0.110000014, y: 1.5300338}
+  - {x: 0.110000014, y: 2.125}
+  - {x: 0.110000014, y: 2.125}
+  - {x: 0.110000014, y: 2.125}

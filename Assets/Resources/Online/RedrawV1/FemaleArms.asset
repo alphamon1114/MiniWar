@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b8606c7741a33468ad9edf5adeda34, type: 3}
+  m_Name: FemaleArms
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Online.CharacterArmFrames
+  frames:
+  - {fileID: 1160642763, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: 1643236834, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: -1298914884, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: 1947846933, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: -1529721600, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: -263344530, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: 512599107, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: 1842337096, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: -1929585917, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: -548193889, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: 1448812774, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  - {fileID: -1846270531, guid: cdc6b502d6c30324db2e924302838467, type: 3}
+  grips:
+  - {x: 0.30833334, y: 0.175}
+  - {x: 0.44444445, y: 0.12777779}
+  - {x: 0.6166667, y: -0.08888889}
+  - {x: 0.51666665, y: -0.50277776}
+  - {x: 0.2888889, y: -0.63055557}
+  - {x: 0.36944443, y: -0.39166668}
+  - {x: 0.275, y: 0.21388888}
+  - {x: 0.45833334, y: 0.13611111}
+  - {x: 0.64166665, y: -0.10555556}
+  - {x: 0.5416667, y: -0.54444444}
+  - {x: 0.28055555, y: -0.65833336}
+  - {x: 0.28611112, y: 0.06388889}

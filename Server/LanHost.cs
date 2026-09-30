@@ -17,6 +17,8 @@ public sealed class LanHost : IAsyncDisposable
     {
         public readonly string Id = Guid.NewGuid().ToString("N");
         public readonly TcpClient Socket = socket;
+        public long PartyRevision = -1;
+        public double PartyTokens = 6, LastPartyRequest;
         public readonly Channel<LanEvent> Outbox = Channel.CreateBounded<LanEvent>(64);
         public void Send(LanEvent value) { if (!Outbox.Writer.TryWrite(value)) Socket.Dispose(); }
     }
@@ -175,6 +177,15 @@ public sealed class LanHost : IAsyncDisposable
                             else peer.Send(new LanEvent { op = "channel", channel = cmd.channel, text = $"채널 {cmd.channel}에 입장했습니다." });
                             break;
                         case "ping": peer.Send(new LanEvent { op = "pong" }); break;
+                        case "party_create": case "party_apply": case "party_cancel":
+                        case "party_accept": case "party_reject": case "party_leave":
+                            peer.PartyTokens = Math.Min(6, peer.PartyTokens + (world.Time - peer.LastPartyRequest) * 2);
+                            peer.LastPartyRequest = world.Time;
+                            if (peer.PartyTokens < 1) { peer.Send(Error("파티 요청이 많습니다. 잠시 후 다시 시도하세요.")); break; }
+                            peer.PartyTokens--;
+                            string partyError = world.PartyCommand(peer.Id, cmd);
+                            if (partyError.Length > 0) peer.Send(Error(partyError));
+                            break;
                         default: peer.Send(Error("지원하지 않는 요청입니다.")); break;
                     }
                 }
@@ -221,7 +232,19 @@ public sealed class LanHost : IAsyncDisposable
                 lock (gate)
                 {
                     world.Tick(0.05f);
-                    if (world.TickNumber % 2 != 0) continue;
+                    foreach (var shot in world.Shots)
+                        foreach (var player in world.Players.Where(p => p.Channel == shot.channel))
+                            if (peers.TryGetValue(player.Id, out var recipient)) recipient.Send(shot);
+                    // A short dash needs 20 Hz snapshots, including its final partial step.
+                    if (world.TickNumber % 2 != 0 && !world.DashMotionThisTick) continue;
+                    foreach (var notification in world.DrainPartyNotifications())
+                        if (peers.TryGetValue(notification.Recipient, out var recipient)) recipient.Send(notification.Event);
+                    foreach (var player in world.Players)
+                        if (peers.TryGetValue(player.Id, out var peer) && peer.PartyRevision != world.PartyRevision)
+                        {
+                            peer.Send(world.PartyState(player.Id));
+                            peer.PartyRevision = world.PartyRevision;
+                        }
                     for (int c = 1; c <= LanRules.MaxChannels; c++)
                     {
                         var snapshot = world.Snapshot(c);

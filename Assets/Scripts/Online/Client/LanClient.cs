@@ -67,19 +67,16 @@ namespace MiniWar.Online
                         int count = (header[0] << 24) | (header[1] << 16) | (header[2] << 8) | header[3];
                         if (count < 1 || count > 65536) throw new IOException("서버 응답 크기가 올바르지 않습니다.");
                         string json = Encoding.UTF8.GetString(ReadExactly(stream, count));
-                        var message = JsonUtility.FromJson<LanEvent>(json);
-                        if (message == null || message.version != LanRules.Version) throw new IOException("서버 버전이 다릅니다.");
+                        var message = Decode(json);
                         if (Events.Count > 256) throw new IOException("수신 메시지가 너무 많습니다.");
                         Events.Enqueue(message);
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (!stopped)
-                    Events.Enqueue(new LanEvent { op = "disconnected", text = ex is AuthenticationException
-                        ? "서버 인증 코드가 일치하지 않습니다. 학원 서버 창의 SHA-256 코드를 확인하세요."
-                        : "서버 연결이 끊겼습니다. 주소와 서버 실행 상태를 확인하세요." });
+                    Events.Enqueue(new LanEvent { op = "disconnected", text = "접속불가" });
             }
             finally
             {
@@ -104,6 +101,16 @@ namespace MiniWar.Online
                 }
             }
             catch (Exception) { lock (socketGate) socket?.Close(); }
+        }
+
+        internal static LanEvent Decode(string json)
+        {
+            var message = JsonUtility.FromJson<LanEvent>(json);
+            if (message == null || message.version != LanRules.Version) throw new IOException("서버 버전이 다릅니다.");
+            // JsonUtility materializes JSON null nested classes as empty objects. Absence of a
+            // server-issued party ID means no membership, including after leave/disband.
+            if (message.party != null && string.IsNullOrEmpty(message.party.id)) message.party = null;
+            return message;
         }
 
         static byte[] ReadExactly(Stream stream, int count)

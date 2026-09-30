@@ -1,0 +1,695 @@
+fileFormatVersion: 2
+guid: 4685591505aa8a14cb9de023d5d29061
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5516967715350416463
+    second: GunnerMaleArmsV1_0
+  - first:
+      213: -451155836277643579
+    second: GunnerMaleArmsV1_1
+  - first:
+      213: 5521096083227758603
+    second: GunnerMaleArmsV1_2
+  - first:
+      213: -6743389688207182902
+    second: GunnerMaleArmsV1_3
+  - first:
+      213: -2067662566918459110
+    second: GunnerMaleArmsV1_4
+  - first:
+      213: 1697133861834051081
+    second: GunnerMaleArmsV1_5
+  - first:
+      213: -2945799920179973986
+    second: GunnerMaleArmsV1_6
+  - first:
+      213: -1588397705517035472
+    second: GunnerMaleArmsV1_7
+  - first:
+      213: 5515243505423241758
+    second: GunnerMaleArmsV1_8
+  - first:
+      213: -4657564367967193654
+    second: GunnerMaleArmsV1_9
+  - first:
+      213: 7879784617300486230
+    second: GunnerMaleArmsV1_10
+  - first:
+      213: 4764507915651420073
+    second: GunnerMaleArmsV1_11
+  - first:
+      213: 2577327405147648532
+    second: GunnerMaleArmsV1_12
+  - first:
+      213: 6600032340631827615
+    second: GunnerMaleArmsV1_13
+  - first:
+      213: 3157840571989291678
+    second: GunnerMaleArmsV1_14
+  - first:
+      213: -8008258067679075164
+    second: GunnerMaleArmsV1_15
+  - first:
+      213: -1762880439729364770
+    second: GunnerMaleArmsV1_16
+  - first:
+      213: -2498774702844687581
+    second: GunnerMaleArmsV1_17
+  - first:
+      213: 7778701283842392125
+    second: GunnerMaleArmsV1_18
+  - first:
+      213: 1191636997831407219
+    second: GunnerMaleArmsV1_19
+  - first:
+      213: -417984734868736132
+    second: GunnerMaleArmsV1_20
+  - first:
+      213: -6357635491472360291
+    second: GunnerMaleArmsV1_21
+  - first:
+      213: -6874387090651717246
+    second: GunnerMaleArmsV1_22
+  - first:
+      213: 4565240836321981109
+    second: GunnerMaleArmsV1_23
+  - first:
+      213: 8832129016511285616
+    second: GunnerMaleArmsV1_24
+  - first:
+      213: 3104883426098476358
+    second: GunnerMaleArmsV1_25
+  - first:
+      213: -3178669510809945479
+    second: GunnerMaleArmsV1_26
+  - first:
+      213: -6401812042994883499
+    second: GunnerMaleArmsV1_27
+  - first:
+      213: 3783874269830085777
+    second: GunnerMaleArmsV1_28
+  - first:
+      213: 3804062356324922696
+    second: GunnerMaleArmsV1_29
+  - first:
+      213: 7839011316643423256
+    second: GunnerMaleArmsV1_30
+  - first:
+      213: 4063999295448241046
+    second: GunnerMaleArmsV1_31
+  - first:
+      213: 5053251671911836766
+    second: GunnerMaleArmsV1_32
+  - first:
+      213: 4454854505891855515
+    second: GunnerMaleArmsV1_33
+  - first:
+      213: -6284383931632340559
+    second: GunnerMaleArmsV1_34
+  - first:
+      213: -5294607505524613494
+    second: GunnerMaleArmsV1_35
+  - first:
+      213: -1666307936732094291
+    second: GunnerMaleArmsV1_36
+  - first:
+      213: -9129292792451537889
+    second: GunnerMaleArmsV1_37
+  - first:
+      213: 7711404203557866623
+    second: GunnerMaleArmsV1_38
+  - first:
+      213: -8032157056455053107
+    second: GunnerMaleArmsV1_39
+  - first:
+      213: -637005559625667454
+    second: GunnerMaleArmsV1_40
+  - first:
+      213: -9040471767625855880
+    second: GunnerMaleArmsV1_41
+  - first:
+      213: 2140486839835532706
+    second: GunnerMaleArmsV1_42
+  - first:
+      213: -311420059394918115
+    second: GunnerMaleArmsV1_43
+  - first:
+      213: 4971606931036895507
+    second: GunnerMaleArmsV1_44
+  - first:
+      213: 970667111803266708
+    second: GunnerMaleArmsV1_45
+  - first:
+      213: -1733381855565369320
+    second: GunnerMaleArmsV1_46
+  - first:
+      213: -7975434162753374446
+    second: GunnerMaleArmsV1_47
+  - first:
+      213: 8456734616859748432
+    second: GunnerMaleArmsV1_48
+  - first:
+      213: 6836188419796586051
+    second: GunnerMaleArmsV1_49
+  - first:
+      213: -5927581346311004529
+    second: GunnerMaleArmsV1_50
+  - first:
+      213: 2747890281265331073
+    second: GunnerMaleArmsV1_51
+  - first:
+      213: -3857239159746138769
+    second: GunnerMaleArmsV1_52
+  - first:
+      213: -6230514441443237600
+    second: GunnerMaleArmsV1_53
+  - first:
+      213: 6879298572952752149
+    second: GunnerMaleArmsV1_54
+  - first:
+      213: 4933862337827357039
+    second: GunnerMaleArmsV1_55
+  - first:
+      213: 8744771146917038874
+    second: GunnerMaleArmsV1_56
+  - first:
+      213: 16867917494963670
+    second: GunnerMaleArmsV1_57
+  - first:
+      213: 1041210826033712554
+    second: GunnerMaleArmsV1_58
+  - first:
+      213: 2865548447959456994
+    second: GunnerMaleArmsV1_59
+  - first:
+      213: 6507327451816110944
+    second: GunnerMaleArmsV1_60
+  - first:
+      213: -5569567878858784148
+    second: GunnerMaleArmsV1_61
+  - first:
+      213: -2803347386444349911
+    second: GunnerMaleArmsV1_62
+  - first:
+      213: -6206788815994873171
+    second: GunnerMaleArmsV1_63
+  - first:
+      213: -4603212279357559888
+    second: GunnerMaleArmsV1_64
+  - first:
+      213: -2702269661663686363
+    second: GunnerMaleArmsV1_65
+  - first:
+      213: 5813108932240127381
+    second: GunnerMaleArmsV1_66
+  - first:
+      213: 577597745969098747
+    second: GunnerMaleArmsV1_67
+  - first:
+      213: -2570329166131535822
+    second: GunnerMaleArmsV1_68
+  - first:
+      213: -6025833883349610214
+    second: GunnerMaleArmsV1_69
+  - first:
+      213: 3048299561502458266
+    second: GunnerMaleArmsV1_70
+  - first:
+      213: 8041327962425428505
+    second: GunnerMaleArmsV1_71
+  - first:
+      213: 7935788963380506069
+    second: GunnerMaleArmsV1_72
+  - first:
+      213: -4059085930445686365
+    second: GunnerMaleArmsV1_73
+  - first:
+      213: -607197070984589135
+    second: GunnerMaleArmsV1_74
+  - first:
+      213: -2647152303032081606
+    second: GunnerMaleArmsV1_75
+  - first:
+      213: 889648912688292657
+    second: GunnerMaleArmsV1_76
+  - first:
+      213: 8343823701464018547
+    second: GunnerMaleArmsV1_77
+  - first:
+      213: 3754124757960739990
+    second: GunnerMaleArmsV1_78
+  - first:
+      213: 8752181323929831615
+    second: GunnerMaleArmsV1_79
+  - first:
+      213: 4330082981582398821
+    second: GunnerMaleArmsV1_80
+  - first:
+      213: 257681145087404006
+    second: GunnerMaleArmsV1_81
+  - first:
+      213: -6020713733448064679
+    second: GunnerMaleArmsV1_82
+  - first:
+      213: -532053283776504132
+    second: GunnerMaleArmsV1_83
+  - first:
+      213: 4993339444327500191
+    second: GunnerMaleArmsV1_84
+  - first:
+      213: 5420567191417322672
+    second: GunnerMaleArmsV1_85
+  - first:
+      213: 5185295176484774803
+    second: GunnerMaleArmsV1_86
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 215
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Arms_00
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 1127
+        width: 219
+        height: 287
+      alignment: 9
+      pivot: {x: 0.11872146, y: 0.4076655}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720cf21894c5a7646b67da6f1d4ae7df
+      internalID: -97019683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_01
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 1144
+        width: 246
+        height: 220
+      alignment: 9
+      pivot: {x: 0.11788618, y: 0.45454547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b7b9e40ec48e440b5aac23a4c56ba2
+      internalID: 503644202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_02
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 1125
+        width: 280
+        height: 151
+      alignment: 9
+      pivot: {x: 0.092857145, y: 0.78807944}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38f55ca73c2e17b42ae6ead1e7c975aa
+      internalID: -307910976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_03
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 812
+        width: 237
+        height: 196
+      alignment: 9
+      pivot: {x: 0.15611814, y: 0.8214286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33263a70a1501ca419da3a72ba284155
+      internalID: 849204467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_04
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 763
+        width: 140
+        height: 284
+      alignment: 9
+      pivot: {x: 0.25, y: 0.8626761}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 915b2544c2843514cbe7f0f71fd553d9
+      internalID: -1176543580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_05
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 822
+        width: 284
+        height: 154
+      alignment: 9
+      pivot: {x: 0.13732395, y: 0.76623374}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2032f9b78b93bde44809520d7230a774
+      internalID: -352582783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_06
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 477
+        width: 221
+        height: 206
+      alignment: 9
+      pivot: {x: 0.1402715, y: 0.4514563}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 557d3aae1a39d2b4c9f8beb1277a15b3
+      internalID: 138124878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_07
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 500
+        width: 228
+        height: 173
+      alignment: 9
+      pivot: {x: 0.14035088, y: 0.433526}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e53d815059931dd459ab6cbe790ddd44
+      internalID: 739139373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_08
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 362
+        width: 289
+        height: 250
+      alignment: 9
+      pivot: {x: 0.121107265, y: 0.84}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9260de92131115a49830e8f99c539f61
+      internalID: -701718928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_09
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 98
+        width: 234
+        height: 227
+      alignment: 9
+      pivot: {x: 0.14529915, y: 0.845815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff656ce6901829439ab5eab5c4b81be
+      internalID: -174930466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_10
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 86
+        width: 190
+        height: 263
+      alignment: 9
+      pivot: {x: 0.20526315, y: 0.85171103}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bab4408c7829dc646841a3fc41c44295
+      internalID: 977761186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arms_11
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 151
+        width: 225
+        height: 211
+      alignment: 9
+      pivot: {x: 0.16888888, y: 0.53554505}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caaccd304e23dab4981609716ca9a6a1
+      internalID: -2087476613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5dacabf42bb571141aa7b5cfe6a0f9b9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Arms_00: -97019683
+      Arms_01: 503644202
+      Arms_02: -307910976
+      Arms_03: 849204467
+      Arms_04: -1176543580
+      Arms_05: -352582783
+      Arms_06: 138124878
+      Arms_07: 739139373
+      Arms_08: -701718928
+      Arms_09: -174930466
+      Arms_10: 977761186
+      Arms_11: -2087476613
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

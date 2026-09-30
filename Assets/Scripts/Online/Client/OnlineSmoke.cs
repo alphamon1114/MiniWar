@@ -38,6 +38,7 @@ namespace MiniWar.Online
             yield return null;
             lobby = FindFirstObjectByType<OnlineLobby>();
             if (lobby == null || config == null) { Finish("FAIL no lobby/config"); yield break; }
+            Set("localPreview", true);
             Set("host", config.host); Set("portText", config.port.ToString()); Set("fingerprint", config.pin);
             Set("nickname", config.nickname); Set("password", config.password); Set("selectedBody", config.body);
             typeof(OnlineLobby).GetMethod("BeginLogin", Flags).Invoke(lobby, new object[] { true });
@@ -66,9 +67,37 @@ namespace MiniWar.Online
             var views = FindObjectsByType<OnlineActorView>(FindObjectsSortMode.None);
             bool sprites = views.Length >= 2 && views.All(x => x.GetComponentsInChildren<SpriteRenderer>().All(s => s.sprite != null));
             if (!sprites) { Finish("FAIL missing character/weapon sprite"); yield break; }
+            bool rigged = views.All(x => x.Rig != null && x.Rig.IsTwoPiece
+                && x.Rig.weaponGrip.parent == x.Rig.connectedArms.transform);
+            rigged &= views.All(x => x.Rig.bodyFrames.frames.Length == 16 && x.Rig.armFrames.frames.Length == 12
+                && x.Rig.parts.All(p => !p.enabled) && x.Rig.connectedBody.sprite != null && x.Rig.connectedArms.sprite != null);
+            if (!rigged) { Finish("FAIL connected body or procedural arm attachment missing"); yield break; }
+            // Suppress ordinary keyboard input; use the same authenticated input protocol as the UI.
+            Set("sendAt", Time.unscaledTime + 10);
+            long shotSequence = Get<long>("sequence");
+            float dashStartX = Get<LanEvent>("snapshot").actors.Single(x => x.nickname == profile.nickname).x;
+            int inputIndex = 0;
+            bool sawDashPose = false;
+            until = Time.realtimeSinceStartup + 4;
+            while (Time.realtimeSinceStartup < until)
+            {
+                client.Send(new LanCommand { op = "input", sequence = ++shotSequence,
+                    fire = true, aiming = true, aimAngle = config.body == 0 ? 32 : 148,
+                    dash = inputIndex == 0 || inputIndex == 5 || inputIndex == 9 });
+                inputIndex++;
+                yield return new WaitForSecondsRealtime(.1f);
+                sawDashPose |= views.Any(x => x.IsDashing && x.Rig.CurrentBodyFrame == 12);
+            }
+            Set("sequence", shotSequence);
+            if (Get<int>("shotsReceived") < 2 || Get<int>("peerShotsReceived") < 1)
+            { Finish("FAIL own/peer practice shots"); yield break; }
+            var dashed = Get<LanEvent>("snapshot").actors.Single(x => x.nickname == profile.nickname);
+            float expected = 2 * LanRules.DashSpeed * LanRules.DashDuration;
+            if (views.Any(x => x.DashSequence != 2) || Mathf.Abs(Mathf.Abs(dashed.x - dashStartX) - expected) > .03f || !sawDashPose)
+            { Finish("FAIL two-dash distance, peer sync, pose or third-tap rejection"); yield break; }
             ScreenCapture.CaptureScreenshot(config.screenshot);
             yield return new WaitForSecondsRealtime(1);
-            Finish("PASS login, character, 2 real Windows clients, equipment swap, Korean peer chat, body/weapon sprites");
+            Finish("PASS login, 2 real Windows clients, equipment swap, Korean peer chat, two-piece character frames, own and peer practice shooting, two-dash distance/pose/peer sync, third-tap rejection");
         }
 
         void Finish(string result)

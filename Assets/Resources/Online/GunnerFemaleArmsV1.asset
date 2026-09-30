@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b8606c7741a33468ad9edf5adeda34, type: 3}
+  m_Name: GunnerFemaleArmsV1
+  m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Online.CharacterArmFrames
+  frames:
+  - {fileID: -1907079574, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: 586590330, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: -567863727, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: 420973148, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: 2001410628, guid: 1fbabeddffa73554c8619e321a15a2ca, type: 3}
+  - {fileID: 452283320, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: -1642179853, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: -16077561, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: 523516642, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: -1404665026, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  - {fileID: -1513404981, guid: 1fbabeddffa73554c8619e321a15a2ca, type: 3}
+  - {fileID: -273236241, guid: 523dfb4fde6b74345988a45e6ef7c394, type: 3}
+  grips:
+  - {x: 0.5702128, y: 0.04680851}
+  - {x: 0.68085104, y: -0.004255319}
+  - {x: 0.63829786, y: -0.16170213}
+  - {x: 0.5744681, y: -0.5744681}
+  - {x: 0.5586957, y: -0.8326087}
+  - {x: 0.41702127, y: -0.45106384}
+  - {x: 0.45106384, y: 0.33617023}
+  - {x: 0.73617023, y: 0.25531915}
+  - {x: 0.9531915, y: 0.034042552}
+  - {x: 0.7319149, y: -0.65106386}
+  - {x: 0.49565217, y: -0.8304348}
+  - {x: 0.39148936, y: 0.21702127}

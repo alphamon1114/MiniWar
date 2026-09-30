@@ -14,7 +14,82 @@ Directory.CreateDirectory(root);
 string password = "Test-only-Password!234";
 try
 {
+    await DiscoveryTests.Run(Check, root, password);
+    await PartyTests.Run(Check, root, password);
+    await DashTests.Run(Check, root, password);
+    Check(LanAim.Pose(90, 1) == AimPose.Up && LanAim.Pose(45, 1) == AimPose.UpDiagonal
+        && LanAim.Pose(0, 1) == AimPose.Forward && LanAim.Pose(-45, 1) == AimPose.DownDiagonal
+        && LanAim.Pose(-90, 1) == AimPose.Down, "Five right-facing aiming poses");
+    Check(LanAim.Pose(90, -1) == AimPose.Up && LanAim.Pose(135, -1) == AimPose.UpDiagonal
+        && LanAim.Pose(180, -1) == AimPose.Forward && LanAim.Pose(-135, -1) == AimPose.DownDiagonal
+        && LanAim.Pose(-90, -1) == AimPose.Down, "Five poses mirror to the left");
+    Check(LanAim.Pose(22.49f, 1) == AimPose.Forward && LanAim.Pose(22.5f, 1) == AimPose.UpDiagonal
+        && LanAim.Pose(67.49f, 1) == AimPose.UpDiagonal && LanAim.Pose(67.5f, 1) == AimPose.Up
+        && LanAim.Pose(-22.49f, 1) == AimPose.Forward && LanAim.Pose(-22.5f, 1) == AimPose.DownDiagonal
+        && LanAim.Pose(-67.49f, 1) == AimPose.DownDiagonal && LanAim.Pose(-67.5f, 1) == AimPose.Down,
+        "Aim sector boundaries include both diagonals and vertical extremes");
+    bool smallCorrection = true;
+    foreach (int previous in new[] { -1, 1 })
+    for (int tenth = -1800; tenth <= 1800; tenth++)
+    {
+        float raw = tenth / 10f;
+        int facing = LanAim.Facing(raw, previous);
+        float visual = LanAim.WorldAngle(LanAim.Pose(raw, facing), facing);
+        smallCorrection &= Math.Abs(LanAim.Normalize(raw - visual)) <= 22.501f;
+    }
+    Check(smallCorrection, "Exact firing direction stays within 22.5 degrees of the five-way visual across a full circle");
+    var aimWorld = new LobbyWorld();
+    aimWorld.Join("aim", new LanProfile { nickname = "AimTest" });
+    aimWorld.Input("aim", new LanCommand { aiming = true, aimAngle = 145, sequence = 1 }); aimWorld.Tick(.05f);
+    var aimSnapshot = aimWorld.Snapshot(1).actors.Single();
+    Check(aimSnapshot.facing == -1 && aimSnapshot.aimAngle == 145
+        && LanAim.WorldAngle(LanAim.Pose(aimSnapshot.aimAngle, aimSnapshot.facing), aimSnapshot.facing) == 135,
+        "Snapshot retains continuous shot intent while the visible pose uses a diagonal");
+    aimWorld.Input("aim", new LanCommand { aiming = true, aimAngle = 89.9f, sequence = 2 }); aimWorld.Tick(.05f);
+    int verticalFacing = aimWorld.Find("aim")!.Facing;
+    aimWorld.Input("aim", new LanCommand { aiming = true, aimAngle = 90.1f, sequence = 3 }); aimWorld.Tick(.05f);
+    Check(verticalFacing == -1 && aimWorld.Find("aim")!.Facing == -1, "Vertical aiming does not flip the body across the upward axis");
+
     var store = new AccountStore(root);
+    var shotWorld = new LobbyWorld();
+    var shotProfile = new LanProfile { nickname = "Shooter", activeItemId = "gun", items = new[] {
+        new LanItem { id = "gun", family = 0, ammo = 12 }, new LanItem { id = "knife", family = 5 } } };
+    var shooter = shotWorld.Join("shooter", shotProfile).Player!;
+    shotWorld.Input("shooter", new LanCommand { sequence = 1, fire = true, aiming = true, aimAngle = 32 });
+    shotWorld.Tick(.05f);
+    var firstShot = shotWorld.Shots.Single().shot;
+    Check(firstShot.angle == 32 && firstShot.family == 0 && firstShot.shooter == "Shooter", "Server approves the equipped gun and exact initial firing direction");
+    Check(firstShot.x == shooter.X && firstShot.y == shooter.Y + LanShooting.AimHeight, "Shot anchor is derived from server actor position");
+    for (int i = 2; i < 80; i++) shotWorld.Input("shooter", new LanCommand { sequence = i, fire = true, aiming = true, aimAngle = -60 });
+    shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Count == 0, "Flooding fresh inputs cannot bypass weapon cadence");
+    Check(!shotWorld.Input("shooter", new LanCommand { sequence = 1, fire = true, aiming = true }), "Replayed trigger input is rejected");
+    LanShooting.Position(firstShot, 0, .2f, out float sx1, out float sy1);
+    LanShooting.Position(firstShot, 0, .4f, out float sx2, out float sy2);
+    Check(firstShot.angle == 32 && Math.Abs((sx2-firstShot.x)-2*(sx1-firstShot.x)) < .0001
+        && Math.Abs((sy2-firstShot.y)-2*(sy1-firstShot.y)) < .0001, "Existing bullet keeps a straight line when aim changes");
+    for (int i = 0; i < 12; i++) shotWorld.Tick(.05f);
+    Check(!shooter.Fire && shotWorld.Shots.Count == 0, "Stale held trigger stops within half a second");
+    Check(shotProfile.items[0].ammo == 12 && shotProfile.money == 0, "Town practice does not spend persistent ammo or money");
+    shotProfile.activeItemId = "knife";
+    shotWorld.Input("shooter", new LanCommand { sequence = 80, fire = true, aiming = true }); shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Count == 0, "Melee weapons cannot emit bullets");
+    shotProfile.activeItemId = "missing"; shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Count == 0, "Unowned or missing equipped gun cannot fire");
+    shotProfile.activeItemId = "gun";
+    shotWorld.Input("shooter", new LanCommand { sequence = 81, fire = true, aiming = false }); shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Count == 0, "Trigger without aiming cannot fire");
+    shotWorld.Input("shooter", new LanCommand { sequence = 82, fire = true, aiming = true });
+    shotWorld.ChangeChannel("shooter", 2); shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Count == 0 && !shooter.Fire, "Channel transfer clears held trigger");
+    shotWorld.Input("shooter", new LanCommand { sequence = 83, fire = true, aiming = true }); shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Single().channel == 2, "Shot event is scoped to shooter's current channel");
+    shotWorld.Leave("shooter"); shotWorld.Tick(.05f);
+    Check(shotWorld.Shots.Count == 0, "Disconnected player cannot keep firing");
+    var shotgun = new LanShot { family = 2, angle = 32 };
+    Check(LanShooting.Pellets(2) == 5 && LanShooting.PelletAngle(shotgun, 0) == 28
+        && LanShooting.PelletAngle(shotgun, 2) == 32 && LanShooting.PelletAngle(shotgun, 4) == 36,
+        "Shotgun spread is symmetric around exact aim");
     var registered = store.Authenticate("테스터", password, true);
     Check(registered.Profile?.money == 300 && registered.Profile.items.Length == 2, "New account receives exactly one starter pistol and melee weapon");
     string itemId = registered.Profile!.items[0].id;
@@ -110,10 +185,19 @@ try
         Check(snap.actors.Single(x => x.nickname == "Bob").aimAngle == 165 && snap.actors.Single(x => x.nickname == "Bob").facing == -1, "Aim direction replicated with facing");
         await a.Send(new LanCommand { op = "chat", text = "동료 테스트" });
         Check((await b.Wait("chat")).text == "동료 테스트", "Korean chat delivered to another client");
+        await a.Send(new LanCommand { op = "input", fire = true, aiming = true, aimAngle = 32, sequence = 1 });
+        var remoteShot = await b.Wait("shot");
+        Check(remoteShot.shot.shooter == "Alice" && remoteShot.shot.angle == 32 && remoteShot.channel == 1,
+            "Server-approved precise shot reaches another real TLS client");
+        var ownShot = await a.Wait("shot");
+        Check(ownShot.shot.id == remoteShot.shot.id, "Both clients receive the same authoritative shot identity");
+        await a.Send(new LanCommand { op = "input", sequence = 2 });
         await b.Send(new LanCommand { op = "channel", channel = 2 }); await b.Wait("channel");
         do { snap = await b.Wait("snapshot"); } while (snap.channel != 2);
         Check(snap.actors.Length == 1 && snap.actors[0].nickname == "Bob", "Channel switch isolated over real sockets");
-        await a.Send(new LanCommand { op = "input", move = 1, sequence = 1 });
+        await a.Send(new LanCommand { op = "input", fire = true, aiming = true, aimAngle = 32, sequence = 3 });
+        Check(await b.ThreeSnapshotsWithoutShots(), "Practice shots do not leak to another channel over real TLS sockets");
+        await a.Send(new LanCommand { op = "input", move = 1, sequence = 4 });
         do { snap = await a.Wait("snapshot"); } while (snap.actors[0].x <= LanRules.TownSpawnX);
         Check(snap.actors[0].x > LanRules.TownSpawnX, "Authoritative motion snapshots delivered");
         await using var intruder = await TestClient.Connect(host.Port, fingerprint);
@@ -177,14 +261,28 @@ sealed class TestClient(TcpClient tcp, SslStream stream) : IAsyncDisposable
         catch { tcp.Dispose(); throw; }
     }
     public Task Send(LanCommand command) => LanHost.WriteFrame(stream, JsonSerializer.SerializeToUtf8Bytes(command, AccountStore.Json), CancellationToken.None);
-    public async Task<LanEvent> Wait(string op)
+    public async Task<bool> ThreeSnapshotsWithoutShots()
+    {
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(3));
+        int snapshots = 0;
+        while (snapshots < 3)
+        {
+            var value = JsonSerializer.Deserialize<LanEvent>(await LanHost.ReadFrame(stream, timeout.Token), AccountStore.Json)!;
+            if (value.op == "shot") return false;
+            if (value.op == "error") throw new Exception(value.text);
+            if (value.op == "snapshot") snapshots++;
+        }
+        return true;
+    }
+    public Task<LanEvent> Wait(string op) => Wait(value => value.op == op, op == "error");
+    public async Task<LanEvent> Wait(Func<LanEvent, bool> match, bool allowError = false)
     {
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(8));
         while (true)
         {
             var value = JsonSerializer.Deserialize<LanEvent>(await LanHost.ReadFrame(stream, timeout.Token), AccountStore.Json)!;
-            if (value.op == op) return value;
-            if (value.op == "error") throw new Exception(value.text);
+            if (match(value)) return value;
+            if (value.op == "error" && !allowError) throw new Exception(value.text);
         }
     }
     public ValueTask DisposeAsync() { stream.Dispose(); tcp.Dispose(); return ValueTask.CompletedTask; }
