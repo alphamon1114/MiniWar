@@ -11,5 +11,7 @@ if ($FrameworkDependent) {
 if ($LASTEXITCODE -ne 0) { throw 'Server build failed.' }
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'Start-GameServer.ps1') -Destination (Join-Path $output 'Start-Server.ps1') -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'ServerLauncher.cmd') -Destination (Join-Path $output 'StartServer.cmd') -Force
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'Stop-GameServer.ps1') -Destination (Join-Path $output 'Stop-Server.ps1') -Force
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'ServerStopper.cmd') -Destination (Join-Path $output 'StopServer.cmd') -Force
 Write-Output "Server: $output/MiniWar.Server.exe"
 Write-Output "Launcher: $output/StartServer.cmd"

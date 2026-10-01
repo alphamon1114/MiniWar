@@ -36,7 +36,7 @@ namespace MiniWar.Online
             state.aiming = true; state.aimAngle = shot.angle; state.facing = shot.facing;
             state.weaponFamily = shot.family; state.weaponTier = shot.tier;
             rig.SetWeapon(visuals.Weapon(shot.family, shot.tier), OnlineVisuals.WeaponWidths[shot.family]);
-            rig.Pose(cycle, smoothSpeed, state.y > .025f, verticalSpeed, state.facing, true, shot.angle, shot.family, IsDashing);
+            rig.Pose(cycle, smoothSpeed, !state.grounded, verticalSpeed, state.facing, true, shot.angle, shot.family, IsDashing);
             Vector3 muzzle = rig.MuzzlePosition;
             rig.Recoil();
             return muzzle;
@@ -65,6 +65,7 @@ namespace MiniWar.Online
                 renderedBody = actor.body;
             }
             rig.SetWeapon(visuals.Weapon(actor.weaponFamily, actor.weaponTier), OnlineVisuals.WeaponWidths[Mathf.Clamp(actor.weaponFamily, 0, 6)]);
+            rig.gameObject.SetActive(!actor.dead && string.IsNullOrEmpty(actor.portalId));
         }
 
         void LateUpdate()
@@ -77,7 +78,7 @@ namespace MiniWar.Online
             float walkRate = rig.bodyFrames != null ? rig.bodyFrames.walkCycleRadiansPerSecond : 10;
             cycle += dt * Mathf.Lerp(2, walkRate, Mathf.Clamp01(Mathf.Abs(smoothSpeed) / LanRules.WalkSpeed));
             bool dashing = IsDashing;
-            rig.Pose(cycle, smoothSpeed, state.y > .025f, verticalSpeed, state.facing, state.aiming, state.aimAngle, state.weaponFamily, dashing);
+            rig.Pose(cycle, smoothSpeed, !state.grounded, verticalSpeed, state.facing, state.aiming, state.aimAngle, state.weaponFamily, dashing);
             if (dashTrail != null) dashTrail.Advance(dt);
             if (dashing && Time.unscaledTime >= trailAt)
             {

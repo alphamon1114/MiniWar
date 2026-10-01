@@ -1,4 +1,4 @@
-param([ValidateRange(1024,65535)][int]$Port = 7777, [string]$DataDirectory = '', [string]$ServerPath = '')
+﻿param([ValidateRange(1024,65535)][int]$Port = 7777, [string]$DataDirectory = '', [string]$ServerPath = '', [switch]$PauseWhenRunning)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot -Parent
 if (-not $ServerPath) { $ServerPath = Join-Path $projectRoot 'Builds/Server/MiniWar.Server.exe' }
@@ -6,7 +6,26 @@ try {
     if (-not (Test-Path -LiteralPath $ServerPath -PathType Leaf)) { throw 'Server files are missing. Build with Tools/Build-Server.ps1, or copy the complete Builds/Server folder.' }
     $busy = [System.Net.NetworkInformation.IPGlobalProperties]::GetIPGlobalProperties().GetActiveTcpListeners() |
         Where-Object { $_.Port -eq $Port }
-    if ($busy) { throw "TCP $Port is already in use. Close the existing server or choose another port. No process was stopped." }
+    if ($busy) {
+        # A second click must not stop/restart a live game or report it as a startup failure.
+        $expectedPath = [System.IO.Path]::GetFullPath($ServerPath)
+        $owners = @(Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique)
+        $existingServer = $null
+        foreach ($ownerId in $owners) {
+            $candidate = Get-Process -Id $ownerId -ErrorAction SilentlyContinue
+            if ($candidate -and $candidate.Path -eq $expectedPath) { $existingServer = $candidate; break }
+        }
+        if ($existingServer) {
+            Write-Host ''
+            Write-Host '서버가 이미 실행 중입니다.' -ForegroundColor Green
+            Write-Host '게임에서 새로고침 후 접속하면 됩니다.'
+            Write-Host '이 안내 창을 닫아도 실행 중인 서버는 유지됩니다.'
+            Write-Host '서버 종료: StopMiniWarLanServer.cmd 또는 배포 폴더의 StopServer.cmd'
+            if ($PauseWhenRunning) { [void](Read-Host 'Enter를 누르면 안내 창을 닫습니다') }
+            exit 0
+        }
+        throw "TCP $Port is in use by another program. MiniWar did not stop or replace it."
+    }
     $discoveryBusy = [System.Net.NetworkInformation.IPGlobalProperties]::GetIPGlobalProperties().GetActiveUdpListeners() | Where-Object { $_.Port -eq 7778 }
     if ($discoveryBusy) { throw 'UDP 7778 is already in use. Close the other server before starting this one.' }
     if (-not $DataDirectory) { $DataDirectory = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'MiniWar/Server' }

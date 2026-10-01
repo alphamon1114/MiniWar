@@ -23,10 +23,13 @@ namespace MiniWar.EditorTools
         public RoomDungeon Dungeon=>dungeon;
 
         [MenuItem("MiniWar/던전 제작기")]
-        public static void Open() {var w=GetWindow<RoomDungeonBuilderWindow>("던전 제작기 · 방 연결");w.Show();}
+        public static void Open() {ShowDungeon(DungeonCampaignAuthoring.Last());}
         public static RoomDungeonBuilderWindow ShowDungeon(RoomDungeon asset)
         {
-            var w=GetWindow<RoomDungeonBuilderWindow>("던전 제작기 · 방 연결");w.dungeon=asset;
+            var w=GetWindow<RoomDungeonBuilderWindow>("던전 제작기 · 방 연결");
+            w.EndGraphDrag();if(w.dungeon!=asset)DungeonCampaignAuthoring.SavePending(w.dungeon);
+            w.dungeon=asset;DungeonCampaignAuthoring.Remember(asset);
+            w.status="편집 중: "+asset.displayName+" · 방 배치와 통로 연결은 별도로 편집합니다.";
             w.selected=asset.startRoomId;w.problems=null;w.linkSource=null;w.FitGraph();w.Show();w.Repaint();return w;
         }
         [OnOpenAsset]
@@ -60,7 +63,7 @@ namespace MiniWar.EditorTools
         {
             GUILayout.BeginHorizontal(EditorStyles.toolbar);
             var next=(RoomDungeon)EditorGUILayout.ObjectField(dungeon,typeof(RoomDungeon),false,GUILayout.Width(225));
-            if(next!=dungeon){dungeon=next;selected=next==null?null:next.startRoomId;problems=null;linkSource=null;FitGraph();}
+            if(next!=dungeon){EndGraphDrag();DungeonCampaignAuthoring.SavePending(dungeon);dungeon=next;DungeonCampaignAuthoring.Remember(next);selected=next==null?null:next.startRoomId;problems=null;linkSource=null;FitGraph();}
             if(GUILayout.Button("새 던전",EditorStyles.toolbarButton,GUILayout.Width(70)))NewDungeon();
             if(GUILayout.Button("방형 예제",EditorStyles.toolbarButton,GUILayout.Width(80)))ShowDungeon(RoomDungeonAuthoring.CreateExample());
             if(GUILayout.Button("복층 예제",EditorStyles.toolbarButton,GUILayout.Width(80)))ShowDungeon(RoomDungeonPlatforms.CreateExample());
@@ -74,18 +77,22 @@ namespace MiniWar.EditorTools
             }
             GUILayout.FlexibleSpace();GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();GUILayout.Space(12);
+            DungeonCampaignAuthoring.Picker(dungeon,asset=>ShowDungeon(asset),170);
             var nextMode=(GraphTool)GUILayout.Toolbar((int)graphTool,new[]{"1 선택 / 이동","2 방 배치","3 연결","4 끊기"},GUILayout.Width(490));
             if(nextMode!=graphTool){graphTool=nextMode;linkSource=null;EndGraphDrag();}
-            GUILayout.FlexibleSpace();GUILayout.Label("방 배치와 통로 연결은 별개입니다",EditorStyles.miniLabel);GUILayout.Space(12);GUILayout.EndHorizontal();
+            if(GUILayout.Button("내부 배치",GUILayout.Width(80))&&dungeon!=null)DungeonBuilderWindow.ShowRoom(dungeon,dungeon.FindRoom(selected)!=null?selected:dungeon.startRoomId);
+            GUILayout.FlexibleSpace();GUILayout.EndHorizontal();
         }
 
         void Sidebar()
         {
-            if(dungeon==null){EditorGUILayout.HelpBox("'방형 예제'에서 방 연결을 만들거나 '복층 예제'에서 점프로 오르내리는 3층 방을 편집할 수 있습니다.",MessageType.Info);return;}
+            if(dungeon==null){EditorGUILayout.HelpBox("상단의 '편집할 던전'에서 제작할 던전을 선택하세요.",MessageType.Info);return;}
             var so=new SerializedObject(dungeon);so.Update();EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(so.FindProperty("displayName"),new GUIContent("던전 이름"));
             EditorGUILayout.PropertyField(so.FindProperty("allowBacktracking"),new GUIContent("이전 방으로 돌아가기"));
             if(EditorGUI.EndChangeCheck()){so.ApplyModifiedProperties();problems=null;}
+            int campaign=DungeonCampaignAuthoring.IndexOf(dungeon);
+            if(campaign>0)EditorGUILayout.HelpBox("배치 제작용 던전입니다. 보스는 임시 표시이며, 온라인 입장은 아직 준비 중입니다.",MessageType.None);
             EditorGUILayout.HelpBox("클리어한 방의 몹은 다시 생성되지 않습니다. 관전 중인 사망자는 이동 가능한 파티원들과 함께 다음 방으로 따라갑니다.",MessageType.None);
             EditorGUILayout.HelpBox(GraphHelp,MessageType.Info);
             var room=dungeon.FindRoom(selected);
@@ -129,8 +136,8 @@ namespace MiniWar.EditorTools
             }
             GUILayout.Space(12);GUILayout.Label("이동 / 집결 테스트",EditorStyles.boldLabel);
             body=EditorGUILayout.Popup("캐릭터",body,new[]{"남성","여성"});
-            partySize=EditorGUILayout.IntSlider("모의 파티 인원",partySize,1,4);
-            EditorGUILayout.HelpBox("F6: 현재 방 몹 처치 처리\nG: 현재 포탈로 모의 동료 집결\n실제 전투·서버 파티 연결 전의 흐름 테스트입니다.",MessageType.None);
+            partySize=EditorGUILayout.IntSlider("모의 파티 인원",partySize,1,campaign==4?6:4);
+            EditorGUILayout.HelpBox("F6: 현재 방 몹 처치 처리\nS: 포탈 진입 / 나가기 · G: 모의 동료 진입\n배치와 방 이동을 확인하는 로컬 테스트입니다.",MessageType.None);
             GUILayout.Label("방 "+dungeon.rooms.Count+"개 · 연결 "+dungeon.rooms.Sum(r=>r.portals.Count)/2+"개",EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("더블클릭: 방 내부 편집\n휠: 확대 / 축소 · 중간 버튼: 화면 이동\nCtrl+S: 저장 · Ctrl+Z: 되돌리기",MessageType.None);
             foreach(var warning in dungeon.ConnectionWarnings())EditorGUILayout.HelpBox(warning,MessageType.Warning);

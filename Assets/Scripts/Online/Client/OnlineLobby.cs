@@ -23,7 +23,7 @@ namespace MiniWar.Online
         OnlineVisuals visuals;
         Camera worldCamera;
         Sprite square;
-        GUIStyle label, title, field, button, small, hudSmall, hudLabel, hudTitle;
+        GUIStyle label, title, field, button, small, hudSmall, hudLabel, hudTitle, chatShadow;
         OnlineUiSkin uiSkin;
         string host = "127.0.0.1", portText = "7777", nickname = "", password = "", fingerprint = "";
         string notice = "", message = "";
@@ -83,6 +83,7 @@ namespace MiniWar.Online
 
         void BuildWorld()
         {
+            townRoot = new GameObject("Town scenery").transform;
             if (worldCamera == null)
             {
                 var cameraObject = new GameObject("Online Camera"); worldCamera = cameraObject.AddComponent<Camera>(); cameraObject.tag = "MainCamera";
@@ -93,15 +94,17 @@ namespace MiniWar.Online
             if (backdrop != null)
             {
                 var bg = new GameObject("Survivors Refuge").AddComponent<SpriteRenderer>();
+                bg.transform.SetParent(townRoot, false);
                 bg.sprite = Sprite.Create(backdrop, new Rect(0, 0, backdrop.width, backdrop.height), new Vector2(0.5f, 0.5f), backdrop.height / 13f);
                 bg.transform.position = new Vector3(21, -1.1f, 0); bg.sortingOrder = -20;
                 bg.transform.localScale = new Vector3(44f / bg.sprite.bounds.size.x, 1, 1);
             }
-            else MakePart("Ground", null, new Vector3(21, Ground - 1, 0), new Vector2(44, 2), new Color(0.13f, 0.17f, 0.23f), -5);
+            else MakePart("Ground", townRoot, new Vector3(21, Ground - 1, 0), new Vector2(44, 2), new Color(0.13f, 0.17f, 0.23f), -5);
             for (int i = 0; i < 3; i++)
             {
                 float x = 9 + i * 13;
                 var npc = new GameObject("Refuge NPC " + i);
+                npc.transform.SetParent(townRoot, false);
                 npc.transform.position = new Vector3(x, Ground + 1.3f, 0);
                 var sr = npc.AddComponent<SpriteRenderer>();
                 if (npcPortraits != null && i < npcPortraits.Length && npcPortraits[i] != null)
@@ -166,19 +169,24 @@ namespace MiniWar.Online
                             PlayerPrefs.SetString("MiniWar.LAN.Nickname", nickname); PlayerPrefs.Save();
                         }
                         break;
-                    case "snapshot": snapshot = e; channel = e.channel; SyncActors(); break;
+                    case "snapshot": snapshot = e; channel = e.channel; SyncDungeon(e.dungeon); SyncActors(); break;
                     case "profile": profile = e.profile; notice = e.text; break;
                     case "parties":
-                        if (MyParty?.id != e.party?.id) partyScroll = Vector2.zero;
+                        if (MyParty?.id != e.party?.id)
+                        {
+                            partyScroll = Vector2.zero;
+                            if (e.party != null) { selectedDungeon = e.party.dungeonId; partyPage = 1; }
+                            else partyPage = 0;
+                        }
                         partyState = e; break;
                     case "party_notice": partyNotice = e.text; notice = e.text; break;
                     case "shot":
-                        if (e.shot == null || e.channel != channel || e.shot.id <= lastShotId) break;
+                        if (e.shot == null || e.channel != channel || e.shot.id <= lastShotId || (e.instanceId ?? "") != (snapshot?.instanceId ?? "")) break;
                         lastShotId = e.shot.id; shotsReceived++;
                         if (profile != null && e.shot.shooter != profile.nickname) peerShotsReceived++;
-                        Vector3 muzzle = new Vector3(e.shot.x, Ground + e.shot.y, 0);
+                        Vector3 muzzle = new Vector3(e.shot.x, WorldGround + e.shot.y, 0);
                         if (views.TryGetValue(e.shot.shooter, out var shooter)) muzzle = shooter.PlayShot(e.shot);
-                        PracticeShotView.Spawn(e.shot, muzzle);
+                        if(!InDungeon)PracticeShotView.Spawn(e.shot, muzzle);
                         break;
                     case "chat": chat.Add($"{e.sender}  {e.text}"); if (chat.Count > 70) chat.RemoveAt(0); scroll.y = float.MaxValue; break;
                     case "channel": channel = e.channel; chat.Clear(); ClearShots(); notice = e.text; break;
@@ -198,24 +206,30 @@ namespace MiniWar.Online
                 if (kb.digit2Key.wasPressedThisFrame && profile.equipped.Length > 1) Equip(profile.equipped[1]);
             }
             bool movementAllowed = kb != null && Application.isFocused && !chatFocused && !inventory && !partyPanel;
+            if(movementAllowed&&InDungeon&&kb.rKey.wasPressedThisFrame)
+                client.Send(new LanCommand{op="dungeon_revive",roomId=dungeonVisit.roomId,roomSequence=dungeonVisit.roomSequence});
+            if (HandlePortalInput(kb, movementAllowed)) movementAllowed = false;
             bool jump = movementAllowed && (kb.spaceKey.wasPressedThisFrame || kb.wKey.wasPressedThisFrame);
+            bool drop = jump && InDungeon && (kb.sKey.isPressed || kb.downArrowKey.isPressed);
+            if (drop) jump = false;
             bool dash = movementAllowed && (kb.leftShiftKey.wasPressedThisFrame || kb.rightShiftKey.wasPressedThisFrame);
-            if (Time.unscaledTime >= sendAt || jump || dash)
+            if (Time.unscaledTime >= sendAt || jump || dash || drop)
             {
                 sendAt = Time.unscaledTime + 0.05f;
                 float move = !movementAllowed ? 0 : (kb.dKey.isPressed ? 1 : 0) - (kb.aKey.isPressed ? 1 : 0);
                 float aimAngle = 0;
-                bool fire = Mouse.current != null && Mouse.current.leftButton.isPressed && Application.isFocused
+                bool fire = movementAllowed && Mouse.current != null && Mouse.current.leftButton.isPressed && Application.isFocused
                     && !chatFocused && !inventory && !PointerOverUi();
                 bool aiming = Mouse.current != null && (Mouse.current.rightButton.isPressed || fire) && !chatFocused && !inventory && !partyPanel;
                 if (aiming && actors.TryGetValue(profile.nickname, out var self))
                 {
                     Vector3 origin = views.TryGetValue(profile.nickname, out var selfView) && selfView.Rig != null
                         ? selfView.Rig.MuzzlePosition : self.position + Vector3.up * CharacterRig.AimHeight;
+                    if(InDungeon)origin=self.position+Vector3.up*LanShooting.AimHeight;
                     Vector2 delta = worldCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - origin;
                     aimAngle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
                 }
-                client.Send(new LanCommand { op = "input", sequence = ++sequence, move = move, jump = jump, dash = dash, aimAngle = aimAngle, aiming = aiming, fire = fire });
+                client.Send(new LanCommand { op = "input", sequence = ++sequence, move = move, jump = jump, drop = drop, dash = dash, aimAngle = aimAngle, aiming = aiming, fire = fire });
             }
             if (Time.unscaledTime >= pingAt) { pingAt = Time.unscaledTime + 5; client.Send(new LanCommand { op = "ping" }); }
             foreach (var kv in actors)
@@ -225,6 +239,12 @@ namespace MiniWar.Online
             }
             if (actors.TryGetValue(profile.nickname, out var own))
             {
+                if (InDungeon)
+                {
+                    var selfState=System.Array.Find(snapshot.actors,a=>a.nickname==profile.nickname);
+                    var alive=selfState!=null&&selfState.dead?System.Array.Find(snapshot.actors,a=>!a.dead):null;
+                    FollowDungeonCamera(alive!=null&&actors.TryGetValue(alive.nickname,out var ally)?ally.position:own.position);return;
+                }
                 float half = worldCamera.orthographicSize * worldCamera.aspect;
                 float x = half * 2 >= LanRules.TownWidth ? LanRules.TownWidth / 2 : Mathf.Clamp(own.position.x, half, LanRules.TownWidth - half);
                 worldCamera.transform.position = Vector3.Lerp(worldCamera.transform.position, new Vector3(x, 0, -10), 1 - Mathf.Exp(-7 * Time.unscaledDeltaTime));
@@ -237,7 +257,7 @@ namespace MiniWar.Online
             foreach (var a in snapshot.actors)
             {
                 live.Add(a.nickname);
-                var desired = new Vector3(a.x, Ground + a.y, 0);
+                var desired = new Vector3(a.x, WorldGround + a.y, 0);
                 if (!actors.TryGetValue(a.nickname, out var root))
                 {
                     root = new GameObject("Player " + a.nickname).transform; root.position = desired; actors.Add(a.nickname, root);
@@ -247,6 +267,7 @@ namespace MiniWar.Online
                 }
                 positions[a.nickname] = desired;
                 views[a.nickname].Apply(a);
+                names[a.nickname].text = a.nickname + (a.dead ? " · 관전" : !string.IsNullOrEmpty(a.portalId) ? " · 포탈 대기" : a.nickname == profile?.nickname ? " · 나" : "");
             }
             foreach (string name in actors.Keys.Where(n => !live.Contains(n)).ToArray())
             { Destroy(actors[name].gameObject); actors.Remove(name); positions.Remove(name); names.Remove(name); views.Remove(name); }
@@ -263,6 +284,7 @@ namespace MiniWar.Online
             hudSmall = new GUIStyle(small); hudSmall.normal.textColor = Color.white;
             hudLabel = new GUIStyle(label); hudLabel.normal.textColor = Color.white;
             hudTitle = new GUIStyle(title); hudTitle.normal.textColor = Color.white;
+            chatShadow = new GUIStyle(hudSmall); chatShadow.normal.textColor = new Color32(5, 10, 15, 255);
             field = uiSkin.Field; button = uiSkin.Button;
         }
 
@@ -339,12 +361,12 @@ namespace MiniWar.Online
         {
             GUI.enabled = !partyPanel;
             GUI.Box(new Rect(8, 4, 1264, 57), GUIContent.none, uiSkin.Header);
-            GUI.Label(new Rect(25, 16, 470, 35), localPreview ? "생존자 거점  /  로컬 미리보기" : $"생존자 거점  /  CH {channel}  /  {profile.nickname}", label);
+            GUI.Label(new Rect(25, 16, 640, 35), InDungeon ? $"{LanDungeons.Find(dungeonVisit.dungeonId)?.Name}  /  {dungeonVisit.roomName}" : localPreview ? "생존자 거점  /  로컬 미리보기" : $"생존자 거점  /  CH {channel}  /  {profile.nickname}", label);
             if (localPreview && GUI.Button(new Rect(488, 12, 190, 40), selectedBody == 0 ? "여성으로 보기" : "남성으로 보기", button))
             {
                 selectedBody = 1 - selectedBody; Logout(false); StartLocalPreview(); return;
             }
-            for (int i = 1; i <= LanRules.MaxChannels; i++)
+            for (int i = 1; !InDungeon && i <= LanRules.MaxChannels; i++)
             {
                 int count = snapshot != null && snapshot.channelCounts.Length >= i ? snapshot.channelCounts[i - 1] : 0;
                 if (GUI.Button(new Rect(690 + (i - 1) * 136, 12, 130, 40), $"CH {i} · {count}/30", button)) client.Send(new LanCommand { op = "channel", channel = i });
@@ -353,23 +375,10 @@ namespace MiniWar.Online
             if (GUI.Button(new Rect(1110, 12, 145, 40), "로그아웃", button)) { Logout(true); return; }
             GUI.Label(new Rect(25, 80, 875, 40), notice, hudSmall);
             DrawPartySummary();
-            GUI.Box(new Rect(18, 459, 505, 243), GUIContent.none, uiSkin.Window);
-            GUI.Box(new Rect(23, 464, 495, 34), GUIContent.none, uiSkin.Header);
-            GUI.Label(new Rect(32, 471, 470, 25), "마을 채팅", small);
-            scroll = GUI.BeginScrollView(new Rect(30, 504, 480, 138), scroll, new Rect(0, 0, 455, Mathf.Max(138, chat.Count * 24)));
-            for (int i = 0; i < chat.Count; i++) GUI.Label(new Rect(3, i * 24, 450, 25), chat[i], small);
-            GUI.EndScrollView();
-            GUI.SetNextControlName("town-chat");
-            message = GUI.TextField(new Rect(30, 651, 375, 37), message, 160, field);
-            chatFocused = GUI.GetNameOfFocusedControl() == "town-chat";
-            bool enter = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return && chatFocused;
-            if (GUI.Button(new Rect(414, 651, 95, 37), "전송", button) || enter)
-            {
-                if (!string.IsNullOrWhiteSpace(message)) client.Send(new LanCommand { op = "chat", text = message });
-                message = ""; GUI.FocusControl(""); chatFocused = false;
-                if (enter) Event.current.Use();
-            }
-            GUI.Label(new Rect(650, 650, 620, 65), "A/D 이동 · Space 점프 · Shift 대시 · 우클릭 조준 · 좌클릭 사격\n1/2 무기 교체 · I 장비 · P 파티\n마을 연습탄: 탄약 소모·피해 없음", hudSmall);
+            DrawOnlinePortals();
+            DrawCombatHUD();
+            DrawChat();
+            GUI.Label(new Rect(650, 650, 620, 65), "A/D 이동 · Space ×2 점프 · Shift 대시 · 우클릭 조준 · 좌클릭 사격\n1/2 무기 교체 · I 장비 · P 파티" + (InDungeon ? " · ↓+Space 하강\nS 포탈 진입 · R 부활 1회 / 이후 관전" : "\n마을 연습탄: 탄약 소모·피해 없음"), hudSmall);
             if (views.TryGetValue(profile.nickname, out var dashView))
                 GUI.Label(new Rect(1010, 621, 260, 25), dashView.DashStatus, hudSmall);
             if (inventory)
@@ -393,8 +402,38 @@ namespace MiniWar.Online
             if (partyPanel) DrawPartyPanel();
         }
 
+        void DrawChat()
+        {
+            var previousSkin = GUI.skin;
+            GUI.skin = uiSkin.ChatSkin;
+            GUI.Box(new Rect(18, 459, 505, 243), GUIContent.none, uiSkin.ChatWindow);
+            GUI.Box(new Rect(23, 464, 495, 34), GUIContent.none, uiSkin.ChatHeader);
+            ChatText(new Rect(32, 471, 470, 25), InDungeon ? "파티 채팅" : "마을 채팅");
+            scroll = GUI.BeginScrollView(new Rect(30, 504, 480, 138), scroll, new Rect(0, 0, 455, Mathf.Max(138, chat.Count * 24)));
+            for (int i = 0; i < chat.Count; i++) ChatText(new Rect(3, i * 24, 450, 25), chat[i]);
+            GUI.EndScrollView();
+            GUI.SetNextControlName("town-chat");
+            message = GUI.TextField(new Rect(30, 651, 375, 37), message, 160, uiSkin.ChatField);
+            chatFocused = GUI.GetNameOfFocusedControl() == "town-chat";
+            bool enter = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return && chatFocused;
+            if (GUI.Button(new Rect(414, 651, 95, 37), "전송", uiSkin.ChatButton) || enter)
+            {
+                if (!string.IsNullOrWhiteSpace(message)) client.Send(new LanCommand { op = "chat", text = message });
+                message = ""; GUI.FocusControl(""); chatFocused = false;
+                if (enter) Event.current.Use();
+            }
+            GUI.skin = previousSkin;
+        }
+
+        void ChatText(Rect rect, string text)
+        {
+            GUI.Label(new Rect(rect.x + 1, rect.y + 1, rect.width, rect.height), text, chatShadow);
+            GUI.Label(rect, text, hudSmall);
+        }
+
         void Logout(bool user)
         {
+            SyncDungeon(null);
             client?.Dispose(); client = null; profile = null; snapshot = null; connecting = false; inventory = false; chatFocused = false;
             partyState = null; partyPanel = false; partyNotice = ""; partyScroll = Vector2.zero;
             chat.Clear(); positions.Clear(); names.Clear(); views.Clear();

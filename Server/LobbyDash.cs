@@ -56,13 +56,13 @@ public sealed partial class LobbyWorld
             if (p.DashRemaining <= .000001f)
             {
                 p.DashRemaining = 0;
-                p.X = Math.Clamp(p.X + p.Move * LanRules.WalkSpeed * remaining, .5f, LanRules.TownWidth - .5f);
+                p.X = MoveX(p, p.Move * LanRules.WalkSpeed * remaining);
                 break;
             }
             DashMotionThisTick = true;
             float step = Math.Min(remaining, p.DashRemaining);
             float wanted = p.X + p.DashDirection * LanRules.DashSpeed * step;
-            p.X = Math.Clamp(wanted, .5f, LanRules.TownWidth - .5f);
+            p.X = MoveX(p, wanted - p.X);
             p.DashRemaining = Math.Max(0, p.DashRemaining - step);
             remaining -= step;
             cursor += step;

@@ -9,6 +9,7 @@ using MiniWar.Server;
 
 int checks = 0;
 void Check(bool condition, string label) { if (!condition) throw new Exception("FAILED: " + label); checks++; Console.WriteLine("PASS " + label); }
+if(args.Contains("--pursuit-only")){EnemyPursuitTests.Run(Check);RangedPursuitTests.Run(Check);Console.WriteLine("ALL "+checks+" PURSUIT CHECKS PASSED");return;}
 string root = Path.Combine(Path.GetTempPath(), "MiniWarTests-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(root);
 string password = "Test-only-Password!234";
@@ -16,7 +17,13 @@ try
 {
     await DiscoveryTests.Run(Check, root, password);
     await PartyTests.Run(Check, root, password);
+    await DungeonPartyTests.Run(Check, root, password);
+    PortalTests.Run(Check);
+    CombatTests.Run(Check);
+    EnemyPursuitTests.Run(Check);
+    RangedPursuitTests.Run(Check);
     await DashTests.Run(Check, root, password);
+    await JumpTests.Run(Check, root, password);
     Check(LanAim.Pose(90, 1) == AimPose.Up && LanAim.Pose(45, 1) == AimPose.UpDiagonal
         && LanAim.Pose(0, 1) == AimPose.Forward && LanAim.Pose(-45, 1) == AimPose.DownDiagonal
         && LanAim.Pose(-90, 1) == AimPose.Down, "Five right-facing aiming poses");
@@ -148,9 +155,11 @@ try
     world.Tick(.05f);
     Check(world.Find("p0")!.X == idleX, "Stale movement stops within 0.5 seconds");
     world.Input("p0", new LanCommand { jump = true, sequence = 2 }); world.Tick(.05f);
-    float velocity = world.Find("p0")!.VelocityY;
     world.Input("p0", new LanCommand { jump = true, sequence = 3 }); world.Tick(.05f);
-    Check(world.Find("p0")!.VelocityY < velocity, "No repeated airborne jump exploit");
+    Check(world.Find("p0")!.VelocityY > 0 && !world.Find("p0")!.AirJumpAvailable, "One airborne jump is allowed");
+    float velocity = world.Find("p0")!.VelocityY;
+    world.Input("p0", new LanCommand { jump = true, sequence = 4 }); world.Tick(.05f);
+    Check(world.Find("p0")!.VelocityY < velocity, "No third airborne jump exploit");
     Check(world.Chat("p0", "hello\n<color=red>world</color>")!.text == "hello<color=red>world</color>", "Chat control characters removed");
     Check(world.Chat("p0", "spam") == null, "Chat throttle enforced");
     Check(world.ChangeChannel("p0", 2).Length > 0, "Channel full check enforced");

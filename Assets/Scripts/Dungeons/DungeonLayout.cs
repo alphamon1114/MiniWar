@@ -43,6 +43,7 @@ namespace MiniWar.Dungeons
         public Rect bounds = new Rect(0, -4, 60, 16);
         [Min(.25f)] public float gridSize = .5f;
         [Range(.5f,6f)] public float jumpHeight = 4f / 3f;
+        [Range(.5f,6f)] public float airJumpHeight = Online.LanRules.AirJumpHeight;
         public Sprite background;
         public Color backgroundColor = new Color(.09f, .13f, .18f);
         public Vector2 entrance = new Vector2(2, 0);
@@ -90,6 +91,8 @@ namespace MiniWar.Dungeons
             if (bounds.width < 6 || bounds.height < 4) issues.Add("맵 범위는 가로 6, 세로 4 이상으로 정해주세요.");
             if (float.IsNaN(jumpHeight) || float.IsInfinity(jumpHeight) || jumpHeight < .5f || jumpHeight > 6f)
                 issues.Add("최대 점프 높이는 0.5~6m 사이로 정해주세요.");
+            if (float.IsNaN(airJumpHeight) || float.IsInfinity(airJumpHeight) || airJumpHeight < .5f || airJumpHeight > 6f)
+                issues.Add("공중 점프 높이는 0.5~6m 사이로 정해주세요.");
             if (floors.Count == 0) issues.Add("바닥이 없습니다. 바닥 도구로 드래그해 만들어주세요.");
             CheckPoint("입구", entrance, new Vector2(.6f, 2.3f), true, issues);
             if(checkExit) CheckPoint("출구", exit, new Vector2(.6f, 2.3f), true, issues);

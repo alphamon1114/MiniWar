@@ -9,7 +9,7 @@ namespace MiniWar.Online
 
     public static class LanRules
     {
-        public const int Version = 5;
+        public const int Version = 10;
         public const int PartyCapacity = 4;
         public const int Port = 7777;
         public const int ChannelCapacity = 30;
@@ -23,6 +23,8 @@ namespace MiniWar.Online
         public const float DashCooldown = 3f;
         public const float JumpSpeed = 8f;
         public const float Gravity = 24f;
+        public const float AirJumpHeight = 2f;
+        public static float AirJumpSpeed => (float)Math.Sqrt(2 * Gravity * AirJumpHeight);
         public static bool IsWeaponFamily(int family) => family >= 0 && family <= (int)WeaponFamily.Revolver;
         public static bool IsHandgun(int family) => family == (int)WeaponFamily.Pistol || family == (int)WeaponFamily.Revolver;
         public static float DungeonPower(int players)
@@ -51,6 +53,10 @@ namespace MiniWar.Online
         public long sequence;
         public string partyId;
         public string applicationId;
+        public string dungeonId, dungeonRevision;
+        public bool drop;
+        public string roomId, portalId;
+        public long roomSequence;
     }
 
     [Serializable] public sealed class LanItem
@@ -88,6 +94,11 @@ namespace MiniWar.Online
         public float dashRemaining, dashCooldown, dashChainWindow;
         public int dashDirection = 1;
         public long dashSequence;
+        public bool grounded;
+        public bool dead;
+        public float hp = 100, maxHp = 100;
+        public bool reviveUsed;
+        public string portalId;
     }
 
     [Serializable] public sealed class LanShot
@@ -102,7 +113,8 @@ namespace MiniWar.Online
 
     [Serializable] public sealed class LanPartyListing
     {
-        public string id, title, leader;
+        public string id, title, leader, dungeonId;
+        public bool inDungeon;
         public int count;
         public int capacity = LanRules.PartyCapacity;
     }
@@ -121,7 +133,8 @@ namespace MiniWar.Online
 
     [Serializable] public sealed class LanParty
     {
-        public string id, title, leader;
+        public string id, title, leader, dungeonId;
+        public bool inDungeon;
         public int capacity = LanRules.PartyCapacity;
         public LanPartyMember[] members = Array.Empty<LanPartyMember>();
         // Sent only to the leader of this party.
@@ -143,5 +156,7 @@ namespace MiniWar.Online
         public LanPartyListing[] parties = Array.Empty<LanPartyListing>();
         public LanParty party;
         public string pendingPartyId, pendingPartyTitle;
+        public string instanceId;
+        public LanDungeonVisit dungeon;
     }
 }

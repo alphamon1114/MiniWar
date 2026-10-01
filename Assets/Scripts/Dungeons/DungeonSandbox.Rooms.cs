@@ -8,7 +8,7 @@ namespace MiniWar.Dungeons
     {
         public RoomDungeon dungeon;
         public string initialRoom;
-        [Range(1,4)] public int partySize=4;
+        [Range(1,6)] public int partySize=4;
         public DungeonRoomRun RoomRun {get;private set;}
         public IReadOnlyList<DungeonPartyPresence> Party=>party;
         readonly List<DungeonPartyPresence> party=new List<DungeonPartyPresence>();
@@ -18,7 +18,7 @@ namespace MiniWar.Dungeons
         void InitializeRoomRun()
         {
             if(dungeon==null)return;
-            for(int i=0;i<Mathf.Clamp(partySize,1,4);i++)party.Add(new DungeonPartyPresence {id="P"+(i+1)});
+            for(int i=0;i<Mathf.Clamp(partySize,1,6);i++)party.Add(new DungeonPartyPresence {id="P"+(i+1)});
             RoomRun=new DungeonRoomRun(dungeon,party.Select(p=>p.id),string.IsNullOrEmpty(initialRoom)?null:initialRoom);
             layout=RoomRun.Current.layout;
         }
@@ -43,6 +43,7 @@ namespace MiniWar.Dungeons
             foreach(var portal in RoomRun.Current.portals)
             {
                 Color color=RoomRun.CanUse(portal)?new Color(.33f,.88f,.72f):new Color(.78f,.32f,.35f);
+                if(RoomRun.CountingPortal==portal.id)color=new Color(1,.78f,.3f);
                 if(portalVisuals.TryGetValue(portal.id,out var renderers))foreach(var renderer in renderers)renderer.color=color;
             }
         }
@@ -51,6 +52,7 @@ namespace MiniWar.Dungeons
         {
             if(RoomRun==null)return;
             RoomRun.ClearCurrentForPreview();
+            currentCombat?.ClearForPreview();
             foreach(var go in enemyVisuals)if(go!=null)go.SetActive(false);
             RefreshPortalColors();
         }
@@ -60,52 +62,65 @@ namespace MiniWar.Dungeons
             if(RoomRun==null||Motor==null)return;
             var portal=RoomRun.Current.portals.Find(p=>p.Contains(Motor.Position));
             if(portal==null)return;
-            for(int i=1;i<party.Count;i++)party[i].feet=portal.position;
+            for(int i=1;i<party.Count;i++)
+            {
+                party[i].feet=portal.position;
+                if(RoomRun.EnteredPortal(party[i].id)!=portal.id)RoomRun.TogglePortal(party[i].id,portal.id,party);
+            }
         }
 
         void UpdatePartyMarkers()
         {
             for(int i=1;i<party.Count&&i-1<companionVisuals.Count;i++)
+            {
+                companionVisuals[i-1].gameObject.SetActive(!party[i].spectator&&RoomRun.EnteredPortal(party[i].id)==null);
                 companionVisuals[i-1].position=party[i].feet+Vector2.up*.6f+Vector2.right*((i-2)*.23f);
+            }
         }
 
         void UpdateRoomFlow()
         {
             party[0].feet=Motor.Position;
-            if(RoomRun.TryTransition(party,out var arrival))
+            if(RoomRun.TryTransition(party,out var arrival,Time.fixedDeltaTime))
             {
                 move=0;jump=dash=drop=false;BuildWorld(arrival.arrival);
             }
+            RefreshPortalColors();
+        }
+        bool WaitingInPortal => RoomRun!=null&&RoomRun.EnteredPortal("P1")!=null;
+        void ToggleLocalPortal()
+        {
+            if(RoomRun==null||Motor==null||!Motor.Grounded||Motor.Dashing)return;
+            party[0].feet=Motor.Position;
+            var portal=RoomRun.Current.portals.Find(p=>p.Contains(Motor.Position));
+            if(portal!=null&&RoomRun.TogglePortal("P1",portal.id,party)) {move=0;jump=dash=drop=false;}
         }
 
         void DrawRoomHUD()
         {
             GUI.Box(new Rect(14,14,550,113),GUIContent.none);
-            GUI.Label(new Rect(30,20,520,29),RoomRun.Current.displayName+" · 방 연결 테스트",heading);
-            GUI.Label(new Rect(25,50,525,24),"A/D 이동  Space 점프  ↓+Space 하강  Shift 대쉬",label);
-            GUI.Label(new Rect(25,75,525,24),"F6 방 클리어 처리   G 현재 포탈에 모의 동료 집결",label);
-            GUI.Label(new Rect(25,99,525,23),"모의 "+party.Count+"인 · 실제 AI / 온라인 파티는 미연결",label);
-            if(!RoomRun.Cleared)foreach(var spawn in layout.spawns)
-            {
-                var center=spawn.position+Vector2.right*((Mathf.Clamp(spawn.count,1,30)-1)*spawn.spacing*.5f);
-                DrawLabel(center+Vector2.up*(spawn.Size.y+.3f),spawn.Label+(spawn.count>1?" ×"+spawn.count:""));
-            }
+            GUI.Label(new Rect(30,20,520,29),RoomRun.Current.displayName+" · 전투·방 연결 테스트",heading);
+            GUI.Label(new Rect(25,50,525,24),"A/D 이동  Space ×2 점프  ↓+Space 하강  Shift 대쉬",label);
+            GUI.Label(new Rect(25,75,525,24),"S 포탈 진입/나가기 · F6 클리어 · G 모의 동료 진입",label);
+            GUI.Label(new Rect(25,99,525,23),"모의 "+party.Count+"인 · 과반수 진입 5초 / 생존자 전원 즉시 이동",label);
+            DrawLivingEnemyNames();
             foreach(var portal in RoomRun.Current.portals)
             {
                 string target=dungeon.FindRoom(portal.targetRoomId)?.displayName??"?";
-                DrawLabel(portal.position+Vector2.up*3.15f,RoomPortal.Label(portal.direction)+" · "+target);
+                DrawLabel(portal.position+Vector2.up*3.15f,RoomPortal.Label(portal.direction)+" · "+target+" [S] "+RoomRun.EnteredCount(portal.id)+"/"+party.Count(p=>!p.spectator&&p.connected));
             }
             if(party.Count>1)DrawLabel(party[1].feet+Vector2.up*3.25f,"모의 동료 "+(party.Count-1)+"명");
             string state=RoomRun.Completed?"던전 클리어!":!RoomRun.Cleared?"몬스터 "+RoomRun.Remaining+"마리 남음 · 포탈 잠김":"방 클리어 · 이동할 포탈에 모여주세요";
             var current=RoomRun.Current.portals.Find(p=>p.Contains(Motor.Position));
-            if(current!=null&&RoomRun.CanUse(current))state=RoomPortal.Label(current.direction)+" 집결 "+party.Count(p=>!p.spectator&&current.Contains(p.feet))+" / "+party.Count(p=>!p.spectator)+"   [G] 모의 동료 모으기";
+            if(current!=null&&RoomRun.CanUse(current))state=WaitingInPortal?"포탈 안에서 대기 중 · S 나가기":"S 포탈 진입 · G 모의 동료 진입";
+            if(RoomRun.CountingPortal!=null)state=Mathf.CeilToInt(RoomRun.Countdown)+"초 후 이동 · 생존자 전원이 들어오면 즉시 출발";
             GUI.Box(new Rect(14,Screen.height-53,620,38),GUIContent.none);GUI.Label(new Rect(20,Screen.height-51,605,34),state,label);
             DrawMinimap();
             if(RoomRun.Completed)
             {
                 GUI.Box(new Rect(Screen.width/2-220,Screen.height/2-50,440,100),GUIContent.none);
                 GUI.Label(new Rect(Screen.width/2-210,Screen.height/2-35,420,35),"DUNGEON CLEAR",heading);
-                GUI.Label(new Rect(Screen.width/2-210,Screen.height/2+5,420,30),"보스 방 클리어 · 보상 지급 없는 동선 테스트",label);
+                GUI.Label(new Rect(Screen.width/2-210,Screen.height/2+5,420,30),"보스 방 클리어 · 보상 지급 없는 전투 테스트",label);
             }
         }
 

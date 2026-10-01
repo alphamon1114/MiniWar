@@ -66,6 +66,7 @@ namespace MiniWar.EditorTools
             Check(!run.TryTransition(party.Take(3).ToList(),out _),"omitted member blocks transition");
             string fourth=party[3].id;party[3].id=party[0].id;Check(!run.TryTransition(party,out _),"duplicate party member blocks transition");party[3].id=fourth;
             party[3].feet=new Vector2(float.NaN,0);Check(!run.TryTransition(party,out _),"invalid positions cannot pass the gate");party[3].feet=exit.position;
+            foreach(var member in party)Check(run.TogglePortal(member.id,exit.id,party),"explicit S entry "+member.id);
             Check(run.TryTransition(party,out var arrival)&&run.Current.id==exit.targetRoomId,"all four enter the same next room");
             Check(!run.TryTransition(party,out _),"arrival latch prevents immediate bounce");
             Place(party,arrival.arrival);run.TryTransition(party,out _);run.ClearCurrentForPreview();
@@ -73,10 +74,12 @@ namespace MiniWar.EditorTools
             var left=run.Current.portals.First(p=>p.direction==PortalDirection.Left);var right=run.Current.portals.First(p=>p.direction==PortalDirection.Down);
             party[0].feet=party[1].feet=left.position;party[2].feet=party[3].feet=right.position;
             Check(!run.TryTransition(party,out _),"split between two portals does not move the party");
-            Place(party,left.position);Check(run.TryTransition(party,out arrival)&&run.Current.id==first.id,"backtrack to previous room");
+            Place(party,left.position);foreach(var member in party)run.TogglePortal(member.id,left.id,party);
+            Check(run.TryTransition(party,out arrival)&&run.Current.id==first.id,"backtrack to previous room");
             Check(run.Cleared&&run.Remaining==0,"cleared enemies do not respawn on return");
             Place(party,arrival.arrival);run.TryTransition(party,out _);Place(party,exit.position);
             party[3].spectator=true;party[3].feet=first.layout.entrance;
+            foreach(var member in party.Where(p=>!p.spectator))run.TogglePortal(member.id,exit.id,party);
             Check(run.TryTransition(party,out arrival),"spectator follows surviving members without walking to portal");
             foreach(var member in party)member.spectator=true;run.ClearCurrentForPreview();
             Check(!run.TryTransition(party,out _),"all-dead party cannot advance");
@@ -84,6 +87,7 @@ namespace MiniWar.EditorTools
             for(int size=1;size<=4;size++)
             {
                 var group=Party(size);var single=new DungeonRoomRun(data,group.Select(p=>p.id));single.ClearCurrentForPreview();Place(group,single.Current.portals[0].position);
+                foreach(var member in group)single.TogglePortal(member.id,single.Current.portals[0].id,group);
                 Check(single.TryTransition(group,out _),size+"-member party uses its actual roster size");
             }
             party=Party(4);run=new DungeonRoomRun(data,party.Select(p=>p.id));
@@ -96,6 +100,7 @@ namespace MiniWar.EditorTools
         {
             Place(party,run.Current.layout.entrance);run.TryTransition(party,out _);run.ClearCurrentForPreview();
             var portal=run.Current.portals.First(p=>p.direction==direction);Place(party,portal.position);
+            foreach(var member in party.Where(p=>!p.spectator))run.TogglePortal(member.id,portal.id,party);
             Check(run.TryTransition(party,out var arrival),"walk through "+direction);
             Place(party,arrival.arrival);run.TryTransition(party,out _);
         }

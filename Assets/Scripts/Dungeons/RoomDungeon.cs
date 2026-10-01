@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using MiniWar.Online;
 
 namespace MiniWar.Dungeons
 {
@@ -117,7 +118,12 @@ namespace MiniWar.Dungeons
         readonly RoomDungeon dungeon;
         readonly HashSet<string> roster,visited=new HashSet<string>();
         readonly Dictionary<string,HashSet<string>> defeated=new Dictionary<string,HashSet<string>>();
-        bool arrivalLocked;
+        readonly LanPortalRally rally = new LanPortalRally();
+        double clock;
+        public string CountingPortal => rally.CountingPortal;
+        public float Countdown => rally.Remaining(clock);
+        public string EnteredPortal(string id) => rally.Entered(id);
+        public int EnteredCount(string portalId) => rally.Count(portalId);
         public DungeonRoom Current {get;private set;}
         public bool Completed {get;private set;}
         public bool Cleared => Remaining==0;
@@ -156,31 +162,43 @@ namespace MiniWar.Dungeons
         public bool CanUse(RoomPortal portal) => !Completed&&Cleared&&Current.portals.Contains(portal)
             &&(dungeon.allowBacktracking||!visited.Contains(portal.targetRoomId));
 
-        public bool TryTransition(IReadOnlyList<DungeonPartyPresence> party,out RoomPortal arrivalPortal)
+        bool ValidParty(IReadOnlyList<DungeonPartyPresence> party)
         {
-            arrivalPortal=null;
-            if(Completed||party==null||party.Count!=roster.Count)return false;
+            if(party==null||party.Count!=roster.Count)return false;
             var seen=new HashSet<string>();
             foreach(var member in party)
-                if(member==null||!roster.Contains(member.id)||!seen.Add(member.id)||!member.connected
+                if(member==null||!roster.Contains(member.id)||!seen.Add(member.id)
                     ||float.IsNaN(member.feet.x)||float.IsNaN(member.feet.y)||float.IsInfinity(member.feet.x)||float.IsInfinity(member.feet.y))return false;
-            var movers=party.Where(p=>!p.spectator).ToArray();
-            if(movers.Length==0)return false;
-            if(arrivalLocked)
+            return true;
+        }
+        public bool TogglePortal(string memberId,string portalId,IReadOnlyList<DungeonPartyPresence> party)
+        {
+            if(!ValidParty(party))return false;
+            var member=party.FirstOrDefault(p=>p.id==memberId);
+            var portal=Current.portals.Find(p=>p.id==portalId);
+            if(member==null||member.spectator||!member.connected||portal==null||!CanUse(portal)||!portal.Contains(member.feet))return false;
+            if(rally.Entered(memberId)!=null&&rally.Entered(memberId)!=portalId)return false;
+            rally.Toggle(memberId,portalId);return true;
+        }
+        public bool TryTransition(IReadOnlyList<DungeonPartyPresence> party,out RoomPortal arrivalPortal,float elapsed=0)
+        {
+            arrivalPortal=null;
+            if(Completed||!ValidParty(party)||float.IsNaN(elapsed)||float.IsInfinity(elapsed)||elapsed<0)
+            {rally.Reset();return false;}
+            clock+=elapsed;
+            foreach(var member in party)
             {
-                if(movers.All(m=>Current.portals.All(p=>!p.Contains(m.feet))))arrivalLocked=false;
-                return false;
+                var portal=Current.portals.Find(p=>p.id==rally.Entered(member.id));
+                if(portal!=null&&!portal.Contains(member.feet))rally.Remove(member.id);
             }
-            if(!Cleared)return false;
-            foreach(var portal in Current.portals)
-            {
-                if(!CanUse(portal)||!movers.All(m=>portal.Contains(m.feet)))continue;
-                var next=dungeon.FindRoom(portal.targetRoomId);
-                var arrival=next?.portals.Find(p=>p.id==portal.targetPortalId);
-                if(arrival==null)continue;
-                Current=next;visited.Add(next.id);arrivalLocked=true;arrivalPortal=arrival;UpdateCompletion();return true;
-            }
-            return false;
+            string chosen=rally.Evaluate(party.Select(p=>new PortalVoter{Id=p.id,Alive=!p.spectator,Connected=p.connected}).ToArray(),
+                new HashSet<string>(Current.portals.Where(CanUse).Select(p=>p.id)),clock);
+            if(chosen==null)return false;
+            var exit=Current.portals.Find(p=>p.id==chosen);
+            var next=dungeon.FindRoom(exit.targetRoomId);
+            var arrival=next?.portals.Find(p=>p.id==exit.targetPortalId);
+            if(arrival==null){rally.Reset();return false;}
+            Current=next;visited.Add(next.id);rally.Reset();arrivalPortal=arrival;UpdateCompletion();return true;
         }
     }
 }

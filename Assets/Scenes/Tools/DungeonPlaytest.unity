@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1492668356
+--- !u!1 &1252536410
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1492668358}
-  - component: {fileID: 1492668357}
+  - component: {fileID: 1252536412}
+  - component: {fileID: 1252536411}
   m_Layer: 0
   m_Name: Dungeon placement test
   m_TagString: Untagged
@@ -136,30 +136,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1492668357
+--- !u!114 &1252536411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492668356}
+  m_GameObject: {fileID: 1252536410}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e950f84ca877d9478780a2b28106422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Dungeons.DungeonSandbox
-  dungeon: {fileID: 0}
-  initialRoom: 
+  dungeon: {fileID: 11400000, guid: 99d7f5e76527ac84292d359e661fabdc, type: 2}
+  initialRoom: e07b422ca287468cbf9458ebaafe4097
   partySize: 1
-  layout: {fileID: 11400000, guid: ba392baa6e575f3478ab77ff80843a20, type: 2}
+  layout: {fileID: -7452990807534170820, guid: 99d7f5e76527ac84292d359e661fabdc, type: 2}
   characterBody: 0
---- !u!4 &1492668358
+--- !u!4 &1252536412
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492668356}
+  m_GameObject: {fileID: 1252536410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -172,4 +172,4 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1492668358}
+  - {fileID: 1252536412}

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace MiniWar.Online
 {
     /// <summary>Explicit two-player recruitment check in real Windows builds, using the UI command path.</summary>
-    public sealed class OnlinePartySmoke : MonoBehaviour
+    public sealed partial class OnlinePartySmoke : MonoBehaviour
     {
         [Serializable] sealed class Config
         {
@@ -16,6 +16,7 @@ namespace MiniWar.Online
             public int port;
             public bool leader;
             public bool automaticDiscovery;
+            public bool dungeon;
         }
         Config config;
         OnlineLobby lobby;
@@ -85,6 +86,7 @@ namespace MiniWar.Online
             if (!ready) { Finish("FAIL login: " + Get<string>("notice")); yield break; }
             if (State.party != null) { Finish("FAIL new player has phantom party"); yield break; }
             typeof(OnlineLobby).GetMethod("SetPartyPanel", Flags).Invoke(lobby, new object[] { true });
+            if (config.dungeon) { yield return RunDungeon(); yield break; }
             if (config.leader)
             {
                 Set("partyTitle", "성문 외곽 · 함께 탈환해요"); Send("party_create");

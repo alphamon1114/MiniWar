@@ -16,33 +16,196 @@ MonoBehaviour:
   description: "\uBC29\uC758 \uBAAC\uC2A4\uD130\uB97C \uCC98\uCE58\uD55C \uB4A4, \uAC19\uC740 \uBC29\uD5A5 \uD3EC\uD0C8\uC5D0 \uD30C\uD2F0\uC6D0\uC774 \uBAA8\uC774\uBA74 \uC774\uB3D9\uD569\uB2C8\uB2E4."
   bounds:
     serializedVersion: 2
-    x: 0
-    y: -3
-    width: 24
-    height: 12
+    x: -6
+    y: -6
+    width: 36
+    height: 18
   gridSize: 0.5
   jumpHeight: 1.3333334
+  airJumpHeight: 2
   background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
   backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
-  entrance: {x: 4, y: 0}
+  entrance: {x: 3, y: -2}
   exit: {x: 20, y: 0}
   floors:
   - id: f5865265d5cf408fad00aa828b8cbbf4
     rect:
       serializedVersion: 2
       x: 0
-      y: -2
+      y: -3
       width: 24
-      height: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 9cb1ad953116420b90a504e300b8b14e
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 5.5
+      width: 6
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 207df85b224d4d88830b47493ec94d56
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: 5.5
+      width: 6
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 017ad9b82d7e4f349aed59168ad2960d
+    rect:
+      serializedVersion: 2
+      x: 6.5
+      y: 4
+      width: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 50b7088b030648fda058c9011d2c589d
+    rect:
+      serializedVersion: 2
+      x: 15.5
+      y: 4
+      width: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 1a0961b984094c48b25461f2585a0f7e
+    rect:
+      serializedVersion: 2
+      x: 9
+      y: 2.5
+      width: 6
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 061997a33ac445ae80609fbe15fc2487
+    rect:
+      serializedVersion: 2
+      x: 15.5
+      y: 1
+      width: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 2ee7f942646a4822b78b7fd2c52df1e1
+    rect:
+      serializedVersion: 2
+      x: 6.5
+      y: 1
+      width: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: f35d0a3b52264cf9860feb113f80f321
+    rect:
+      serializedVersion: 2
+      x: 9
+      y: -1
+      width: 6
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 06ff9b1059b043a59504f5654d0d26f2
+    rect:
+      serializedVersion: 2
+      x: 6.5
+      y: -2
+      width: 2.5
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: e3614dcb1bd3476b8f22d65dab5ccb0b
+    rect:
+      serializedVersion: 2
+      x: 15.5
+      y: -2
+      width: 2
+      height: 0.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-left-20261001
+    rect:
+      serializedVersion: 2
+      x: -6
+      y: -3
+      width: 6
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-right-20261001
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: -3
+      width: 6
+      height: 1
     sprite: {fileID: 0}
     color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
     oneWay: 0
   spawns:
-  - id: 14502e69de75463799a53673abfce87c
-    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+  - id: 9130fdd98832442dbfd5621eb44e4b68
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
     sprite: {fileID: 0}
-    position: {x: 7, y: 0}
-    count: 8
+    position: {x: 5, y: 6.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 68cb50ede19d4b429b15de6686041a84
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 19, y: 6.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 153e575b5a1243248e6c265f2d4b73de
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 1.5, y: 6.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 7e5a6801e12b42cb855043f661dfb727
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 23, y: 6.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: c68d60e6b66640aca385eb87e7b9eac1
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 12, y: 3.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 105bf0e656fd4900aa7b78c2a6589a4c
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 12, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: a81f6d74bd9c4a1693ec4725d8bf399b
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 20.5, y: -2}
+    count: 1
     spacing: 1.5
     faceLeft: 1
 --- !u!114 &-3077651909500710169
@@ -61,24 +224,105 @@ MonoBehaviour:
   description: "\uBC29\uC758 \uBAAC\uC2A4\uD130\uB97C \uCC98\uCE58\uD55C \uB4A4, \uAC19\uC740 \uBC29\uD5A5 \uD3EC\uD0C8\uC5D0 \uD30C\uD2F0\uC6D0\uC774 \uBAA8\uC774\uBA74 \uC774\uB3D9\uD569\uB2C8\uB2E4."
   bounds:
     serializedVersion: 2
-    x: 0
-    y: -3
-    width: 24
-    height: 12
+    x: -6
+    y: -6
+    width: 36
+    height: 18
   gridSize: 0.5
   jumpHeight: 1.3333334
+  airJumpHeight: 2
   background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
   backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
-  entrance: {x: 4, y: 0}
+  entrance: {x: 4.5, y: -1.5}
   exit: {x: 20, y: 0}
   floors:
   - id: 573b6779ffac49f09cc720374134d4de
     rect:
       serializedVersion: 2
       x: 0
-      y: -2
+      y: -3
       width: 24
-      height: 2
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: c403142417034580a0093462810ee760
+    rect:
+      serializedVersion: 2
+      x: 20
+      y: -1.5
+      width: 4
+      height: 2.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 5214f5d1e2c14354a9b9328656200c10
+    rect:
+      serializedVersion: 2
+      x: 20
+      y: 4
+      width: 4
+      height: 2.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: a638ef523eb047f6953393728e42101e
+    rect:
+      serializedVersion: 2
+      x: 6
+      y: -0.5
+      width: 2.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 49b2295136ff41c5810d8374c9f834be
+    rect:
+      serializedVersion: 2
+      x: 6
+      y: 2
+      width: 2.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 29a621ef5d2c44908369c7450ce633a0
+    rect:
+      serializedVersion: 2
+      x: 6
+      y: 4.5
+      width: 2.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 92dc8578d02e4a22ac49641848f0b1b8
+    rect:
+      serializedVersion: 2
+      x: 6
+      y: 7
+      width: 2.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: space-left-20261001
+    rect:
+      serializedVersion: 2
+      x: -6
+      y: -3
+      width: 6
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-right-20261001
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: -3
+      width: 6
+      height: 1.5
     sprite: {fileID: 0}
     color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
     oneWay: 0
@@ -86,16 +330,30 @@ MonoBehaviour:
   - id: de2c899ccccc41bdbfb4fec80dfbf55b
     enemy: {fileID: 11400000, guid: 73ebc2b9dc850cf49a850e9b016158fa, type: 2}
     sprite: {fileID: 0}
-    position: {x: 19, y: 0}
+    position: {x: 22, y: 1}
     count: 1
     spacing: 1.5
     faceLeft: 1
-  - id: e9e432d5432247bd8432ee318a63f543
-    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+  - id: aa1a258caa364b7b9e87e797083a612b
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
     sprite: {fileID: 0}
-    position: {x: 7, y: 0}
-    count: 7
-    spacing: 1.25
+    position: {x: 18.5, y: -1.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 29c2e29e639b48dc92c4507d8a02c80b
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 16.5, y: -1.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: da7cb8ae72fa4000818724c517b990c0
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 14, y: -1.5}
+    count: 1
+    spacing: 1.5
     faceLeft: 1
 --- !u!114 &-3019454823252215807
 MonoBehaviour:
@@ -113,40 +371,136 @@ MonoBehaviour:
   description: "\uBC29\uC758 \uBAAC\uC2A4\uD130\uB97C \uCC98\uCE58\uD55C \uB4A4, \uAC19\uC740 \uBC29\uD5A5 \uD3EC\uD0C8\uC5D0 \uD30C\uD2F0\uC6D0\uC774 \uBAA8\uC774\uBA74 \uC774\uB3D9\uD569\uB2C8\uB2E4."
   bounds:
     serializedVersion: 2
-    x: 0
-    y: -3
-    width: 24
-    height: 12
+    x: -6
+    y: -6
+    width: 36
+    height: 18
   gridSize: 0.5
   jumpHeight: 1.3333334
+  airJumpHeight: 2
   background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
   backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
-  entrance: {x: 4, y: 0}
+  entrance: {x: 4.5, y: -2}
   exit: {x: 20, y: 0}
   floors:
   - id: 3a2f1e9c546546e39e181f8ee78bbfa6
     rect:
       serializedVersion: 2
       x: 0
-      y: -2
+      y: -3
       width: 24
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: fc035e97128d4cac9d07ba85ba84e5fc
+    rect:
+      serializedVersion: 2
+      x: 16
+      y: -2
+      width: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 7ca608667c034f60a6fc1233c5081c59
+    rect:
+      serializedVersion: 2
+      x: 18
+      y: -2
+      width: 2
       height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 496faa2d0628422e8478234d49fecbe0
+    rect:
+      serializedVersion: 2
+      x: 20
+      y: -2
+      width: 2
+      height: 3
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: eab824d49f8e49dc9afe2e871d4b1ecd
+    rect:
+      serializedVersion: 2
+      x: 22
+      y: -2
+      width: 2
+      height: 4
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: space-left-20261001
+    rect:
+      serializedVersion: 2
+      x: -6
+      y: -3
+      width: 6
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-right-20261001
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: -3
+      width: 6
+      height: 1
     sprite: {fileID: 0}
     color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
     oneWay: 0
   spawns:
-  - id: fad0888c6c294085b9c22af01de452f1
-    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
-    sprite: {fileID: 0}
-    position: {x: 7, y: 0}
-    count: 4
-    spacing: 1.5
-    faceLeft: 1
-  - id: f1f24013db5c479cb648bdcb5e5c5af0
+  - id: b63b780a7e8b4652a67495e55d93d3ae
     enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
     sprite: {fileID: 0}
-    position: {x: 14, y: 0}
-    count: 4
+    position: {x: 21, y: 1}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 6e09af7e9ed44bbfa9339c5b656fb7c1
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 19, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 2fab8b93413448c999f36fe62b240350
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: -1}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 15bea202084346349bd8ce9fd1aef845
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 22.5, y: -2}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: df9b066e297c493b91d9e02f67783e10
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 20, y: -2}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 428da005562b4eb7af9cef15c4ba3af3
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 18, y: -2}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 82da61cc2931432784afee3110468cd8
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 13, y: -2}
+    count: 1
     spacing: 1.5
     faceLeft: 1
 --- !u!114 &-1881015486288111528
@@ -165,40 +519,136 @@ MonoBehaviour:
   description: "\uBC29\uC758 \uBAAC\uC2A4\uD130\uB97C \uCC98\uCE58\uD55C \uB4A4, \uAC19\uC740 \uBC29\uD5A5 \uD3EC\uD0C8\uC5D0 \uD30C\uD2F0\uC6D0\uC774 \uBAA8\uC774\uBA74 \uC774\uB3D9\uD569\uB2C8\uB2E4."
   bounds:
     serializedVersion: 2
-    x: 0
-    y: -3
-    width: 24
-    height: 12
+    x: -6
+    y: -6
+    width: 36
+    height: 18
   gridSize: 0.5
   jumpHeight: 1.3333334
+  airJumpHeight: 2
   background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
   backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
-  entrance: {x: 4, y: 0}
+  entrance: {x: 4, y: -1.5}
   exit: {x: 20, y: 0}
   floors:
   - id: e01f21d8463d4f34b1e8fe90d1bae4fa
     rect:
       serializedVersion: 2
       x: 0
-      y: -2
+      y: -3
       width: 24
-      height: 2
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 9e964671805747599b935cab4ac39a0c
+    rect:
+      serializedVersion: 2
+      x: 10
+      y: -1.5
+      width: 4
+      height: 5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 751e424e6b8a472ea54221c1ffa66e57
+    rect:
+      serializedVersion: 2
+      x: 6.5
+      y: -1
+      width: 1.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 3935462415244087b9fcafc43203cc04
+    rect:
+      serializedVersion: 2
+      x: 5
+      y: 1
+      width: 1.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: f1dd8964c0e2463cb0975563423bb172
+    rect:
+      serializedVersion: 2
+      x: 8
+      y: 2
+      width: 1.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: space-left-20261001
+    rect:
+      serializedVersion: 2
+      x: -6
+      y: -3
+      width: 6
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-right-20261001
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: -3
+      width: 6
+      height: 1.5
     sprite: {fileID: 0}
     color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
     oneWay: 0
   spawns:
-  - id: 67fb9710acd64691b953a86b2ac4f17c
-    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
-    sprite: {fileID: 0}
-    position: {x: 7, y: 0}
-    count: 4
-    spacing: 1.5
-    faceLeft: 1
-  - id: 672351c8a69340f49b8230856948add8
+  - id: 46e44f11a51c4d8aaf4c3c8014694014
     enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
     sprite: {fileID: 0}
-    position: {x: 14, y: 0}
-    count: 4
+    position: {x: 11, y: 3.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: ee14a30215dc4cbeb0bb79b00ade2321
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 13, y: 3.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 611d8874cba8462fa30b9979cbc17b0d
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: -1.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 76e96c3662a24a148965f900ace3a7b1
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 21, y: -1.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 9ec3abfc322040a1bbc94fd0e061536f
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 19, y: -1.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 9a34c7d082a34079be49b988493e0770
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 9, y: -1.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 498e81b8785f4a048af009ac88bfe305
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8.5, y: 3}
+    count: 1
     spacing: 1.5
     faceLeft: 1
 --- !u!114 &11400000
@@ -227,8 +677,8 @@ MonoBehaviour:
       direction: 1
       targetRoomId: 044ce99e78454cddab0b8e90932d3f97
       targetPortalId: 9e8d8439a12b4be5b231f9f1642ece1e
-      position: {x: 22.5, y: 0}
-      arrival: {x: 20, y: 0}
+      position: {x: 27.5, y: 0}
+      arrival: {x: 25, y: 0}
   - id: 044ce99e78454cddab0b8e90932d3f97
     displayName: "\uBB34\uB108\uC9C4 \uAD11\uC7A5"
     cell: {x: 1, y: 0}
@@ -239,14 +689,14 @@ MonoBehaviour:
       direction: 0
       targetRoomId: bcf4c3c65e674c1da614c3a731bc40a8
       targetPortalId: 0d9eaad0a89345039d0698a7b62a2359
-      position: {x: 1.5, y: 0}
-      arrival: {x: 4, y: 0}
+      position: {x: 1, y: -2}
+      arrival: {x: 3, y: -2}
     - id: bbe417ff0fc24d6d8a5c0d63be3279b7
       direction: 3
       targetRoomId: ac3e8abf76fb487a880d1a9b85946685
       targetPortalId: 500a3e98eb784e369b9b5e01f3d8c2af
-      position: {x: 7, y: 0}
-      arrival: {x: 9, y: 0}
+      position: {x: 23, y: -2}
+      arrival: {x: 20.5, y: -2}
   - id: 78d41b4de6c743b4bf06137c0292027a
     displayName: "\uC131\uBB38 \uC9C4\uC785\uB85C"
     cell: {x: 2, y: 0}
@@ -257,14 +707,14 @@ MonoBehaviour:
       direction: 2
       targetRoomId: 49ba458622c14db4a9e64090b057ad15
       targetPortalId: b1f9a8b75afe47a9b81f22ce1b6b0a2c
-      position: {x: 12, y: 0}
-      arrival: {x: 14, y: 0}
+      position: {x: 23, y: -1.5}
+      arrival: {x: 21, y: -1.5}
     - id: 020e3686fdd346b6bd2e8bbfc16bccc1
       direction: 3
       targetRoomId: be670e97a8ca4e2886d80d1e6e0bacd0
       targetPortalId: 889e58c37fec49eabb07196dc1c93d0c
-      position: {x: 7, y: 0}
-      arrival: {x: 9, y: 0}
+      position: {x: 1, y: -1.5}
+      arrival: {x: 3, y: -1.5}
   - id: 49ba458622c14db4a9e64090b057ad15
     displayName: "\uC131\uBB38 \uB300\uD3EC"
     cell: {x: 2, y: 1}
@@ -275,8 +725,8 @@ MonoBehaviour:
       direction: 3
       targetRoomId: 78d41b4de6c743b4bf06137c0292027a
       targetPortalId: 8783e440d7624948b7722e13ab3fbf9f
-      position: {x: 7, y: 0}
-      arrival: {x: 9, y: 0}
+      position: {x: 1.5, y: -1.5}
+      arrival: {x: 3, y: -1.5}
   - id: ac3e8abf76fb487a880d1a9b85946685
     displayName: "\uBCF4\uAE09 \uCC3D\uACE0"
     cell: {x: 1, y: -1}
@@ -287,14 +737,14 @@ MonoBehaviour:
       direction: 2
       targetRoomId: 044ce99e78454cddab0b8e90932d3f97
       targetPortalId: bbe417ff0fc24d6d8a5c0d63be3279b7
-      position: {x: 12, y: 0}
-      arrival: {x: 14, y: 0}
+      position: {x: 1, y: -2}
+      arrival: {x: 3, y: -2}
     - id: 7421cf3a84ab44a691bc6ff825eba095
       direction: 1
       targetRoomId: be670e97a8ca4e2886d80d1e6e0bacd0
       targetPortalId: ed248694b7f94ce2a8120c72c376f088
-      position: {x: 22.5, y: 0}
-      arrival: {x: 20, y: 0}
+      position: {x: 23, y: 2}
+      arrival: {x: 21.5, y: 1}
   - id: be670e97a8ca4e2886d80d1e6e0bacd0
     displayName: "\uC131\uBCBD \uC6B0\uD68C\uB85C"
     cell: {x: 2, y: -1}
@@ -305,14 +755,14 @@ MonoBehaviour:
       direction: 0
       targetRoomId: ac3e8abf76fb487a880d1a9b85946685
       targetPortalId: 7421cf3a84ab44a691bc6ff825eba095
-      position: {x: 1.5, y: 0}
-      arrival: {x: 4, y: 0}
+      position: {x: 1, y: -1}
+      arrival: {x: 2.5, y: -1}
     - id: 889e58c37fec49eabb07196dc1c93d0c
       direction: 2
       targetRoomId: 78d41b4de6c743b4bf06137c0292027a
       targetPortalId: 020e3686fdd346b6bd2e8bbfc16bccc1
-      position: {x: 12, y: 0}
-      arrival: {x: 14, y: 0}
+      position: {x: 23, y: 5}
+      arrival: {x: 21, y: 5}
 --- !u!114 &6546314342567870541
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,33 +779,146 @@ MonoBehaviour:
   description: "\uBC29\uC758 \uBAAC\uC2A4\uD130\uB97C \uCC98\uCE58\uD55C \uB4A4, \uAC19\uC740 \uBC29\uD5A5 \uD3EC\uD0C8\uC5D0 \uD30C\uD2F0\uC6D0\uC774 \uBAA8\uC774\uBA74 \uC774\uB3D9\uD569\uB2C8\uB2E4."
   bounds:
     serializedVersion: 2
-    x: 0
-    y: -3
-    width: 24
-    height: 12
+    x: -6
+    y: -6
+    width: 36
+    height: 18
   gridSize: 0.5
   jumpHeight: 1.3333334
+  airJumpHeight: 2
   background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
   backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
-  entrance: {x: 4, y: 0}
+  entrance: {x: 2.5, y: -1}
   exit: {x: 20, y: 0}
   floors:
   - id: 29cfc58156074059b85e2ef537310cd3
     rect:
       serializedVersion: 2
+      x: 12.5
+      y: 4
+      width: 11.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 1601d0e0e61c4113843f2e2459a0449d
+    rect:
+      serializedVersion: 2
       x: 0
-      y: -2
+      y: -2.5
       width: 24
-      height: 2
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 044509ba1c4e4dfcbdd71385717d6676
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 4.5
+      width: 6.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: 214c5bb387f6411ba144cc288628ee2d
+    rect:
+      serializedVersion: 2
+      x: 3
+      y: 0
+      width: 4
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: f12e376ce15d49ab910a164b246d4c7d
+    rect:
+      serializedVersion: 2
+      x: 7
+      y: 1.5
+      width: 3.5
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: 4029ee67594f46a5973b7b8960d4fe18
+    rect:
+      serializedVersion: 2
+      x: 10.5
+      y: 3
+      width: 2
+      height: 1
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 1
+  - id: space-left-20261001
+    rect:
+      serializedVersion: 2
+      x: -6
+      y: -2.5
+      width: 6
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-right-20261001
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: -2.5
+      width: 6
+      height: 1.5
     sprite: {fileID: 0}
     color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
     oneWay: 0
   spawns:
-  - id: 6dd840b186ab4df1ad9076d1c902564c
+  - id: 123ee05895434168b77e43c4c3a5590a
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 20.5, y: 5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 1af560fca92e438c879b3059e562a79f
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 15.5, y: 5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: a9f3e532020740c3a2e78d1732041986
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 21, y: -1}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 1f5be4e40b3e48e09e188e10709f6783
     enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
     sprite: {fileID: 0}
-    position: {x: 7, y: 0}
-    count: 8
+    position: {x: 15.5, y: -1}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: e7a572246dde4ec28f17c67b816799ee
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 10, y: -1}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 487f2f93d12342a8a3879bef7ff0dc91
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 1, y: 5.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: a87b257171b1441b8342036d2f039824
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 5, y: 5.5}
+    count: 1
     spacing: 1.5
     faceLeft: 1
 --- !u!114 &6916680944589037756
@@ -374,15 +937,16 @@ MonoBehaviour:
   description: "\uBC29\uC758 \uBAAC\uC2A4\uD130\uB97C \uCC98\uCE58\uD55C \uB4A4, \uAC19\uC740 \uBC29\uD5A5 \uD3EC\uD0C8\uC5D0 \uD30C\uD2F0\uC6D0\uC774 \uBAA8\uC774\uBA74 \uC774\uB3D9\uD569\uB2C8\uB2E4."
   bounds:
     serializedVersion: 2
-    x: 0
-    y: -3
-    width: 24
-    height: 12
+    x: -6
+    y: -6
+    width: 36
+    height: 18
   gridSize: 0.5
   jumpHeight: 1.3333334
+  airJumpHeight: 2
   background: {fileID: 21300000, guid: 1c2adaca6276fa545877d29411a9a6dd, type: 3}
   backgroundColor: {r: 0.09, g: 0.13, b: 0.18, a: 1}
-  entrance: {x: 4, y: 0}
+  entrance: {x: -4, y: 0}
   exit: {x: 20, y: 0}
   floors:
   - id: ddcf6b9cdf104104906584ba542d6231
@@ -395,11 +959,76 @@ MonoBehaviour:
     sprite: {fileID: 0}
     color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
     oneWay: 0
+  - id: 818393cfe81b499fa5bee2f830228392
+    rect:
+      serializedVersion: 2
+      x: 18.5
+      y: 4
+      width: 5.5
+      height: 1.5
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-left-20261001
+    rect:
+      serializedVersion: 2
+      x: -6
+      y: -2
+      width: 6
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
+  - id: space-right-20261001
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: -2
+      width: 6
+      height: 2
+    sprite: {fileID: 0}
+    color: {r: 0.33, g: 0.41, b: 0.48, a: 1}
+    oneWay: 0
   spawns:
   - id: e66c29f702d24940b0524beb42f1ceb8
     enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
     sprite: {fileID: 0}
-    position: {x: 7, y: 0}
-    count: 8
+    position: {x: 10, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 450fd920b46944f998cb904799053449
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 20, y: 5.5}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: f6bc3b0f1b74437ebef34d3f62735b09
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 8, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: ac6210068de3444393e7ffef11e9f0e3
+    enemy: {fileID: 11400000, guid: d20905e0ae2026043b60d69e70b9273a, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 15.5, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 543c2cfe2e58415aaf253013fb589915
+    enemy: {fileID: 11400000, guid: e4a13724d22408e458bb6b075ed1ce88, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 17, y: 0}
+    count: 1
+    spacing: 1.5
+    faceLeft: 1
+  - id: 18eb7ea63dc94e66a8ff4fdae331f401
+    enemy: {fileID: 11400000, guid: 78c3a5cfd15d56f4986e7b5a3f19b9dc, type: 2}
+    sprite: {fileID: 0}
+    position: {x: 22, y: 5.5}
+    count: 1
     spacing: 1.5
     faceLeft: 1

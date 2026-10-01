@@ -61,14 +61,16 @@ namespace MiniWar.EditorTools
 
         static void PrepareTextures()
         {
-            foreach (var name in new[] { "SurvivorsRefuge", "GunnerMale", "GunnerFemale", "Weapons", "Handguns" })
+            foreach (var name in new[] { "SurvivorsRefuge", "GunnerMale", "GunnerFemale", "Weapons", "Handguns", "DungeonCampaignCasual" })
                 SetTexture("Assets/Resources/Online/" + name + ".png");
+            SetTexture("Assets/Resources/Online/Terrain/KingdomStoneAtlas.png");
         }
 
         [MenuItem("MiniWar/Online/Build Windows client")]
         public static void BuildWindows()
         {
             if (!File.Exists(ScenePath)) CreateScene();
+            OnlineDungeonExport.Export();
             PrepareTextures();
             Directory.CreateDirectory("Builds/OnlineClient");
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);

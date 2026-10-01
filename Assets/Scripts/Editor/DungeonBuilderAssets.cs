@@ -115,7 +115,7 @@ namespace MiniWar.EditorTools
             {
                 var go=new GameObject("Dungeon placement test");SceneManager.MoveGameObjectToScene(go,scene);
                 var sandbox=go.AddComponent<DungeonSandbox>();sandbox.layout=layout;sandbox.characterBody=Mathf.Clamp(body,0,1);
-                sandbox.dungeon=dungeon;sandbox.partySize=Mathf.Clamp(partySize,1,4);sandbox.initialRoom=initialRoom;
+                sandbox.dungeon=dungeon;sandbox.partySize=Mathf.Clamp(partySize,1,6);sandbox.initialRoom=initialRoom;
                 if(!EditorSceneManager.SaveScene(scene,SandboxPath))throw new IOException("Cannot save dungeon sandbox scene.");
             }
             finally

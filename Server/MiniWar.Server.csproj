@@ -8,5 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../Assets/Scripts/Online/Shared/*.cs" Link="Shared/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../Assets/Resources/Online/Dungeons/GateOutskirts.json" LogicalName="MiniWar.GateOutskirts.json" />
   </ItemGroup>
 </Project>

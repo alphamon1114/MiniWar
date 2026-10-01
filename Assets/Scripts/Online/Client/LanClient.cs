@@ -110,6 +110,7 @@ namespace MiniWar.Online
             // JsonUtility materializes JSON null nested classes as empty objects. Absence of a
             // server-issued party ID means no membership, including after leave/disband.
             if (message.party != null && string.IsNullOrEmpty(message.party.id)) message.party = null;
+            if (message.dungeon != null && string.IsNullOrEmpty(message.dungeon.instanceId)) message.dungeon = null;
             return message;
         }
 

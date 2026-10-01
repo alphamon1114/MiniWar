@@ -38,6 +38,7 @@ namespace MiniWar.Dungeons
             view.clearFlags = CameraClearFlags.SolidColor; view.backgroundColor = layout.backgroundColor;
             view.tag = "MainCamera";
             var visuals = new OnlineVisuals();
+            combatVisuals=visuals;
             rig = Instantiate(visuals.RigPrefab(characterBody), transform).GetComponent<CharacterRig>();
             rig.SetWeapon(visuals.Weapon(3, 1), OnlineVisuals.WeaponWidths[3]);
             BuildWorld();
@@ -54,12 +55,14 @@ namespace MiniWar.Dungeons
                 Box("Background", layout.bounds, new Color(.65f,.75f,.86f,.28f), -20, layout.background);
             foreach (var floor in layout.floors)
             {
+                if (DungeonStoneSurface.Build(worldRoot, floor, 0)) continue;
                 Box("Floor " + floor.id, floor.rect, floor.color, 0, floor.sprite);
                 Box("Floor edge", new Rect(floor.rect.xMin, floor.rect.yMax - .06f, floor.rect.width, .06f), floor.oneWay?new Color(.4f,.93f,.75f):new Color(.69f,.76f,.78f), 1);
                 if (floor.sprite == null)
                     for (float x = floor.rect.xMin + 1; x < floor.rect.xMax; x += 1)
                         Box("Stone joint", new Rect(x, floor.rect.yMin, .025f, floor.rect.height - .06f), floor.color * .65f, 1);
             }
+            InitializeCombatView();
             drawingEnemies=true;
             if(RoomRun==null||!RoomRun.Cleared)foreach (var spawn in layout.spawns)
                 for (int i = 0; i < Mathf.Clamp(spawn.count, 1, 30); i++)
@@ -67,9 +70,10 @@ namespace MiniWar.Dungeons
                     var p = spawn.PositionAt(i); var size = spawn.Size;
                     var sprite = spawn.VisualSprite;
                     Color color = spawn.enemy != null && spawn.enemy.isBoss ? new Color(.77f,.27f,.31f) : new Color(.91f,.57f,.27f);
-                    Box(spawn.Label, spawn.VisualRectAt(i), sprite == null ? color : Color.white, 3, sprite, spawn.faceLeft);
+                    var body=Box(spawn.Label, spawn.VisualRectAt(i), sprite == null ? color : Color.white, 3, sprite, spawn.faceLeft);
+                    combatView.Bind(spawn.id+":"+i,body.GetComponent<SpriteRenderer>());
                     if (sprite == null)
-                        Box("Marker eye", new Rect(p.x + (spawn.faceLeft ? -.22f : .08f) * size.x, p.y + size.y * .76f, size.x * .14f, .07f), Color.white, 4);
+                        Box("Marker eye", new Rect(p.x + (spawn.faceLeft ? -.22f : .08f) * size.x, p.y + size.y * .76f, size.x * .14f, .07f), Color.white, 4).transform.SetParent(body.transform,true);
                 }
             drawingEnemies=false;
             if(RoomRun==null)
@@ -118,13 +122,16 @@ namespace MiniWar.Dungeons
                 jump |= kb.spaceKey.wasPressedThisFrame && !down;
                 drop |= kb.spaceKey.wasPressedThisFrame && down;
                 dash |= kb.leftShiftKey.wasPressedThisFrame || kb.rightShiftKey.wasPressedThisFrame;
-                if (kb.rKey.wasPressedThisFrame) { Motor.Reset(); jump = dash = drop = false; }
+                if (kb.rKey.wasPressedThisFrame&&Application.isFocused) ResetOrRevive();
                 if(Application.isFocused&&RoomRun!=null)
                 {
+                    if(kb.sKey.wasPressedThisFrame&&!kb.spaceKey.isPressed)ToggleLocalPortal();
                     if(kb.f6Key.wasPressedThisFrame)ClearRoomForPreview();
                     if(kb.gKey.wasPressedThisFrame)GatherCompanionsForPreview();
                 }
             }
+            ReadCombatInput();
+            if(WaitingInPortal||LocalDead){move=0;jump=dash=drop=false;}
             if (!Application.isFocused) { move = 0; jump = dash = drop = false; }
             cycle += Time.deltaTime; ghosts.Advance(Time.deltaTime);
             rig.AdvanceEffects(Time.deltaTime); UpdatePose();
@@ -136,7 +143,10 @@ namespace MiniWar.Dungeons
         void FixedUpdate()
         {
             if (Motor == null) return;
-            Motor.Step(Time.fixedDeltaTime, move, jump, dash, drop); jump = dash = drop = false;
+            bool airJump = jump && !drop && Motor.CanAirJump;
+            if(!LocalDead)Motor.Step(Time.fixedDeltaTime, move, jump, dash, drop); jump = dash = drop = false;
+            if (airJump) { UpdatePose(); ghosts.Emit(rig); }
+            TickLocalCombat();
             if(RoomRun!=null)UpdateRoomFlow();
         }
 
@@ -144,8 +154,10 @@ namespace MiniWar.Dungeons
 
         void UpdatePose()
         {
+            rig.gameObject.SetActive(!WaitingInPortal&&!LocalDead);
             rig.transform.position = Motor.Position;
-            rig.Pose(cycle, Motor.HorizontalSpeed, !Motor.Grounded, Motor.VerticalSpeed, Motor.Facing, false, Motor.Facing > 0 ? 0 : 180, 3, Motor.Dashing);
+            int facing=localAiming?LanAim.Facing(localAim,Motor.Facing):Motor.Facing;
+            rig.Pose(cycle, Motor.HorizontalSpeed, !Motor.Grounded, Motor.VerticalSpeed, facing, localAiming,localAiming?localAim:facing>0?0:180,localWeapon,Motor.Dashing);
         }
 
         void FollowCamera(bool instant)
@@ -167,16 +179,13 @@ namespace MiniWar.Dungeons
                 label.normal.textColor = Color.white;
                 heading = new GUIStyle(label) { fontSize = 19, alignment = TextAnchor.MiddleLeft };
             }
+            DrawLocalCombatHUD();
             if(RoomRun!=null){DrawRoomHUD();return;}
             GUI.Box(new Rect(14,14,540,90), GUIContent.none);
             GUI.Label(new Rect(30,20,510,29), layout.displayName + "  ·  배치 테스트", heading);
-            GUI.Label(new Rect(25,48,515,24), "A/D 이동  Space 점프  ↓+Space 하강  Shift 대쉬", label);
-            GUI.Label(new Rect(25,73,515,24), "몬스터는 위치 표시용 · 전투와 보상은 진행되지 않습니다", label);
-            foreach (var spawn in layout.spawns)
-            {
-                Vector2 center=spawn.position+Vector2.right*((Mathf.Clamp(spawn.count,1,30)-1)*spawn.spacing*.5f);
-                DrawLabel(center+Vector2.up*(spawn.Size.y+.3f),spawn.Label+(spawn.count>1?" ×"+spawn.count:""));
-            }
+            GUI.Label(new Rect(25,48,515,24), "A/D 이동  Space ×2 점프  ↓+Space 하강  Shift 대쉬", label);
+            GUI.Label(new Rect(25,73,515,24), "근접 추적·원거리 전투 · 모든 몬스터 처치로 방 클리어", label);
+            DrawLivingEnemyNames();
             DrawLabel(layout.entrance+Vector2.up*3.1f, "입구"); DrawLabel(layout.exit+Vector2.up*3.1f, "출구");
             GUI.Box(new Rect(14,Screen.height-51,380,36), GUIContent.none);
             GUI.Label(new Rect(20,Screen.height-49,365,31), Motor.CanChain ? "대쉬 한 번 더 가능" : Motor.Cooldown > 0 ? "대쉬 " + Motor.Cooldown.ToString("0.0") + "초" : "대쉬 준비", label);

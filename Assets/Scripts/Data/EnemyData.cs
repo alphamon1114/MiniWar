@@ -26,6 +26,20 @@ namespace MiniWar.Data
         [Tooltip("기본 서 있는 모습. 던전 배치별 이미지가 있으면 그 이미지를 우선합니다.")]
         public Sprite idleSprite;
 
+        [Header("전투")]
+        public Online.EnemyAttackKind attackKind;
+        [Min(1)] public float attackDamage = 12;
+        [Min(.5f)] public float attackRange = 1.8f;
+        [Min(.2f)] public float attackInterval = 1.5f;
+        [Min(.1f)] public float attackWindup = .4f;
+        [Min(1)] public float projectileSpeed = 10;
+
+        [Header("몬스터 추적")]
+        [Tooltip("근접은 접근해 공격하고 석궁·마법사는 사거리의 80% 거리를 유지합니다. 고정형은 끕니다. 이동·일반 점프는 플레이어와 같습니다.")]
+        public bool chasePlayer = true;
+        [Min(.5f)] public float detectionRange = 8;
+        [Range(30,360)] public float viewAngle = 180;
+
         [Header("이동 방식")]
         [Tooltip("비행형은 고도를 유지하며 빠르게 접근한다. 탄속이 있으므로 예측 사격이 필요하다.")]
         public LocomotionKind locomotion = LocomotionKind.Ground;

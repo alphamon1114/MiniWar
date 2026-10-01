@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace MiniWar.EditorTools
 {
-    public sealed class DungeonBuilderWindow : EditorWindow
+    public sealed partial class DungeonBuilderWindow : EditorWindow
     {
         enum Tool { Select, Floor, Monster, Entrance, Exit, Erase }
         static readonly string[] ToolNames = { "1  선택 / 이동", "2  바닥 그리기", "3  몬스터 배치", "4  입구 놓기", "5  출구 놓기", "6  지우개" };
@@ -47,7 +47,11 @@ namespace MiniWar.EditorTools
         public static DungeonBuilderWindow ShowRoom(RoomDungeon dungeon,string id)
         {
             var room=dungeon.FindRoom(id);
+            var previous=Resources.FindObjectsOfTypeAll<DungeonBuilderWindow>().FirstOrDefault();
+            if(previous!=null&&previous.roomDungeon!=dungeon)DungeonCampaignAuthoring.SavePending(previous.roomDungeon);
             var window=ShowLayout(room.layout);window.roomDungeon=dungeon;window.roomId=id;
+            DungeonCampaignAuthoring.Remember(dungeon);window.ReloadPalette();
+            window.status="편집 중: "+dungeon.displayName+" / "+room.displayName+" · Ctrl+S 저장";
             window.titleContent=new GUIContent("방 내부 배치 · "+room.displayName);window.tool=Tool.Select;window.Repaint();return window;
         }
 
@@ -62,21 +66,24 @@ namespace MiniWar.EditorTools
         {
             var asset = EditorUtility.EntityIdToObject(instanceId) as DungeonLayout;
             if (asset == null) return false;
-            ShowLayout(asset); return true;
+            var owner=AssetDatabase.LoadAssetAtPath<RoomDungeon>(AssetDatabase.GetAssetPath(asset));
+            var room=owner?.rooms.Find(r=>r.layout==asset);
+            if(room!=null)ShowRoom(owner,room.id);else ShowLayout(asset); return true;
         }
 
         void OnEnable()
         {
             minSize = new Vector2(980,640);
-            Undo.undoRedoPerformed += OnUndo; ReloadPalette();
+            wantsMouseMove = true;
+            Undo.undoRedoPerformed += OnUndo; ReloadPalette(); ClearGroupedSelection();
         }
         void OnDisable() { Undo.undoRedoPerformed -= OnUndo; EndDrag(); }
-        void OnUndo() { validation = null; Repaint(); }
+        void OnUndo() { validation = null; ClearGroupedSelection(); Repaint(); }
         void ReloadPalette()
         {
             enemies = AssetDatabase.FindAssets("t:EnemyData").Select(AssetDatabase.GUIDToAssetPath)
                 .Select(AssetDatabase.LoadAssetAtPath<EnemyData>).OrderBy(e => e.displayName).ToArray();
-            if (brushEnemy == null) brushEnemy = enemies.FirstOrDefault();
+            if (brushEnemy == null) brushEnemy = AssetDatabase.LoadAssetAtPath<EnemyData>("Assets/Data/DungeonLayouts/Enemies/Patrol.asset") ?? enemies.FirstOrDefault();
         }
 
         void SetLayout(DungeonLayout asset)
@@ -145,7 +152,12 @@ namespace MiniWar.EditorTools
                 }
                 GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal(); GUILayout.Space(10);
-                GUILayout.Label(Room!=null?roomDungeon.displayName+" / "+Room.displayName:layout == null ? "새 던전을 만들거나 예제를 열어 시작하세요" : layout.displayName, title);
+                DungeonCampaignAuthoring.Picker(roomDungeon, nextDungeon=>{
+                    ShowRoom(nextDungeon,nextDungeon.startRoomId);ReloadPalette();scroll=Vector2.zero;hoverInside=false;
+                    status="던전 변경 · "+nextDungeon.displayName+" · 이전 작업 저장 완료";
+                },170);
+                if(Room!=null)DrawRoomPicker();
+                else GUILayout.Label(layout == null ? "새 던전을 만들거나 예제를 열어 시작하세요" : layout.displayName, title);
                 GUILayout.FlexibleSpace();
                 GUILayout.Label("중간 버튼 드래그: 화면 이동    휠: 확대 / 축소", EditorStyles.miniLabel);
                 GUILayout.Space(10); GUILayout.EndHorizontal();
@@ -156,7 +168,8 @@ namespace MiniWar.EditorTools
         {
             if (layout == null)
             {
-                EditorGUILayout.HelpBox("위의 '성문 외곽 예제'를 열면 바닥과 순찰대원, 대포 보스가 배치된 기본 맵으로 시작할 수 있습니다.",MessageType.Info); return;
+                if(GUILayout.Button("내 맵 그리기 시작",GUILayout.Height(38)))OpenPainting();
+                EditorGUILayout.HelpBox("복층 예제를 복사한 내 맵에서 시작합니다. 바닥은 드래그하고 몬스터는 그림을 골라 놓으세요.",MessageType.Info); return;
             }
             GUILayout.Label("배치 도구",EditorStyles.boldLabel);
             var labels=(string[])ToolNames.Clone();if(Room!=null){labels[3]="4  시작 위치";labels[4]="5  포탈 놓기";}
@@ -176,6 +189,7 @@ namespace MiniWar.EditorTools
             }
             if (tool == Tool.Floor)
             {
+                DrawFloorBrush();
                 brushOneWay = EditorGUILayout.Popup("지형 종류",brushOneWay?1:0,new[]{"단단한 바닥 / 벽","아래에서 통과하는 발판"})==1;
                 EditorGUILayout.HelpBox(brushOneWay?"아래에서 점프로 통과하고 위에서는 착지합니다. ↓+Space로 내려갑니다. 3m 층 간격, 0.5m 두께부터 시작하세요.":"원하는 영역을 드래그하세요. 사방을 막는 바닥과 벽을 만듭니다.",MessageType.None);
                 brushFloorSprite = (Sprite)EditorGUILayout.ObjectField("바닥 이미지",brushFloorSprite,typeof(Sprite),false);
@@ -183,28 +197,36 @@ namespace MiniWar.EditorTools
             }
             if (tool == Tool.Monster)
             {
+                DrawMonsterPalette();
                 int index = Array.IndexOf(enemies,brushEnemy);
                 int nextIndex = EditorGUILayout.Popup("몬스터 종류",index,enemies.Select(e=>e.displayName).ToArray());
                 if (nextIndex >= 0 && nextIndex < enemies.Length) brushEnemy = enemies[nextIndex];
                 brushEnemy = (EnemyData)EditorGUILayout.ObjectField("능력치 에셋",brushEnemy,typeof(EnemyData),false);
                 brushMonsterSprite = (Sprite)EditorGUILayout.ObjectField("배치 이미지",brushMonsterSprite,typeof(Sprite),false);
                 if (GUILayout.Button("목록 새로고침")) ReloadPalette();
-                EditorGUILayout.HelpBox("클릭한 곳에 한 마리를 놓습니다. 선택 후 수량과 간격을 바꾸면 여러 마리를 한 번에 배치할 수 있습니다.",MessageType.None);
+                monsterStroke=EditorGUILayout.ToggleLeft("드래그해서 여러 마리 놓기",monsterStroke);
+                if(monsterStroke)monsterSpacing=EditorGUILayout.Slider("배치 간격 (m)",monsterSpacing,1,5);
+                EditorGUILayout.HelpBox("그림 선택 → 클릭하면 한 마리. 드래그하면 일정 간격으로 놓습니다. 초록 테두리는 배치 가능, 빨간 테두리는 바닥·범위를 확인하세요.",MessageType.None);
             }
-            GUILayout.Space(8); GUILayout.Label("선택한 배치",EditorStyles.boldLabel);
-            DrawSelection();
-            GUILayout.Space(10); GUILayout.Label("던전 설정",EditorStyles.boldLabel);
+            if(tool==Tool.Erase)EditorGUILayout.HelpBox("몬스터는 한 마리씩, 바닥은 한 개씩 지웁니다. 다른 도구에서도 우클릭으로 지울 수 있습니다. 포탈은 방 연결 지도에서 끊어주세요.",MessageType.None);
+            if(tool==Tool.Select||!string.IsNullOrEmpty(selected))
+            {GUILayout.Space(8);GUILayout.Label("선택한 배치",EditorStyles.boldLabel);DrawSelection();}
+            GUILayout.Space(10);settingsOpen=EditorGUILayout.Foldout(settingsOpen,"맵 크기 / 배경 / 점프 설정",true);
+            if(settingsOpen)
+            {
             var so = new SerializedObject(layout); so.Update();
             EditorGUI.BeginChangeCheck();
             if(Room==null)Property(so,"displayName","이름"); Property(so,"description","설명");
             Property(so,"bounds","맵 범위"); Property(so,"gridSize","격자 크기");
-            Property(so,"jumpHeight","최대 점프 높이 (m)");
+            Property(so,"jumpHeight","첫 점프 높이 (m)");
+            Property(so,"airJumpHeight","공중 점프 높이 (m)");
             Property(so,"background","배경 이미지"); Property(so,"backgroundColor","배경 색");
             if (EditorGUI.EndChangeCheck()) { so.ApplyModifiedProperties(); validation = null; Repaint(); }
+            }
             previewBody = EditorGUILayout.Popup("테스트 캐릭터",previewBody,new[]{"남성","여성"});
             GUILayout.Space(6);
             GUILayout.Label("바닥 " + layout.floors.Count + "개  ·  몬스터 " + layout.spawns.Sum(s=>s.count) + "마리",EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Delete 삭제 · Ctrl+D 복제 · Ctrl+Z 되돌리기\nCtrl+S 저장 · F 전체 보기\n색 사각형 몬스터는 배치 표시용입니다.",MessageType.None);
+            EditorGUILayout.HelpBox("우클릭 지우기 · Ctrl+Z 되돌리기\nDelete 삭제 · Ctrl+D 복제 · Esc 그리기 취소\nCtrl+S 저장 · F 전체 보기",MessageType.None);
             if(validation != null)
             {
                 if(validation.Count == 0) EditorGUILayout.HelpBox("배치 검사 완료: 문제를 찾지 못했습니다.\n이동 테스트로 동선도 확인해주세요.",MessageType.Info);
@@ -239,9 +261,14 @@ namespace MiniWar.EditorTools
             }
             else if(spawnIndex >= 0)
             {
+                if(layout.spawns[spawnIndex].count>1)
+                {
+                    EditorGUI.EndChangeCheck();
+                    EditorGUILayout.HelpBox("예전에 묶어서 배치한 몬스터입니다. 화면에서 원하는 한 마리를 클릭해 편집하세요.",MessageType.None);
+                    return;
+                }
                 string root = "spawns.Array.data["+spawnIndex+"]";
                 Property(so,root+".enemy","몬스터 종류"); Property(so,root+".position","발 위치");
-                Property(so,root+".count","수량"); Property(so,root+".spacing","간격");
                 Property(so,root+".faceLeft","왼쪽 바라보기"); Property(so,root+".sprite","배치 이미지");
             }
             else if(selected=="$entrance") Property(so,"entrance","입구 발 위치");
@@ -292,7 +319,8 @@ namespace MiniWar.EditorTools
             Outline(bounds,new Color(.4f,.5f,.6f));
             foreach(var floor in layout.floors)
             {
-                var r=WorldRect(floor.rect); EditorGUI.DrawRect(r,floor.color);
+                var r=WorldRect(floor.rect);
+                if(!DungeonStoneSurface.DrawPreview(r,floor))EditorGUI.DrawRect(r,floor.color);
                 if(floor.sprite != null) { GUI.color=floor.color; GUI.DrawTextureWithTexCoords(r,floor.sprite.texture,SpriteUV(floor.sprite)); GUI.color=Color.white; }
                 EditorGUI.DrawRect(new Rect(r.x,r.y,r.width,2),floor.oneWay?new Color(.4f,.93f,.75f):new Color(.64f,.74f,.8f));
                 if(floor.oneWay)GUI.Label(new Rect(r.x,r.y,r.width,Mathf.Max(15,r.height)),"↑ 점프 발판",small);
@@ -322,8 +350,8 @@ namespace MiniWar.EditorTools
                         EditorGUI.DrawRect(r,boss?new Color(.76f,.25f,.31f):new Color(.91f,.56f,.25f));
                         EditorGUI.DrawRect(new Rect(spawn.faceLeft?r.x+3:r.xMax-7,r.y+r.height*.22f,4,3),Color.white);
                     }
-                    if(spawn.id==selected) Outline(r,Color.cyan,2);
-                    if(i==0) Caption(new Vector2(r.center.x,r.y-13),(boss?"BOSS  ":"")+spawn.Label+(spawn.count>1?" ×"+spawn.count:""));
+                    if(spawn.id==selected&&i==0) Outline(r,Color.cyan,2);
+                    Caption(new Vector2(r.center.x,r.y-13),(boss?"BOSS  ":"")+spawn.Label);
                 }
             }
             DrawPortal(layout.entrance,Room==null?"입구":"시작 위치","$entrance",new Color(.35f,.88f,.79f));
@@ -338,6 +366,7 @@ namespace MiniWar.EditorTools
                 }
             }
             if(dragMode==1) { var r=WorldRect(paintRect); EditorGUI.DrawRect(r,new Color(.3f,.8f,1,.24f)); Outline(r,Color.cyan,2); }
+            DrawBrushPreview();
             GUI.EndGroup();
             string toolLabel=Room!=null&&tool==Tool.Exit?"5  포탈 놓기":ToolNames[(int)tool];
             GUI.Label(new Rect(canvas.x+10,canvas.y+8,360,22),toolLabel+"  |  격자 "+layout.gridSize.ToString("0.##")+"m",EditorStyles.whiteMiniLabel);
@@ -369,8 +398,8 @@ namespace MiniWar.EditorTools
                 }
                 else if(e.keyCode==KeyCode.Delete||e.keyCode==KeyCode.Backspace) { DeleteSelection(); e.Use(); }
                 else if(e.keyCode==KeyCode.F) { Fit(); e.Use(); }
-                else if(e.keyCode>=KeyCode.Alpha1&&e.keyCode<=KeyCode.Alpha6) { tool=(Tool)(e.keyCode-KeyCode.Alpha1); e.Use(); }
-                else if(e.keyCode==KeyCode.Escape) { EndDrag(); e.Use(); }
+                else if(e.keyCode>=KeyCode.Alpha1&&e.keyCode<=KeyCode.Alpha6) { EndDrag(); tool=(Tool)(e.keyCode-KeyCode.Alpha1); e.Use(); }
+                else if(e.keyCode==KeyCode.Escape) { CancelStroke(); e.Use(); }
                 Repaint();
             }
             if(e.type==EventType.ScrollWheel && inside)
@@ -380,21 +409,22 @@ namespace MiniWar.EditorTools
                 center+=before-ScreenToWorld(e.mousePosition); e.Use(); Repaint(); return;
             }
             Vector2 world=ScreenToWorld(e.mousePosition), snapped=gridSnap?layout.Snap(world):world;
-            if(e.type==EventType.MouseDown && inside && (e.button==0||e.button==2))
+            if(e.type==EventType.MouseMove){hoverWorld=snapped;hoverInside=inside;Repaint();}
+            if(e.type==EventType.MouseLeaveWindow){hoverInside=false;Repaint();}
+            if(e.type==EventType.MouseDown && inside && (e.button==0||e.button==1||e.button==2))
             {
                 GUI.FocusControl(null); GUIUtility.keyboardControl=0;
                 GUIUtility.hotControl=control; didDrag=false;
                 dragStart=snapped; originalPoint=world;
                 if(e.button==2||e.alt) { dragMode=4; originalPoint=center; dragStart=e.mousePosition; }
+                else if(e.button==1||tool==Tool.Erase) { BeginStroke(6,"배치 지우기");lastStrokePoint=world;EraseAt(world); }
                 else if(tool==Tool.Floor) { dragMode=1; paintRect=new Rect(snapped,Vector2.zero); }
                 else if(tool==Tool.Monster)
                 {
                     if(brushEnemy==null) status="먼저 몬스터 종류를 선택해주세요.";
                     else
                     {
-                        Record("몬스터 배치");
-                        var spawn=new DungeonSpawn { enemy=brushEnemy, sprite=brushMonsterSprite, position=PlaceFeet(snapped,brushEnemy.locomotion==LocomotionKind.Ground) };
-                        layout.spawns.Add(spawn); selected=spawn.id; Changed();
+                        BeginStroke(5,"몬스터 그리기");lastStrokePoint=snapped;strokeDistance=0;strokeFeet.Clear();StampMonster(snapped);
                     }
                 }
                 else if(tool==Tool.Entrance||tool==Tool.Exit)
@@ -405,7 +435,6 @@ namespace MiniWar.EditorTools
                         SetSelectedPoint(PlaceFeet(snapped,true)); Changed();
                     }
                 }
-                else if(tool==Tool.Erase) { selected=HitTest(world); DeleteSelection(); }
                 else
                 {
                     var floor=layout.floors.Find(f=>f.id==selected);
@@ -414,9 +443,10 @@ namespace MiniWar.EditorTools
                     else
                     {
                         selected=HitTest(world);
-                        if(selected!=null) { dragMode=2; originalPoint=SelectedPoint(); }
+                        if(selected!=null) dragMode=2;
                     }
                     if(dragMode==2||dragMode==3) { Undo.IncrementCurrentGroup(); dragGroup=Undo.GetCurrentGroup(); Undo.RegisterCompleteObjectUndo(UndoTargets,"던전 배치 이동"); }
+                    if(dragMode==2) { selected=IndividualMonsterAt(selected,world); originalPoint=SelectedPoint(); }
                 }
                 e.Use(); Repaint();
             }
@@ -424,7 +454,9 @@ namespace MiniWar.EditorTools
             {
                 didDrag=true;
                 if(dragMode==4) center=originalPoint+new Vector2(dragStart.x-e.mousePosition.x,e.mousePosition.y-dragStart.y)/zoom;
-                else if(dragMode==1) paintRect=Rect.MinMaxRect(Mathf.Min(dragStart.x,snapped.x),Mathf.Min(dragStart.y,snapped.y),Mathf.Max(dragStart.x,snapped.x),Mathf.Max(dragStart.y,snapped.y));
+                else if(dragMode==1) paintRect=FloorBrushRect(dragStart,snapped);
+                else if(dragMode==5&&monsterStroke) PaintMonstersTo(snapped);
+                else if(dragMode==6) EraseTo(world);
                 else if(dragMode==2) { SetSelectedPoint(originalPoint+snapped-dragStart); Changed(); }
                 else if(dragMode==3)
                 {
@@ -483,7 +515,7 @@ namespace MiniWar.EditorTools
         }
         void EndDrag()
         {
-            if(dragMode==2||dragMode==3) Undo.CollapseUndoOperations(dragGroup);
+            if(dragMode==2||dragMode==3||dragMode==5||dragMode==6) Undo.CollapseUndoOperations(dragGroup);
             if(GUIUtility.hotControl==canvasControl) GUIUtility.hotControl=0;
             dragMode=0; didDrag=false;
         }
@@ -493,15 +525,16 @@ namespace MiniWar.EditorTools
         {
             if(layout==null||string.IsNullOrEmpty(selected))return;
             if(selected.StartsWith("$")) { status=Room==null?"입구와 출구는 지우지 않고 다른 위치로 옮겨주세요.":"포탈 연결 해제는 방 연결 지도에서 할 수 있습니다."; return; }
-            Record("배치 삭제"); layout.floors.RemoveAll(f=>f.id==selected); layout.spawns.RemoveAll(s=>s.id==selected); selected=null; Changed();
+            Record("배치 삭제"); selected=IndividualMonsterAt(selected,null);layout.floors.RemoveAll(f=>f.id==selected); layout.spawns.RemoveAll(s=>s.id==selected); selected=null; Changed();
         }
         void DuplicateSelection()
         {
             if(layout==null)return;
             var floor=layout.floors.Find(f=>f.id==selected);var spawn=layout.spawns.Find(s=>s.id==selected);
             if(floor==null&&spawn==null)return; Record("배치 복제");
+            if(spawn!=null){selected=IndividualMonsterAt(selected,null);spawn=layout.spawns.Find(s=>s.id==selected);}
             if(floor!=null) { var copy=JsonUtility.FromJson<DungeonFloor>(JsonUtility.ToJson(floor)); copy.id=Guid.NewGuid().ToString("N"); copy.rect.position+=Vector2.right*Mathf.Max(.5f,layout.gridSize);layout.floors.Add(copy);selected=copy.id; }
-            if(spawn!=null) { var copy=JsonUtility.FromJson<DungeonSpawn>(JsonUtility.ToJson(spawn));copy.id=Guid.NewGuid().ToString("N");copy.position.x+=spawn.spacing*Mathf.Max(1,spawn.count);layout.spawns.Add(copy);selected=copy.id; }
+            if(spawn!=null) { var copy=JsonUtility.FromJson<DungeonSpawn>(JsonUtility.ToJson(spawn));copy.id=Guid.NewGuid().ToString("N");copy.position.x+=Mathf.Max(1,monsterSpacing);layout.spawns.Add(copy);selected=copy.id; }
             Changed();
         }
         void Save() { if(layout==null)return;if(Room!=null)RoomDungeonAuthoring.Save(roomDungeon);else AssetDatabase.SaveAssetIfDirty(layout);status="저장 완료 · "+AssetDatabase.GetAssetPath(layout); }

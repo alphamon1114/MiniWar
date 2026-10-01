@@ -14,6 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MiniWar.Data.EnemyData
   displayName: "\uC131\uBB38 \uB300\uD3EC"
   isBoss: 1
+  idleSprite: {fileID: 0}
+  attackKind: 3
+  attackDamage: 24
+  attackRange: 16
+  attackInterval: 2.4
+  attackWindup: 1.1
+  projectileSpeed: 7
+  chasePlayer: 0
+  detectionRange: 8
+  viewAngle: 180
   locomotion: 0
   cruiseAltitude: 2.4
   bobAmplitude: 0.3

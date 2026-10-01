@@ -9,6 +9,15 @@ public sealed class LobbyPlayer
     public int Channel;
     public float X = LanRules.TownSpawnX, Y, VelocityY, Move;
     public bool Jump;
+    public bool Drop;
+    public bool Dead;
+    public bool ReviveUsed;
+    public CombatFighter Combat = new();
+    public string WaitingPortal = "";
+    public string InstanceId = "";
+    public LanDungeonRoom? DungeonRoom;
+    public readonly HashSet<string> DroppingThrough = new();
+    public bool AirJumpAvailable = true;
     public int Facing = 1;
     public float AimAngle;
     public bool Aiming;
@@ -60,8 +69,11 @@ public sealed partial class LobbyWorld
     {
         if (!players.TryGetValue(id, out var p) || !float.IsFinite(cmd.move) || !float.IsFinite(cmd.aimAngle) || cmd.sequence <= p.LastSequence || cmd.sequence < 0) return false;
         p.LastSequence = cmd.sequence;
+        p.LastInput = Time;
+        if (p.Dead || p.WaitingPortal.Length > 0) { ResetMotion(p); return true; }
         p.Move = Math.Clamp(cmd.move, -1, 1);
         p.Jump |= cmd.jump;
+        p.Drop |= cmd.drop;
         p.AimAngle = Math.Clamp(cmd.aimAngle, -180, 180);
         p.Aiming = cmd.aiming;
         p.Fire = cmd.fire && cmd.aiming;
@@ -80,6 +92,7 @@ public sealed partial class LobbyWorld
         if (players.Values.Count(x => x.Channel == channel) >= LanRules.ChannelCapacity) return "해당 채널이 가득 찼습니다.";
         if (RemoveApplication(id)) NotifyParty(id, "채널을 이동하여 참가 신청을 취소했습니다.");
         p.Channel = channel; p.Move = 0; p.Jump = false; p.X = LanRules.TownSpawnX; p.Y = 0; p.VelocityY = 0;
+        p.AirJumpAvailable = true;
         p.Fire = false; p.Aiming = false;
         p.DashRemaining = 0; p.DashQueued = false; p.DashUses = 0; p.DashChainUntil = -1;
         // Keep DashReadyAt: changing channel cannot refresh the cooldown.
@@ -94,7 +107,7 @@ public sealed partial class LobbyWorld
         text = new string(text.Where(c => !char.IsControl(c)).Take(160).ToArray()).Trim();
         if (text.Length == 0) return null;
         p.LastChat = Time;
-        return new LanEvent { op = "chat", sender = p.Profile.nickname, text = text, channel = p.Channel };
+        return new LanEvent { op = "chat", sender = p.Profile.nickname, text = text, channel = p.Channel, instanceId = p.InstanceId };
     }
 
     public void Tick(float dt)
@@ -105,39 +118,54 @@ public sealed partial class LobbyWorld
         shots.Clear();
         foreach (var p in players.Values)
         {
-            if (Time - p.LastInput > 0.5) { p.Move = 0; p.Jump = false; p.Aiming = false; p.Fire = false; p.DashQueued = false; }
+            if (p.Dead || p.WaitingPortal.Length > 0) { ResetMotion(p); continue; }
+            if (Time - p.LastInput > 0.5) { p.Move = 0; p.Jump = p.Drop = false; p.Aiming = false; p.Fire = false; p.DashQueued = false; }
             TickHorizontal(p, dt);
             if (Math.Abs(p.Move) > 0.01) p.Facing = p.Move > 0 ? 1 : -1;
             if (p.Aiming) p.Facing = LanAim.Facing(p.AimAngle, p.Facing);
-            if (p.Jump && p.Y <= 0) p.VelocityY = LanRules.JumpSpeed;
-            p.Jump = false;
-            p.VelocityY -= LanRules.Gravity * dt;
-            p.Y = Math.Max(0, p.Y + p.VelocityY * dt);
-            if (p.Y <= 0) p.VelocityY = 0;
-            if (p.Fire && Time + .00001 >= p.NextShot)
+            if (p.DungeonRoom != null) TickDungeonVertical(p, dt);
+            else
+            {
+                if (p.Jump)
+                {
+                    if (p.Y <= 0) p.VelocityY = LanRules.JumpSpeed;
+                    else if (p.AirJumpAvailable)
+                    { p.VelocityY = LanRules.AirJumpSpeed; p.AirJumpAvailable = false; }
+                }
+                p.Jump = p.Drop = false;
+                p.VelocityY -= LanRules.Gravity * dt;
+                p.Y = Math.Max(0, p.Y + p.VelocityY * dt);
+                if (p.Y <= 0) { p.VelocityY = 0; p.AirJumpAvailable = true; }
+            }
+            if (p.DungeonRoom == null && p.Fire && Time + .00001 >= p.NextShot)
             {
                 var weapon = p.Profile.items.FirstOrDefault(i => i.id == p.Profile.activeItemId);
                 if (weapon == null || !float.IsFinite(LanShooting.Interval(weapon.family))) continue;
                 // No catch-up bursts, even if a client floods inputs or switches weapons between ticks.
                 p.NextShot = Time + LanShooting.Interval(weapon.family);
-                shots.Add(new LanEvent { op = "shot", channel = p.Channel, tick = TickNumber,
+                shots.Add(new LanEvent { op = "shot", channel = p.Channel, instanceId = p.InstanceId, tick = TickNumber,
                     shot = new LanShot { id = ++shotId, shooter = p.Profile.nickname, family = weapon.family, tier = weapon.tier,
                         facing = p.Facing, x = p.X, y = p.Y + LanShooting.AimHeight, angle = p.AimAngle } });
             }
         }
+        TickDungeonCombat(dt);
+        TickPortalGroups();
     }
 
-    public LanEvent Snapshot(int channel) => new()
+    public LanEvent Snapshot(int channel, string instanceId = "") => new()
     {
-        op = "snapshot", tick = TickNumber, channel = channel,
+        op = "snapshot", tick = TickNumber, channel = channel, instanceId = instanceId,
         channelCounts = Enumerable.Range(1, LanRules.MaxChannels).Select(c => players.Values.Count(p => p.Channel == c)).ToArray(),
-        actors = players.Values.Where(p => p.Channel == channel).Select(p =>
+        actors = players.Values.Where(p => p.Channel == channel && p.InstanceId == instanceId).Select(p =>
         {
             var weapon = p.Profile.items.FirstOrDefault(i => i.id == p.Profile.activeItemId);
             return new LanActor { nickname = p.Profile.nickname, x = p.X, y = p.Y, facing = p.Facing,
                 body = p.Profile.body, weaponFamily = weapon?.family ?? (int)WeaponFamily.Melee,
                 weaponTier = weapon?.tier ?? 1, weaponEnhance = weapon?.enhance ?? 0,
                 aimAngle = p.AimAngle, aiming = p.Aiming,
+                grounded = p.DungeonRoom == null ? p.Y <= 0 : p.VelocityY <= 0 && OnDungeonGround(p),
+                dead = p.Dead, portalId = p.WaitingPortal,
+                hp = p.Combat.Health, reviveUsed = p.ReviveUsed,
                 dashRemaining = p.DashRemaining, dashDirection = p.DashDirection, dashSequence = p.DashSequence,
                 dashCooldown = (float)Math.Max(0, p.DashReadyAt - Time),
                 dashChainWindow = p.DashUses == 1 ? (float)Math.Max(0, p.DashChainUntil - Time) : 0 };

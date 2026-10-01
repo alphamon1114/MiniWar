@@ -15,6 +15,15 @@ MonoBehaviour:
   displayName: "\uC21C\uCC30\uB300\uC6D0"
   isBoss: 0
   idleSprite: {fileID: -1658834351, guid: 599a7028e371dd24ab3eb2f830dd5504, type: 3}
+  attackKind: 0
+  attackDamage: 12
+  attackRange: 1.8
+  attackInterval: 1.25
+  attackWindup: 0.35
+  projectileSpeed: 10
+  chasePlayer: 1
+  detectionRange: 8
+  viewAngle: 180
   locomotion: 0
   cruiseAltitude: 2.4
   bobAmplitude: 0.3

@@ -27,11 +27,18 @@ namespace MiniWar.EditorTools
             layout.name=name+" 배치";layout.displayName=name;
             if(source==null)
             {
-                layout.bounds=new Rect(0,-3,24,12);layout.entrance=new Vector2(4,0);layout.exit=new Vector2(20,0);
-                layout.jumpHeight=3.5f;
-                layout.floors.Add(new DungeonFloor {rect=new Rect(0,-2,24,2)});
-                layout.background=AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Backdrop/BG_Castle.png");
-                layout.spawns.Add(new DungeonSpawn {enemy=DefaultPatrol(),position=new Vector2(7,0),count=8,spacing=1.5f});
+                var template=dungeon.FindRoom(dungeon.startRoomId)?.layout;
+                layout.bounds=template!=null?template.bounds:new Rect(0,-3,24,12);
+                var bounds=layout.bounds;float ground=Mathf.Clamp(0,bounds.yMin+2,bounds.yMax-3);
+                layout.entrance=new Vector2(bounds.xMin+4,ground);layout.exit=new Vector2(bounds.xMax-4,ground);
+                layout.jumpHeight=template!=null?template.jumpHeight:3.5f;
+                layout.airJumpHeight=template!=null?template.airJumpHeight:Online.LanRules.AirJumpHeight;
+                layout.floors.Add(new DungeonFloor {rect=new Rect(bounds.xMin,ground-2,bounds.width,2)});
+                layout.background=template!=null?template.background:AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Backdrop/BG_Castle.png");
+                if(template!=null)layout.backgroundColor=template.backgroundColor;
+                var enemies=template?.spawns.Where(s=>s.enemy!=null&&!s.enemy.isBoss).Select(s=>s.enemy).Distinct().ToArray();
+                float spacing=Mathf.Min(2.5f,Mathf.Max(.5f,(bounds.width-12)/7));
+                for(int i=0;i<8;i++)layout.spawns.Add(new DungeonSpawn {enemy=enemies!=null&&enemies.Length>0?enemies[i%enemies.Length]:DefaultPatrol(),position=new Vector2(bounds.xMin+6+i*spacing,ground)});
             }
             layout.hideFlags=HideFlags.HideInHierarchy;
             // Keep subassets when removing a room: Undo must retain its complete authored geometry.

@@ -168,7 +168,7 @@ public sealed class LanHost : IAsyncDisposable
                             break;
                         case "chat":
                             var chat = world.Chat(peer.Id, cmd.text);
-                            if (chat != null) foreach (var p in world.Players.Where(p => p.Channel == chat.channel))
+                            if (chat != null) foreach (var p in world.Players.Where(p => p.Channel == chat.channel && p.InstanceId == chat.instanceId))
                                 if (peers.TryGetValue(p.Id, out var recipient)) recipient.Send(chat);
                             break;
                         case "channel":
@@ -179,11 +179,14 @@ public sealed class LanHost : IAsyncDisposable
                         case "ping": peer.Send(new LanEvent { op = "pong" }); break;
                         case "party_create": case "party_apply": case "party_cancel":
                         case "party_accept": case "party_reject": case "party_leave":
+                        case "party_start": case "party_return":
+                        case "portal_enter": case "dungeon_revive":
                             peer.PartyTokens = Math.Min(6, peer.PartyTokens + (world.Time - peer.LastPartyRequest) * 2);
                             peer.LastPartyRequest = world.Time;
                             if (peer.PartyTokens < 1) { peer.Send(Error("파티 요청이 많습니다. 잠시 후 다시 시도하세요.")); break; }
                             peer.PartyTokens--;
-                            string partyError = world.PartyCommand(peer.Id, cmd);
+                            string partyError = cmd.op == "portal_enter" ? world.PortalCommand(peer.Id, cmd)
+                                : cmd.op == "dungeon_revive" ? world.ReviveCommand(peer.Id, cmd) : world.PartyCommand(peer.Id, cmd);
                             if (partyError.Length > 0) peer.Send(Error(partyError));
                             break;
                         default: peer.Send(Error("지원하지 않는 요청입니다.")); break;
@@ -233,10 +236,10 @@ public sealed class LanHost : IAsyncDisposable
                 {
                     world.Tick(0.05f);
                     foreach (var shot in world.Shots)
-                        foreach (var player in world.Players.Where(p => p.Channel == shot.channel))
+                        foreach (var player in world.Players.Where(p => p.Channel == shot.channel && p.InstanceId == shot.instanceId))
                             if (peers.TryGetValue(player.Id, out var recipient)) recipient.Send(shot);
-                    // A short dash needs 20 Hz snapshots, including its final partial step.
-                    if (world.TickNumber % 2 != 0 && !world.DashMotionThisTick) continue;
+                    // Dash and live dungeon projectiles need the full 20 Hz simulation cadence.
+                    if (world.TickNumber % 2 != 0 && !world.DashMotionThisTick && !world.Players.Any(p => p.DungeonRoom != null)) continue;
                     foreach (var notification in world.DrainPartyNotifications())
                         if (peers.TryGetValue(notification.Recipient, out var recipient)) recipient.Send(notification.Event);
                     foreach (var player in world.Players)
@@ -245,11 +248,8 @@ public sealed class LanHost : IAsyncDisposable
                             peer.Send(world.PartyState(player.Id));
                             peer.PartyRevision = world.PartyRevision;
                         }
-                    for (int c = 1; c <= LanRules.MaxChannels; c++)
-                    {
-                        var snapshot = world.Snapshot(c);
-                        foreach (var p in world.Players.Where(p => p.Channel == c)) if (peers.TryGetValue(p.Id, out var peer)) peer.Send(snapshot);
-                    }
+                    foreach (var p in world.Players)
+                        if (peers.TryGetValue(p.Id, out var peer)) peer.Send(world.SnapshotFor(p.Id));
                 }
             }
         }
